@@ -11,3 +11,8 @@ export const closeJoinClassPopUp = atom({
     key: "closeJoinClassPopUp",
     default: true
 })
+
+export const isProfileOptionsOpen = atom({
+    key: "isProfileOptionsOpen",
+    default: false
+})

@@ -41,6 +41,7 @@ const config: Config = {
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
+        '54':'216px',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
@@ -49,6 +50,7 @@ const config: Config = {
       width: {
         'calc-8': 'calc(100% - 32px)',
         'cacl-11':'cacl(100% - 44px)',
+        '90': '360px',
       },
       minWidth: {
         auto: 'auto',

@@ -1,12 +1,25 @@
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useRef } from 'react';
+import { CloseProfileOptions } from '../Buttons';
+import { useRecoilState } from 'recoil';
+import { isProfileOptionsOpen } from '@/Recoil';
+import { useClickOutside } from '../Hooks';
 
 export const ProfileOptions = () => {
+
+  const [isVisible, setIsVisible] = useRecoilState(isProfileOptionsOpen) 
+  const ref = useRef<HTMLDivElement>(null)
+  useClickOutside(ref, () => setIsVisible(false))
+
   return (
+    !isVisible ? <></> :
     <div
-      className='absolute right-0 top-0 mr-6 mt-[57px] h-60 max-h-calc-1 
-    min-h-52 w-[436px] max-w-calc-1 overflow-hidden'
+    ref={ref}
+      className='absolute right-0 top-0 mr-6 mt-[57px] h-54 max-h-calc-1 
+    min-h-52 w-90 max-w-calc-1 overflow-hidden'
     >
       <div className='h-full w-full color-scheme-light'>
         <div className='h-full overflow-hidden'>
@@ -21,27 +34,8 @@ export const ProfileOptions = () => {
                     <div
                       className='relative box-border h-auto min-w-60 max-w-109 px-3
                             pb-4 pt-2'
-                    >
-
-                      {/* //TODO: separete into component */}
-                      <button
-                        className='text-gray-4 z-2 absolute right-8 top-4
-                      h-10 w-10 cursor-pointer rounded-full border border-solid border-transparent bg-none p-2 
-                      outline-0 '
-                      >
-                        <svg
-                          className='fill-current'
-                          width='22'
-                          height='22'
-                          viewBox='1 1 22 22'
-                          focusable='false'
-                        >
-                          <path
-                            d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 
-                                        6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'
-                          ></path>
-                        </svg>
-                      </button>
+                    >                      
+                      <CloseProfileOptions/>
 
                       <div
                         className='relative h-full w-full overflow-hidden
@@ -58,6 +52,8 @@ export const ProfileOptions = () => {
                                 className='mx-4 mb-0 mt-3 overflow-hidden 
                                 rounded-7.5 border-0 text-left'
                               >
+
+                                {/* //TODO: Extract common out of following two make a component (if need to) */}
 
                                 <span className='mb-[2px] block rounded-1'>
                                   <Link
@@ -99,7 +95,7 @@ export const ProfileOptions = () => {
 
                                 <span className='mb-[2px] block rounded-1'>
                                   <Link
-                                    href='profile'
+                                    href='/singout'
                                     className='rounded-tl-inherit rounded-tr-inherit box-border block h-calc-1 w-full
                                   cursor-pointer overflow-hidden whitespace-nowrap border border-solid 
                                   border-transparent bg-white-2 pb-0 pl-[23px] pr-[15px] pt-2.5
@@ -140,7 +136,7 @@ export const ProfileOptions = () => {
                             </div>
                           </div>
                         </div>
-                        <div className='block w-0 h-10'></div>
+                        <div className='block w-0 h-4'></div>
                       </div>
                     </div>
                   </div>

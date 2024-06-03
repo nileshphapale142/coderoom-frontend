@@ -6,6 +6,7 @@ import { CancelJoinClass } from '../Buttons';
 import { JoinClass } from '../Buttons/joinClass';
 import { useRecoilState } from 'recoil';
 import { closeJoinClassPopUp } from '@/Recoil';
+import { useClickOutside } from '../Hooks';
 
 // TODO: Separate the input into separate component
 
@@ -13,21 +14,7 @@ export const JoinClassPopUp = () => {
   const [isClose, setClose] = useRecoilState(closeJoinClassPopUp);
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      setClose(true);
-    }
-  };
-
-  
-
-  React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.addEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  useClickOutside(ref, () => setClose(true))
 
   return (
     // TODO: Add transition to open and close

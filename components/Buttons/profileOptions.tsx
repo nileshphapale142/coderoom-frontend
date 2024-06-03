@@ -1,11 +1,19 @@
+'use client'
+
+import { isProfileOptionsOpen } from '@/Recoil';
 import Image from 'next/image';
 import React from 'react';
+import { useRecoilState } from 'recoil';
 
 export const ProfileOptionsBtn = () => {
+
+  const [_, setIsProfileOptions] = useRecoilState(isProfileOptionsOpen)
   return (
     <button
       className='box-border inline-block h-10 w-10 cursor-pointer rounded-full 
                             p-1 align-middle outline-none'
+
+      onClick={() => setIsProfileOptions((prev) => !prev)}
     >
       <Image
         src={
