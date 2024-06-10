@@ -30,6 +30,13 @@ const nextConfig = {
         pathname:
           '/ios/50/exit--v1.png',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.icons8.com',
+        port: '',
+        pathname:
+          '/ios-filled/50/test-partial-passed.png',
+      },
     ],
   },
 };

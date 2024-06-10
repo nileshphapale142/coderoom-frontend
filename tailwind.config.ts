@@ -35,13 +35,19 @@ const config: Config = {
         navbar: '1 1 0',
         '1-auto': '1 1 auto',
         '0-auto': '0 0 auto',
+        '51': '5 1',
+        '20': '2 0',
+        '30': '3 0',
       },
       screens: {
         navbar: '1024px',
+        screen195: '48.75rem',
+        screen120: '30rem',
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
-        '54':'216px',
+        '54': '216px',
+        '15': '3.75rem',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
@@ -49,18 +55,21 @@ const config: Config = {
       },
       width: {
         'calc-8': 'calc(100% - 32px)',
-        'cacl-11':'cacl(100% - 44px)',
+        'cacl-11': 'cacl(100% - 44px)',
         '90': '360px',
+        'calc-12': 'calc(100% - 3rem)',
+        'calc-33': 'calc(100% - 8.25rem)',
       },
       minWidth: {
         auto: 'auto',
-        'unset': 'unset',
+        unset: 'unset',
       },
       maxWidth: {
         'calc-3': 'calc(100% - 24px)',
         'calc-1': 'calc(100vw - 8px)',
         '109': '436px',
-        'unset': 'unset',
+        unset: 'unset',
+        '625r': '62.5rem',
       },
       backgroundSize: {
         'profile-photo': '32px 32px',
@@ -71,8 +80,8 @@ const config: Config = {
         '0': '0',
         '7': '28px',
         '7.5': '30px',
-        'inherit': 'inherit',
-        
+        '25': '100px',
+        inherit: 'inherit',
       },
       borderWidth: {
         '0625': '.0625rem',
@@ -92,9 +101,12 @@ const config: Config = {
           '0 1px 3px 0 rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15)',
         'profile-options':
           '0 4px 8px 3px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.3)',
+        'test-box':
+          '0 1px 2px 0 rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15)',
       },
       fontSize: {
         '875': '.875rem',
+        '1375': '1.375rem',
       },
       letterSpacing: {
         sm: '.01785714em',
@@ -105,9 +117,10 @@ const config: Config = {
         'gray-light': 'rgb(95,99,104)',
         'gray-2': 'rgb(60,64,67)',
         'gray-3': '#5f6368',
-        'gray-4':'#444746',
+        'gray-4': '#444746',
         'black-1': 'rgba(0,0,0,.38)',
         'black-2': '#1f1f1f',
+        'black-3': 'rgba(0,0,0,.549)',
         'blue-1': 'rgb(26, 115, 232)',
       },
       caretColor: {
@@ -116,7 +129,7 @@ const config: Config = {
       lineHeight: {
         '875': '.875rem',
         '0': '0',
-        '4.5': '18px'
+        '4.5': '18px',
       },
       transitionProperty: {
         background: 'background',
@@ -125,7 +138,6 @@ const config: Config = {
         'gray-3': '#5f6368',
         'white-1': '#e9eef6',
         'white-2': '#f8fafd',
-        
       },
       fill: {
         'black-1': 'rgba(0,0,0,.38)',
@@ -135,9 +147,8 @@ const config: Config = {
         '2': '2',
       },
       padding: {
-        '2.5':'10px',
-      }
-      
+        '2.5': '10px',
+      },
     },
   },
   plugins: [
@@ -161,6 +172,9 @@ const config: Config = {
         },
         '.scroll-color': {
           scrollbarColor: '#c4c7c5 transparent',
+        },
+        '.backface-visibility-h': {
+          backfaceVisibility: 'hidden',
         },
       };
       addUtilities(newUtilities, ['responsive', 'hover']);
