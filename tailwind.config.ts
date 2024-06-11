@@ -43,11 +43,13 @@ const config: Config = {
         navbar: '1024px',
         screen195: '48.75rem',
         screen120: '30rem',
+        'screen260.5': '65.125rem',
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
         '54': '216px',
         '15': '3.75rem',
+        '13': '52px',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
@@ -59,6 +61,7 @@ const config: Config = {
         '90': '360px',
         'calc-12': 'calc(100% - 3rem)',
         'calc-33': 'calc(100% - 8.25rem)',
+        'calc-17': 'calc(100% - 4.25rem)',
       },
       minWidth: {
         auto: 'auto',
@@ -89,6 +92,7 @@ const config: Config = {
       borderColor: {
         gray: 'rgb(128,134,139)',
         'blue-1': 'rgb(26, 115, 232)',
+        'gray-1': 'rgb(218,220,224)',
         // 'red': 'red'
       },
       willChange: {
@@ -121,6 +125,7 @@ const config: Config = {
         'black-1': 'rgba(0,0,0,.38)',
         'black-2': '#1f1f1f',
         'black-3': 'rgba(0,0,0,.549)',
+        'black-4': 'rgb(32,33,36)',
         'blue-1': 'rgb(26, 115, 232)',
       },
       caretColor: {
@@ -148,6 +153,9 @@ const config: Config = {
       },
       padding: {
         '2.5': '10px',
+      },
+      margin: {
+        '18': '4.5rem',
       },
     },
   },
