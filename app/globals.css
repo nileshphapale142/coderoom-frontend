@@ -68,4 +68,11 @@ button {
   .text-wrapping {
     @apply block overflow-hidden text-ellipsis whitespace-nowrap;
   }
+
+  .table-box {
+    border-bottom: 0.0625rem solid;
+    border-right: 0.0625rem solid;
+    @apply box-border h-full border-b-slate-300 border-r-slate-300 
+    bg-white;
+  }
 }

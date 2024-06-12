@@ -17,12 +17,15 @@ const config: Config = {
     'text-blue-1',
     'opacity-100',
     'opacity-0',
+    'text-green-600',
+    'font-bold',
+    'text-gray-900',
+    'font-normal',
   ],
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial':
-          'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
@@ -50,6 +53,7 @@ const config: Config = {
         '54': '216px',
         '15': '3.75rem',
         '13': '52px',
+        mainNavHgt: '4.05rem',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
@@ -62,10 +66,12 @@ const config: Config = {
         'calc-12': 'calc(100% - 3rem)',
         'calc-33': 'calc(100% - 8.25rem)',
         'calc-17': 'calc(100% - 4.25rem)',
+        '70': '280px',
       },
       minWidth: {
         auto: 'auto',
         unset: 'unset',
+        '28': '112px',
       },
       maxWidth: {
         'calc-3': 'calc(100% - 24px)',
@@ -73,6 +79,8 @@ const config: Config = {
         '109': '436px',
         unset: 'unset',
         '625r': '62.5rem',
+        '70': '280px',
+        '47.5': '11.875rem',
       },
       backgroundSize: {
         'profile-photo': '32px 32px',
@@ -115,6 +123,7 @@ const config: Config = {
       letterSpacing: {
         sm: '.01785714em',
         'very-sm': '.00625em',
+        'just-sm': '.0142857143em',
       },
       textColor: {
         'gray-1': '#3c4043',
@@ -163,10 +172,7 @@ const config: Config = {
     function ({
       addUtilities,
     }: {
-      addUtilities: (
-        utilities: Record<string, any>,
-        options?: any
-      ) => void;
+      addUtilities: (utilities: Record<string, any>, options?: any) => void;
     }) {
       const newUtilities = {
         '.color-scheme-light': {
