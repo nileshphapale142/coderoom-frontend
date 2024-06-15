@@ -1,5 +1,7 @@
 'use client'
 
+import exp from "constants";
+import { Fascinate } from "next/font/google";
 import { atom } from "recoil";
 
 export const courseCodeInput = atom({
@@ -14,5 +16,10 @@ export const closeJoinClassPopUp = atom({
 
 export const isProfileOptionsOpen = atom({
     key: "isProfileOptionsOpen",
+    default: false
+})
+
+export const isBasicPopUpOpen = atom({
+    key: "basicPopUpVisible",
     default: false
 })
