@@ -4,13 +4,24 @@ import {
   ShortLearderboard,
   TestBox,
 } from '@/components/Course';
+import { SecondNavbar } from '@/components/Navbar';
 import { CreateTestPopUp } from '@/components/Popups';
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
 import React from 'react';
 
-const CourseDash: React.FC = () => {
+interface CoursePageProps {
+  params: {
+    id: string;
+  };
+}
+
+const CourseDash = ({params}: CoursePageProps) => {
+  
+  const {id} = params
+
   return (
     <>
+    
       <div className='visible static flex h-auto min-h-0 overflow-y-hidden opacity-100 contain-style'>
         <div className='relative bottom-0 left-0 right-0 top-0 z-auto block min-h-full min-w-0 flex-1-auto'>
           <div className='min-h-auto relative z-auto h-auto backface-visibility-h '>
@@ -51,7 +62,7 @@ const CourseDash: React.FC = () => {
           </div>
         </div>
       </div>
-      <CreateTestPopUp/>
+      <CreateTestPopUp />
     </>
   );
 };

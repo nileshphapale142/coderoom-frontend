@@ -5,7 +5,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    "./node_modules/flowbite-react/lib/**/*.js",
+    './node_modules/flowbite-react/lib/**/*.js',
   ],
   safelist: [
     'border-gray-600',
@@ -51,6 +51,7 @@ const config: Config = {
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
+        'calc-que-box': 'calc(48px + 4rem)',
         '54': '216px',
         '15': '3.75rem',
         '13': '52px',
@@ -68,6 +69,7 @@ const config: Config = {
         'calc-33': 'calc(100% - 8.25rem)',
         'calc-17': 'calc(100% - 4.25rem)',
         '70': '280px',
+        '30': '120px',
       },
       minWidth: {
         auto: 'auto',
@@ -81,6 +83,7 @@ const config: Config = {
         unset: 'unset',
         '625r': '62.5rem',
         '70': '280px',
+        '50r': '50rem',
         '47.5': '11.875rem',
       },
       backgroundSize: {
@@ -93,6 +96,9 @@ const config: Config = {
         '7': '28px',
         '7.5': '30px',
         '25': '100px',
+        '3': '12px',
+        '4': '16px',
+        '5': '20px',
         inherit: 'inherit',
       },
       borderWidth: {
@@ -194,7 +200,7 @@ const config: Config = {
       };
       addUtilities(newUtilities, ['responsive', 'hover']);
     },
-    require("flowbite/plugin"),
+    require('flowbite/plugin'),
   ],
 };
 export default config;

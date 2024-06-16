@@ -74,6 +74,10 @@ form {
     @apply block overflow-hidden text-ellipsis whitespace-nowrap;
   }
 
+  .text-heading {
+    @apply font-bold text-xl leading-5 tracking-sm
+  }
+
   .table-box {
     border-bottom: 0.0625rem solid;
     border-right: 0.0625rem solid;
