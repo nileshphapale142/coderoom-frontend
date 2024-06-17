@@ -6,9 +6,11 @@ import { useClickOutside } from '../Hooks';
 export const BasicInput = ({
   title,
   inputHandler,
+  width = 20,
 }: {
   title: string;
   inputHandler: (input: string) => void;
+  width?: number;
 }) => {
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
 
@@ -27,14 +29,19 @@ export const BasicInput = ({
   const normalStyle = `border border-${color}`;
   const clickedStyle = `border-2 border-${color}`;
 
+  // const width = title.length* 7
+  // console.log(width)
   const normalStyleMainDiv = `w-auto border-b border-t border-${color}`;
-  const clickedStyleMainDiv = `border-${color} border-b-2 w-[73.25px] pt-[2px] border-t-0 pr-2`;
+  const clickedStyleMainDiv = `border-${color} border-b-2  pt-[2px] border-t-0 pr-2 w-[74.35px]`;
 
   const normalStyleMain = `text-${color} transform -translate-y-1/2`;
   const clickedStyleMain = `text-${color} translate-y-[-34.75px] scale-75 text-clip leading-4.6 max-w-[140.333%]`;
 
   return (
-    <div className='relative inline-flex w-80 max-w-full flex-col'>
+    <div
+      className={'relative inline-flex max-w-full flex-col'}
+      style={{ width: `${width}rem` }}
+    >
       <label
         className='relative box-border h-[56px] items-baseline overflow-visible rounded-t py-0 pl-4 
 pr-4 will-change-t-o-c '
@@ -52,7 +59,7 @@ w-full max-w-full text-left '
 
           <span
             className={
-              'pointer-events-none box-border h-full max-w-calc-3 flex-0-auto ' +
+              `pointer-events-none box-border h-full max-w-calc-3 flex-0-auto ` +
               ' border-solid ' +
               (isFocused ? clickedStyleMainDiv : normalStyleMainDiv)
             }

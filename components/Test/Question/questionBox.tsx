@@ -16,7 +16,7 @@ export const QuestionBox = (question: QuestionBoxProps) => {
                     className='absolute left-0 right-0 z-20 h-full w-full'
                   /> */}
       <div
-        className='rounded-5 relative flex  flex-row justify-between border 
+        className='relative flex flex-row  justify-between rounded-5 border 
                   border-solid border-gray px-8 py-8 '
       >
         <div className='flex max-w-full flex-col items-start overflow-hidden'>
@@ -35,8 +35,8 @@ export const QuestionBox = (question: QuestionBoxProps) => {
         <div className='flex h-12 flex-row items-center '>
           <Link
             href={question.route}
-            className='text-style w-30 flex 
-                        h-10 rounded-2 border border-solid
+            className='text-style flex h-10 
+                        w-30 rounded-2 border border-solid
                         border-black p-2 font-semibold hover:bg-[#f0f4f9]'
           >
             <span className='flex w-full items-center justify-center'>

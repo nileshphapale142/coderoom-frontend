@@ -55,6 +55,15 @@ form {
   padding: 0;
 }
 
+textarea {
+  appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+  outline: none;
+  overflow-y: auto
+}
+
 @layer components {
   .text-style {
     @apply text-sm font-medium leading-5 tracking-sm;

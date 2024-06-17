@@ -22,6 +22,7 @@ const config: Config = {
     'font-bold',
     'text-gray-900',
     'font-normal',
+    'w',
   ],
   theme: {
     extend: {
@@ -70,6 +71,11 @@ const config: Config = {
         'calc-17': 'calc(100% - 4.25rem)',
         '70': '280px',
         '30': '120px',
+        '50': '150px',
+        '30r': '30rem',
+        '50r': '50rem',
+        '40r': '40rem',
+        'calc-24r': 'calc(100% - 24rem)',
       },
       minWidth: {
         auto: 'auto',
@@ -84,6 +90,9 @@ const config: Config = {
         '625r': '62.5rem',
         '70': '280px',
         '50r': '50rem',
+        '80r': '80rem',
+        '70r': '80rem',
+
         '47.5': '11.875rem',
       },
       backgroundSize: {
