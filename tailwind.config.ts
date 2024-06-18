@@ -57,6 +57,7 @@ const config: Config = {
         '15': '3.75rem',
         '13': '52px',
         mainNavHgt: '4.05rem',
+        '30r': '30rem',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
