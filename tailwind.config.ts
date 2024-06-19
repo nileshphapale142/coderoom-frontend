@@ -5,6 +5,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/flowbite-react/lib/**/*.js',
   ],
   safelist: [
     'border-gray-600',
@@ -21,6 +22,7 @@ const config: Config = {
     'font-bold',
     'text-gray-900',
     'font-normal',
+    'w',
   ],
   theme: {
     extend: {
@@ -50,10 +52,12 @@ const config: Config = {
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
+        'calc-que-box': 'calc(48px + 4rem)',
         '54': '216px',
         '15': '3.75rem',
         '13': '52px',
         mainNavHgt: '4.05rem',
+        '30r': '30rem',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
@@ -67,6 +71,12 @@ const config: Config = {
         'calc-33': 'calc(100% - 8.25rem)',
         'calc-17': 'calc(100% - 4.25rem)',
         '70': '280px',
+        '30': '120px',
+        '50': '150px',
+        '30r': '30rem',
+        '50r': '50rem',
+        '40r': '40rem',
+        'calc-24r': 'calc(100% - 24rem)',
       },
       minWidth: {
         auto: 'auto',
@@ -80,6 +90,10 @@ const config: Config = {
         unset: 'unset',
         '625r': '62.5rem',
         '70': '280px',
+        '50r': '50rem',
+        '80r': '80rem',
+        '70r': '80rem',
+
         '47.5': '11.875rem',
       },
       backgroundSize: {
@@ -92,6 +106,9 @@ const config: Config = {
         '7': '28px',
         '7.5': '30px',
         '25': '100px',
+        '3': '12px',
+        '4': '16px',
+        '5': '20px',
         inherit: 'inherit',
       },
       borderWidth: {
@@ -136,6 +153,7 @@ const config: Config = {
         'black-3': 'rgba(0,0,0,.549)',
         'black-4': 'rgb(32,33,36)',
         'blue-1': 'rgb(26, 115, 232)',
+        'violet-1': 'rgb(161, 108, 235)',
       },
       caretColor: {
         'blue-1': 'rgb(26,115,232)',
@@ -152,6 +170,7 @@ const config: Config = {
         'gray-3': '#5f6368',
         'white-1': '#e9eef6',
         'white-2': '#f8fafd',
+        'gray-google': '#f0f4f9',
       },
       fill: {
         'black-1': 'rgba(0,0,0,.38)',
@@ -193,6 +212,7 @@ const config: Config = {
       };
       addUtilities(newUtilities, ['responsive', 'hover']);
     },
+    require('flowbite/plugin'),
   ],
 };
 export default config;

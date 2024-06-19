@@ -50,6 +50,20 @@ button {
   font: inherit;
 }
 
+form {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+  outline: none;
+  overflow-y: auto
+}
+
 @layer components {
   .text-style {
     @apply text-sm font-medium leading-5 tracking-sm;
@@ -69,10 +83,21 @@ button {
     @apply block overflow-hidden text-ellipsis whitespace-nowrap;
   }
 
+  .text-heading {
+    @apply font-bold text-xl leading-5 tracking-sm
+  }
+
   .table-box {
     border-bottom: 0.0625rem solid;
     border-right: 0.0625rem solid;
     @apply box-border h-full border-b-slate-300 border-r-slate-300 
     bg-white;
   }
+}
+
+.underline-custom {
+  text-decoration: underline;
+  text-decoration-color: rgb(161, 108, 235);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }

@@ -50,12 +50,12 @@ const SimpleCell = ({
 const TestCell = ({
   name,
   link,
-  date,
   outof,
+  date,
 }: {
   name: string;
   link: string;
-  date: string;
+  date?: string;
   outof: string;
 }) => {
   return (
@@ -69,7 +69,7 @@ const TestCell = ({
             <Link
               href={link}
               className='text-style line-clamp-2 h-10 overflow-hidden
-                         text-ellipsis text-violet-500 underline'
+                                     text-ellipsis text-violet-500 underline'
             >
               {name}
             </Link>
@@ -105,23 +105,23 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-const Leaderboard = () => {
+const LeaderboardPage = () => {
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start
   //TODO: horizontal scrolling
 
   const students: User[] = [
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
+    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
+    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
+    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
+    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
+    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
+    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
     {
       name: 'Adam Warlock name is too long',
       points: 100,
-      tests: [15, 15, 15, 15, 15, 25],
+      tests: [15, 15, 15],
     },
   ];
   return (
@@ -153,39 +153,21 @@ const Leaderboard = () => {
                             <SimpleCell name='Total Points' />
 
                             <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
+                              name='Question No. 1'
+                              link='/c/1/t/1/q/1'
+                              // date='some date'
                               outof='random'
                             />
                             <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
+                              name='Question NO. 2'
+                              link='/c/1/t/1/q/2'
+                              // date='some date'
                               outof='random'
                             />
                             <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
+                              name='Question No. 3'
+                              link='/c/1/t/1/q/3'
+                              // date='some date'
                               outof='random'
                             />
                           </tr>
@@ -228,4 +210,4 @@ const Leaderboard = () => {
   );
 };
 
-export default Leaderboard;
+export default LeaderboardPage;

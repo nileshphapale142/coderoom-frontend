@@ -1,12 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const TestBox = () => {
   return (
     <li
-      className='box-border bg-transparent transition-all duration-300 
+      className='relative box-border bg-transparent transition-all duration-300 
                  hover:overflow-hidden hover:rounded-2 hover:shadow-test-box'
     >
+      <Link href={"/c/1/t/1"}
+      className='absolute top-0 left-0 right-0 bottom-0 h-full z-20' />
       <div
         className='relative z-0 box-border flex h-15 
                   cursor-pointer flex-row items-center border-b-[0.0625rem] border-solid border-transparent 
@@ -16,7 +19,7 @@ export const TestBox = () => {
         {/* // TODO:  add color to this div if required */}
         <div
           className='ml-6 mr-4 flex h-9 w-9 shrink-0 items-center justify-center
-                                  rounded-full fill-white text-center text-base leading-8 text-white'
+            rounded-full fill-white text-center text-base leading-8 text-white'
         >
           <Image
             src='https://img.icons8.com/ios-filled/50/test-partial-passed.png'
