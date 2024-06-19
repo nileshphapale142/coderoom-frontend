@@ -153,6 +153,7 @@ const config: Config = {
         'black-3': 'rgba(0,0,0,.549)',
         'black-4': 'rgb(32,33,36)',
         'blue-1': 'rgb(26, 115, 232)',
+        'violet-1': 'rgb(161, 108, 235)',
       },
       caretColor: {
         'blue-1': 'rgb(26,115,232)',
@@ -169,6 +170,7 @@ const config: Config = {
         'gray-3': '#5f6368',
         'white-1': '#e9eef6',
         'white-2': '#f8fafd',
+        'gray-google': '#f0f4f9',
       },
       fill: {
         'black-1': 'rgba(0,0,0,.38)',

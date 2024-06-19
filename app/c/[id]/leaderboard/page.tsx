@@ -69,7 +69,7 @@ const TestCell = ({
             <Link
               href={link}
               className='text-style line-clamp-2 h-10 overflow-hidden
-                                     text-ellipsis text-violet-500 underline'
+                         text-ellipsis text-violet-500 underline'
             >
               {name}
             </Link>

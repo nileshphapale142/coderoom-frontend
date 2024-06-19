@@ -94,3 +94,10 @@ textarea {
     bg-white;
   }
 }
+
+.underline-custom {
+  text-decoration: underline;
+  text-decoration-color: rgb(161, 108, 235);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
