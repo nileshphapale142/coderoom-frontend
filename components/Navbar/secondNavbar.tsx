@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavItem } from './';
-
 interface Item {
   name: string;
   route: string;
@@ -8,9 +7,10 @@ interface Item {
 
 interface secondNavProps {
   navItems: Item[];
+  displaced?: boolean;
 }
 
-export const SecondNavbar = ({ navItems }: secondNavProps) => {
+export const SecondNavbar = (props: secondNavProps) => {
   return (
     <nav className='fixed z-[978] block w-full'>
       <div className='h-[4.05rem]'></div>
@@ -24,7 +24,7 @@ export const SecondNavbar = ({ navItems }: secondNavProps) => {
         >
           <div className='overflow-hidden'>
             <div className='mx-3 my-0 flex max-w-full whitespace-nowrap screen260.5:ml-18'>
-              {navItems.map((item, idx) => (
+              {props.navItems.map((item, idx) => (
                 <NavItem key={idx} name={item.name} route={item.route} />
               ))}
               {/* <NavItem name='Home' route={`/c/${id}`} />
@@ -36,8 +36,10 @@ export const SecondNavbar = ({ navItems }: secondNavProps) => {
             <div>
               <div className='mx-3 block'>
                 <span>
-                  {/* //TODO: in course--> open edit course info dialogue 
-                      //TODO: in test --> open edit test info diaglouge
+                  {/*
+                    //TODO: setting button:
+                    //TODO: in course--> open edit course info dialogue 
+                    //TODO: in test --> open edit test info diaglouge
                   */}
                   <button
                     className='relative z-0 m-[-12px] box-border block h-10 w-10 cursor-pointer
@@ -51,7 +53,7 @@ export const SecondNavbar = ({ navItems }: secondNavProps) => {
                     >
                       <div
                         className='pointer-events-none absolute left-0 top-0 z-[-1] h-full
-                      w-full rounded-full bg-black opacity-0 transition-background transition-opacity ease-linear ease-linear'
+                      w-full rounded-full bg-black opacity-0 transition-background transition-opacity ease-linear'
                       ></div>
                     </div>
                     <svg
