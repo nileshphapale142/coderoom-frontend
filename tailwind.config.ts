@@ -22,7 +22,10 @@ const config: Config = {
     'font-bold',
     'text-gray-900',
     'font-normal',
-    'w',
+    'translate-x-0',
+    '-translate-x-full',
+    'visible',
+    'hidden',
   ],
   theme: {
     extend: {
@@ -170,7 +173,7 @@ const config: Config = {
         'gray-3': '#5f6368',
         'white-1': '#e9eef6',
         'white-2': '#f8fafd',
-        'gray-google': '#f0f4f9',
+        'white-3': '#f0f4f9',
       },
       fill: {
         'black-1': 'rgba(0,0,0,.38)',

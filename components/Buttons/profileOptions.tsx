@@ -11,7 +11,7 @@ export const ProfileOptionsBtn = () => {
   return (
     <button
       className='box-border inline-block h-10 w-10 cursor-pointer rounded-full 
-                            p-1 align-middle outline-none'
+                p-1 align-middle outline-none'
 
       onClick={() => setIsProfileOptions((prev) => !prev)}
     >

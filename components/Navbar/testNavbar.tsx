@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import { CourseNavFiller } from '../Utils';
+import { OpenProblemListBtn } from '../Buttons';
 
 export const TestNavbar = () => {
   return (
@@ -20,34 +18,7 @@ export const TestNavbar = () => {
               <div className='h-full flex-shrink-0 '>
                 <div className='my-1 rounded-2 hover:bg-gray-200'>
                   <span>
-                    <button
-                      className='relative z-0 box-border flex h-12 cursor-pointer flex-row
-                    items-center justify-center overflow-visible border-none 
-                    bg-transparent fill-gray-600 p-3 text-2xl text-gray-3 outline-none
-                    will-change-t-o '
-                    >
-                      <span>
-                        <svg
-                          width='24'
-                          height='24'
-                          viewBox='0 0 24 24'
-                          focusable='false'
-                          className='h-6 w-6'
-                        >
-                          <path d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'></path>
-                        </svg>
-                      </span>
-
-                      <span className='text-style p-2 text-lg font-semibold'>
-                        <div className='relative flex items-center justify-center'>
-                          <div className='w-full'>
-                            <div>
-                              <span>Problem List</span>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-                    </button>
+                    <OpenProblemListBtn/>
                   </span>
                 </div>
               </div>
@@ -61,14 +32,22 @@ export const TestNavbar = () => {
                   className='text-style text-normal flex flex-row items-center justify-between 
                 rounded-2 border-none py-1 text-base '
                 >
-                  <div className='mr-[0.1rem] opacity-100 w-full rounded-bl-2 rounded-tl-2 bg-gray-300 p-2
-                  hover:bg-black hover:text-gray-300 transition-all'>
-                    <button>Run</button>
+                  <div
+                    className='mr-[0.1rem] w-full rounded-bl-2 rounded-tl-2 bg-gray-300 p-2 opacity-100
+                  transition-all hover:bg-black hover:text-gray-300'
+                  >
+                    <button className='flex items-center justify-center'>
+                      Run
+                    </button>
                   </div>
 
-                  <div className='rounded-br-2  w-full rounded-tr-2 bg-gray-300 p-2 text-green-600
-                  hover:bg-green-600 hover:text-gray-300 transition-all'>
-                    <button>Submit</button>
+                  <div
+                    className='w-full  rounded-br-2 rounded-tr-2 bg-gray-300 p-2 text-green-600
+                  transition-all hover:bg-green-600 hover:text-gray-300'
+                  >
+                    <button className='flex items-center justify-center'>
+                      Submit
+                    </button>
                   </div>
                 </div>
               </div>
