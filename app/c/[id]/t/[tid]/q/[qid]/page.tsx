@@ -183,16 +183,94 @@ const Description = () => {
       </div>
     </div>
   );
-}
+};
 
+const Submission = ({
+  message,
+  lang,
+  time,
+  isDanger,
+}: {
+  message: string;
+  lang: string;
+  time: string;
+  isDanger: boolean;
+}) => {
+  return (
+    //todo: submitted code section on button click 
 
+    <button
+      className='text-style flex flex-row rounded-2 
+          border border-solid border-gray p-2 mt-2 hover:bg-gray-200'
+    >
+      <div
+        className={`flex w-2/5 items-start justify-start text-base 
+            font-semibold text-${isDanger ? 'red' : 'green'}-600`}
+      >
+        <span>{message}</span>
+      </div>
+
+      <div
+        className='inline-block w-1/5 text-base 
+            font-medium text-gray-700'
+      >
+        <span>{lang}</span>
+      </div>
+
+      <div
+        className='inline-block w-2/5 text-base
+            font-normal text-gray-600'
+      >
+        <span>{time}</span>
+      </div>
+    </button>
+  );
+};
+
+const Submissions = () => {
+  return (
+    <div className='h-full w-full overflow-x-auto overflow-y-visible'>
+      <div className='p-4'>
+        <div className='flex flex-col rounded-2 bg-white p-4 pt-2'>
+          <Submission
+            time='June 01, 2024 at 09:34PM'
+            lang='C++'
+            isDanger={false}
+            message='Accepted'
+          />
+          <Submission
+            time='June 01, 2024 at 09:34PM'
+            lang='C++'
+            isDanger={true}
+            message='Memory Limit Exceeded'
+          />
+          <Submission
+            time='June 01, 2024 at 09:34PM'
+            lang='C++'
+            isDanger={true}
+            message='Time Limit Exceeded'
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const QuestionPage = () => {
+  //todo: make separate directory for all the components
   const [selected, setSelected] = React.useState(1);
+
+  const pages: React.ReactNode[] = [
+    <Description />,
+    <Submissions />,
+    <></>,
+    <></>,
+    <></>,
+  ];
 
   return (
     <>
-      <div className='visible relative bottom-0 left-0 right-0 top-0 flex h-auto bg-[#f0f4f9] bg-white opacity-100 contain-style'>
+      <div className='visibl ṇ n  be relative bottom-0 left-0 right-0 top-0 flex h-auto bg-[#f0f4f9] bg-white opacity-100 contain-style'>
         <div className='relative z-auto block h-full  flex-1-auto'>
           <div className='relative z-auto flex h-full flex-col backface-visibility-h '>
             <MainNavFiller />
@@ -235,8 +313,7 @@ const QuestionPage = () => {
                   </div>
                 </div>
 
-                <Description/>
-
+                {pages[selected - 1]}
               </div>
 
               <div className='h-full w-2 bg-black'>{'||'}</div>

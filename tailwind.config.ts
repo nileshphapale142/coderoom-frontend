@@ -13,6 +13,7 @@ const config: Config = {
     'border-blue-500',
     'text-gray-600',
     'text-red-500',
+    'text-red-600',
     'text-blue-500',
     'border-blue-1',
     'text-blue-1',
@@ -22,6 +23,7 @@ const config: Config = {
     'font-bold',
     'text-gray-900',
     'font-normal',
+    'text-yellow-500',
   ],
   theme: {
     extend: {
