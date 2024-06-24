@@ -22,10 +22,6 @@ const config: Config = {
     'font-bold',
     'text-gray-900',
     'font-normal',
-    'translate-x-0',
-    '-translate-x-full',
-    'visible',
-    'hidden',
   ],
   theme: {
     extend: {
@@ -55,6 +51,7 @@ const config: Config = {
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
+        '111': 'calc(100vh - 30rem)',
         'calc-que-box': 'calc(48px + 4rem)',
         '54': '216px',
         '15': '3.75rem',
@@ -80,6 +77,7 @@ const config: Config = {
         '50r': '50rem',
         '40r': '40rem',
         'calc-24r': 'calc(100% - 24rem)',
+        '45p': '45%',
       },
       minWidth: {
         auto: 'auto',

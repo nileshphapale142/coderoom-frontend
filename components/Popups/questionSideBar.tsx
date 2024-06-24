@@ -24,23 +24,47 @@ export const QuestionSideBar = () => {
   //todo: add open and close logic
 
   const [isOpen, setIsOpen] = useRecoilState(isProblemListOpen);
-  const ref = useRef<HTMLDivElement>(null)
+  // const [isVisible, setIsVisible] = React.useState(false);
 
-  useClickOutside(ref, () => setIsOpen(false))
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref, () => setIsOpen(false));
+
+  // React.useEffect(() => {
+  //   if (isOpen) {
+  //     setIsVisible(true);
+  //   } else {
+  //     const handleTransitionEnd = () => setIsVisible(false);
+  //     // const handleTransitionStart = () => setIsVisible(true);
+
+  //     const node = ref.current;
+
+  //     if (node) {
+  //       node.addEventListener('transitionend', handleTransitionEnd);
+  //       // node.addEventListener('transitionstart', handleTransitionStart);
+  //       return () => {
+  //         node.removeEventListener('transitionend', handleTransitionEnd);
+  //         // node.removeEventListener('transitionstart', handleTransitionStart);
+  //       };
+  //     }
+  //   }
+  // }, [isOpen]);
 
   return (
-    <div>
+    <div className=''>
       <div
         className={
           `trasn fixed bottom-0 left-0 right-0 top-0 z-[1000] h-screen 
-      w-full bg-[rgba(0,0,0,.5)] transition-all duration-300 ` + (isOpen ? ' visible ' : ' hidden ')
+      w-full bg-[rgba(0,0,0,.5)] transition-all duration-300 ` +
+          (isOpen ? ' visible ' : ' hidden ')
         }
       ></div>
       <div
         className={
           `fixed left-0 top-0 z-[1024] block h-screen w-auto 
          transition-transform duration-300 ease-linear  ` +
-          (isOpen ? ' translate-x-0  ' : ' -translate-x-full ')
+          (isOpen ? ' translate-x-0  ' : ' -translate-x-full ') 
+          // (isVisible ? ' visible ' : ' hidden ')
         }
         ref={ref}
       >

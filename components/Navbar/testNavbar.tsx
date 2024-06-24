@@ -6,11 +6,11 @@ export const TestNavbar = () => {
     <nav className='fixed z-[978] block w-full'>
       <div className='h-[4.05rem]'></div>
       <div
-        className='mt-[-.0625rem] h-12 transform-none transition-transform 
+        className='mt-[-.0625rem] h-14 transform-none transition-transform 
       duration-[240ms]'
       >
         <div
-          className='float-right flex w-full justify-between border-b-[0.0625rem]
+          className='h-full flex w-full justify-between border-b-[0.0625rem]
         border-b-gray-1 bg-white transition-[width] ease-bezier0021'
         >
           <div className='flex items-center justify-center overflow-hidden'>
