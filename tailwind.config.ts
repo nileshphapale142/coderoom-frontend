@@ -20,10 +20,13 @@ const config: Config = {
     'opacity-100',
     'opacity-0',
     'text-green-600',
+    'text-green-700',
     'font-bold',
     'text-gray-900',
     'font-normal',
     'text-yellow-500',
+    'border-r',
+    'border-r-gray'
   ],
   theme: {
     extend: {

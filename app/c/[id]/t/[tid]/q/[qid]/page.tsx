@@ -1,30 +1,27 @@
 'use client';
 
 import React from 'react';
-import { MainNavFiller } from '@/components/Utils';
+import { MainNavFiller, MyDropDown } from '@/components/Utils';
 import { QuestionSideBar } from '@/components/Popups';
 
 const SubNavBarItem = ({
   name,
   color,
-  // id,
   action,
   selected = false,
 }: {
   name: string;
   color: string;
-  // id:number;
   action: () => void;
   selected?: boolean;
 }) => {
-  // 'use client'
 
   return (
     <div
       className={
         `text-style inline-block h-full  w-30 cursor-pointer select-none 
         border-r border-r-gray text-${color} rounded-tr-1` +
-        (selected ? ' google-bw-bg ' : ' hover:bg-gray-200 ')
+        (selected ? ' google-bw-bg ' : ' hover:bg-gray-200 ') 
       }
     >
       <button className='h-full w-full p-2 px-4' onClick={action}>
@@ -242,6 +239,12 @@ const Submissions = () => {
             time='June 01, 2024 at 09:34PM'
             lang='C++'
             isDanger={true}
+            message='Wrong answer'
+          />
+          <Submission
+            time='June 01, 2024 at 09:34PM'
+            lang='C++'
+            isDanger={true}
             message='Memory Limit Exceeded'
           />
           <Submission
@@ -258,6 +261,8 @@ const Submissions = () => {
 
 const QuestionPage = () => {
   //todo: make separate directory for all the components
+  //todo: test, test result and current submission result page to be added
+
   const [selected, setSelected] = React.useState(1);
 
   const pages: React.ReactNode[] = [
@@ -317,8 +322,33 @@ const QuestionPage = () => {
               </div>
 
               <div className='h-full w-2 bg-black'>{'||'}</div>
-              <div className='flex-shrink-0 flex-grow border-solid border-gray'>
-                2
+
+              <div
+                className='flex-1-auto google-bw-bg relative  m-[0.1rem] flex flex-col
+              overflow-hidden rounded-2 border border-solid border-gray'
+              >
+                <div className='relative h-10 rounded-2 '>
+                  <div className='block h-full bg-gray-300'>
+
+                    <SubNavBarItem 
+                    name='Code'
+                    color='green-700'
+                    selected={true}
+                    action={() => {}}
+                    />
+                  </div>
+                </div>
+
+                <div className='w-full h-8 border-b border-b-stone-400'>
+                  <div className='h-full flex flex-row justify-between items-center px-2'>
+                    <MyDropDown/>
+                    <div>Extra options</div>
+                  </div>
+                </div>
+
+                {/* <div>Here comes code</div> */}
+
+                
               </div>
             </div>
           </div>

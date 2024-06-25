@@ -11,7 +11,8 @@ export const LanguagesDropdown = ({ onSelectChange }:any) => {
       options={languageOptions}
       styles={customStyles}
       defaultValue={languageOptions[0]}
-      onChange={(selectedOption) => onSelectChange(selectedOption)}
+      // onChange={(selectedOption) => onSelectChange(selectedOption)}
+      
     />
   );
 };
