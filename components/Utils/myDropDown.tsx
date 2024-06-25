@@ -3,9 +3,15 @@
 import React from 'react';
 import { languageOptions } from '@/Utils';
 import { useClickOutside } from '../Hooks';
+import { currLanguage } from '@/Recoil';
+import { useRecoilState } from 'recoil';
+
+
 export const MyDropDown = () => {
-  const [language, setLanguage] = React.useState(languageOptions[0]);
-  const [isOptionsVisible, setIsOptionsVisible] = React.useState(false);
+
+  const [language, setLanguage] = useRecoilState(currLanguage);
+  
+  const [isOptionsVisible, setIsOptionsVisible] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
   useClickOutside(ref, () => setIsOptionsVisible(false));
@@ -38,15 +44,18 @@ export const MyDropDown = () => {
           </svg>
         </div>
       </button>
+
+
+    
       <div
         className={
-          `absolute left-0 top-full mt-1 flex rounded-2 border-none bg-white
-       p-1 outline-none ` +
-          (isOptionsVisible ? ' visible ' : ' hidden h-0 w-0 ')
+          `absolute left-0 top-full z-50 mt-1 flex rounded-2 border-none
+          bg-white p-1 outline-none transition-transform duration-200 ease-linear ` +
+          (isOptionsVisible ? ' visible scale-100 ' : ' hidden scale-0 ')
         }
         ref={ref}
       >
-        <div className='relative min-w-60 p-2'>
+        <div className='relative min-w-60 p-2 '>
           <div className='flex flex-col '>
             {languageOptions.map((lang) => (
               <div

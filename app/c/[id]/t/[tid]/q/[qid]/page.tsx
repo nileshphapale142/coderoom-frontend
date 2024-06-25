@@ -3,6 +3,9 @@
 import React from 'react';
 import { MainNavFiller, MyDropDown } from '@/components/Utils';
 import { QuestionSideBar } from '@/components/Popups';
+import { Editor } from '@monaco-editor/react';
+import { useRecoilValue } from 'recoil';
+import { currLanguage } from '@/Recoil';
 
 const SubNavBarItem = ({
   name,
@@ -15,13 +18,12 @@ const SubNavBarItem = ({
   action: () => void;
   selected?: boolean;
 }) => {
-
   return (
     <div
       className={
         `text-style inline-block h-full  w-30 cursor-pointer select-none 
         border-r border-r-gray text-${color} rounded-tr-1` +
-        (selected ? ' google-bw-bg ' : ' hover:bg-gray-200 ') 
+        (selected ? ' google-bw-bg ' : ' hover:bg-gray-200 ')
       }
     >
       <button className='h-full w-full p-2 px-4' onClick={action}>
@@ -194,11 +196,11 @@ const Submission = ({
   isDanger: boolean;
 }) => {
   return (
-    //todo: submitted code section on button click 
+    //todo: submitted code section on button click
 
     <button
-      className='text-style flex flex-row rounded-2 
-          border border-solid border-gray p-2 mt-2 hover:bg-gray-200'
+      className='text-style mt-2 flex flex-row 
+          rounded-2 border border-solid border-gray p-2 hover:bg-gray-200'
     >
       <div
         className={`flex w-2/5 items-start justify-start text-base 
@@ -262,8 +264,10 @@ const Submissions = () => {
 const QuestionPage = () => {
   //todo: make separate directory for all the components
   //todo: test, test result and current submission result page to be added
+  //todo: fucking separate into components
 
   const [selected, setSelected] = React.useState(1);
+  const language = useRecoilValue(currLanguage);
 
   const pages: React.ReactNode[] = [
     <Description />,
@@ -272,6 +276,21 @@ const QuestionPage = () => {
     <></>,
     <></>,
   ];
+
+  const defaulCode = `class Solution {
+  public:
+  
+  int twoSum(vector<int> &num, int target) {
+
+  }
+};`;
+
+  const requestFullScreen = () => {
+    const element = document.documentElement; // full-screen the entire document
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    }
+  };
 
   return (
     <>
@@ -321,34 +340,96 @@ const QuestionPage = () => {
                 {pages[selected - 1]}
               </div>
 
-              <div className='h-full w-2 bg-black'>{'||'}</div>
+              {/* //todo: add slider if want to */}
+              {/* <div className='h-full w-2 bg-black'>{'||'}</div> */}
 
               <div
-                className='flex-1-auto google-bw-bg relative  m-[0.1rem] flex flex-col
+                className='google-bw-bg relative m-[0.1rem]  flex flex-1-auto flex-col
               overflow-hidden rounded-2 border border-solid border-gray'
               >
                 <div className='relative h-10 rounded-2 '>
                   <div className='block h-full bg-gray-300'>
-
-                    <SubNavBarItem 
-                    name='Code'
-                    color='green-700'
-                    selected={true}
-                    action={() => {}}
+                    <SubNavBarItem
+                      name='Code'
+                      color='green-700'
+                      selected={true}
+                      action={() => {}}
                     />
                   </div>
                 </div>
 
-                <div className='w-full h-8 border-b border-b-stone-400'>
-                  <div className='h-full flex flex-row justify-between items-center px-2'>
-                    <MyDropDown/>
-                    <div>Extra options</div>
+                <div className='z-100 h-8 w-full border-b border-b-stone-400'>
+                  <div className='flex h-full flex-row items-center justify-between px-2'>
+                    <MyDropDown />
+                    <div className='block py-2'>
+                      {/* //todo: separate the buttons into components */}
+
+                      <button className='inline-block rounded-2 p-2 hover:bg-gray-200'>
+                        {/* //todo: reset code button */}
+                        <div className='flex items-center justify-center'>
+                          <svg
+                            width='14'
+                            height='14'
+                            data-prefix='far'
+                            data-icon='arrow-rotate-left'
+                            role='img'
+                            xmlns='http://www.w3.org/2000/svg'
+                            viewBox='0 0 512 512'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M40 224c-13.3 0-24-10.7-24-24V56c0-13.3 10.7-24 24-24s24 10.7 24 24v80.1l20-23.5C125 63.4 186.9 32 256 32c123.7 0 224 100.3 224 224s-100.3 224-224 224c-50.4 0-97-16.7-134.4-44.8c-10.6-8-12.7-23-4.8-33.6s23-12.7 33.6-4.8C179.8 418.9 216.3 432 256 432c97.2 0 176-78.8 176-176s-78.8-176-176-176c-54.3 0-102.9 24.6-135.2 63.4l-.1 .2 0 0L93.1 176H184c13.3 0 24 10.7 24 24s-10.7 24-24 24H40z'
+                            ></path>
+                          </svg>
+                        </div>
+                      </button>
+
+                      <button
+                        className='inline-block rounded-2 p-2 hover:bg-gray-200 '
+                        onClick={requestFullScreen}
+                      >
+                        <div className='flex items-center justify-center '>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            viewBox='0 0 24 24'
+                            width='14'
+                            height='14'
+                            fill='currentColor'
+                          >
+                            <path
+                              fill-rule='evenodd'
+                              d='M6.414 19H10a1 1 0 110 2H4a1 1 0 01-1-1v-6a1 1 0 112 0v3.586l4.293-4.293a1 1 0 011.414 1.414L6.414 19zM17.586 5H14a1 1 0 110-2h6a1 1 0 011 1v6a1 1 0 11-2 0V6.414l-4.293 4.293a1 1 0 01-1.414-1.414L17.586 5z'
+                              clip-rule='evenodd'
+                            ></path>
+                          </svg>
+                        </div>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                {/* <div>Here comes code</div> */}
-
-                
+                <div className='z-1 flex h-full'>
+                  <Editor
+                    width={`100%`}
+                    height={'100%'}
+                    language={language.value}
+                    // value={value}
+                    theme={'oceanic-next'}
+                    defaultValue={defaulCode}
+                    onChange={() => {}}
+                    options={{
+                      scrollbar: {
+                        vertical: 'auto',
+                        horizontal: 'auto',
+                      },
+                      minimap: {
+                        enabled: false,
+                      },
+                      scrollBeyondLastLine: false,
+                      overviewRulerLanes: 0,
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>

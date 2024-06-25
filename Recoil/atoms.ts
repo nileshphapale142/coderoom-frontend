@@ -1,5 +1,6 @@
 'use client'
 
+import { languageOptions } from "@/Utils";
 import { atom } from "recoil";
 
 export const courseCodeInput = atom({
@@ -25,4 +26,9 @@ export const isBasicPopUpOpen = atom({
 export const isProblemListOpen = atom({
     key:'problemListOpenVisibility',
     default:false
+})
+
+export const currLanguage = atom({
+    key:'currentSelectedLanguage',
+    default:languageOptions[0]
 })
