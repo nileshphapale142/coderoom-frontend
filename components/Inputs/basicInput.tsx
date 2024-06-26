@@ -15,7 +15,7 @@ export const BasicInput = ({
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
 
   const [isFocused, setIsFocused] = React.useState(false);
-
+  const [input, setInput] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleFocus = () => {
@@ -34,7 +34,7 @@ export const BasicInput = ({
   const normalStyleMainDiv = `w-auto border-b border-t border-${color}`;
   const clickedStyleMainDiv = `border-${color} border-b-2  pt-[2px] border-t-0 pr-2 w-[74.35px]`;
 
-  const normalStyleMain = `text-${color} transform -translate-y-1/2`;
+  const normalStyleMain = `text-${color} transform -translate-y-1/2 `;
   const clickedStyleMain = `text-${color} translate-y-[-34.75px] scale-75 text-clip leading-4.6 max-w-[140.333%]`;
 
   return (
@@ -61,7 +61,9 @@ w-full max-w-full text-left '
             className={
               `pointer-events-none box-border h-full max-w-calc-3 flex-0-auto ` +
               ' border-solid ' +
-              (isFocused ? clickedStyleMainDiv : normalStyleMainDiv)
+              (isFocused || input.length !== 0
+                ? clickedStyleMainDiv
+                : normalStyleMainDiv)
             }
           >
             <span
@@ -70,7 +72,9 @@ w-full max-w-full text-left '
                 ' cursor-text overflow-hidden text-ellipsis text-nowrap text-left ' +
                 ' text-base font-normal tracking-very-sm transition-transform duration-150 ease-navbar-bezier ' +
                 ' will-change-transform ' +
-                (isFocused ? clickedStyleMain : normalStyleMain)
+                (isFocused || input.length !== 0
+                  ? clickedStyleMain
+                  : normalStyleMain)
               }
             >
               {title}
@@ -80,7 +84,7 @@ w-full max-w-full text-left '
           <span
             className={
               'pointer-events-none box-border h-full w-3 flex-grow rounded-br rounded-tr border-l-0 border-solid ' +
-              (isFocused ? clickedStyle : normalStyle)
+              (isFocused || input.length !== 0 ? clickedStyle : normalStyle)
             }
           ></span>
         </span>
@@ -90,7 +94,10 @@ w-full max-w-full text-left '
           className='round-0 flex h-full w-full min-w-0 appearance-none border-none bg-transparent 
 bg-none p-0 text-base font-normal tracking-very-sm text-gray-2 caret-blue-1 transition-opacity duration-150 focus:outline-none'
           onFocus={handleFocus}
-          onChange={(e) => inputHandler(e.target.value)}
+          onChange={(e) => {
+            inputHandler(e.target.value);
+            setInput(e.target.value);
+          }}
         />
       </label>
     </div>
