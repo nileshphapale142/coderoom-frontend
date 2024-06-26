@@ -32,3 +32,8 @@ export const currLanguage = atom({
     key:'currentSelectedLanguage',
     default:languageOptions[0]
 })
+
+export const signUpPageNo = atom({
+    key: 'signUpPageNo',
+    default: 0
+})

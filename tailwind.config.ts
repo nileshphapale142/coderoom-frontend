@@ -26,7 +26,12 @@ const config: Config = {
     'font-normal',
     'text-yellow-500',
     'border-r',
-    'border-r-gray'
+    'border-r-gray',
+    'border-stone-500',
+    'border-stone-600',
+    'border-stone-700',
+    'border-stone-800',
+    'border-stone-900',
   ],
   theme: {
     extend: {
@@ -53,6 +58,9 @@ const config: Config = {
         screen195: '48.75rem',
         screen120: '30rem',
         'screen260.5': '65.125rem',
+      },
+      minHeight: {
+        '10r': '10rem',
       },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
@@ -83,13 +91,18 @@ const config: Config = {
         '40r': '40rem',
         'calc-24r': 'calc(100% - 24rem)',
         '45p': '45%',
+        '70r': '70rem',
       },
       minWidth: {
         auto: 'auto',
         unset: 'unset',
         '28': '112px',
+        '30p': '30%',
+        '30r': '30rem',
+        '20r': '20rem',
       },
       maxWidth: {
+        '50p': '50%',
         'calc-3': 'calc(100% - 24px)',
         'calc-1': 'calc(100vw - 8px)',
         '109': '436px',
@@ -99,7 +112,6 @@ const config: Config = {
         '50r': '50rem',
         '80r': '80rem',
         '70r': '80rem',
-
         '47.5': '11.875rem',
       },
       backgroundSize: {

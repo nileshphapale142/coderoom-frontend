@@ -6,13 +6,14 @@ import { useClickOutside } from '../Hooks';
 export const BasicInput = ({
   title,
   inputHandler,
-  width = 20,
+  width = '20rem',
 }: {
   title: string;
   inputHandler: (input: string) => void;
-  width?: number;
+  width?: string;
 }) => {
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
+  //todo: gap between border and text when clicked
 
   const [isFocused, setIsFocused] = React.useState(false);
   const [input, setInput] = React.useState('');
@@ -24,7 +25,7 @@ export const BasicInput = ({
 
   useClickOutside(inputRef, () => setIsFocused(false));
 
-  const color = isFocused ? 'blue-1' : 'gray-600';
+  const color = isFocused ? 'blue-1' : 'stone-500';
 
   const normalStyle = `border border-${color}`;
   const clickedStyle = `border-2 border-${color}`;
@@ -39,8 +40,8 @@ export const BasicInput = ({
 
   return (
     <div
-      className={'relative inline-flex max-w-full flex-col'}
-      style={{ width: `${width}rem` }}
+      className={'relative inline-flex max-w-full flex-col '}
+      style={{ width: `${width}` }}
     >
       <label
         className='relative box-border h-[56px] items-baseline overflow-visible rounded-t py-0 pl-4 
@@ -59,7 +60,7 @@ w-full max-w-full text-left '
 
           <span
             className={
-              `pointer-events-none box-border h-full max-w-calc-3 flex-0-auto ` +
+              `pointer-events-none box-border h-full max-w-calc-3 flex-0-auto border-solid` +
               ' border-solid ' +
               (isFocused || input.length !== 0
                 ? clickedStyleMainDiv
@@ -71,7 +72,7 @@ w-full max-w-full text-left '
                 'pointer-events-none relative left-1 right-auto top-1/2 inline-block origin-top-left ' +
                 ' cursor-text overflow-hidden text-ellipsis text-nowrap text-left ' +
                 ' text-base font-normal tracking-very-sm transition-transform duration-150 ease-navbar-bezier ' +
-                ' will-change-transform ' +
+                ' will-change-transform border-solid' +
                 (isFocused || input.length !== 0
                   ? clickedStyleMain
                   : normalStyleMain)
