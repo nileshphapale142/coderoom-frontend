@@ -1,7 +1,6 @@
 'use client'
 
-import exp from "constants";
-import { Fascinate } from "next/font/google";
+import { languageOptions } from "@/Utils";
 import { atom } from "recoil";
 
 export const courseCodeInput = atom({
@@ -22,4 +21,24 @@ export const isProfileOptionsOpen = atom({
 export const isBasicPopUpOpen = atom({
     key: "basicPopUpVisible",
     default: false
+})
+
+export const isProblemListOpen = atom({
+    key:'problemListOpenVisibility',
+    default:false
+})
+
+export const currLanguage = atom({
+    key:'currentSelectedLanguage',
+    default:languageOptions[0]
+})
+
+export const signUpPageNo = atom({
+    key: 'signUpPageNo',
+    default: 0
+})
+
+export const userRoleSelected = atom<string | null>({
+    key: 'useRoleKey',
+    default: null
 })

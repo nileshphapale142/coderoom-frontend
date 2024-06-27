@@ -6,3 +6,7 @@ export function isAlphanumeric(str: string) {
 export function isValidCourseCode(code: string): boolean {
   return isAlphanumeric(code) && code.length >= 5 && code.length <= 7
 }
+
+export const classnames = (...args:any) => {
+  return args.join(' ');
+};

@@ -101,3 +101,7 @@ textarea {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
+
+.google-bw-bg {
+  background-color: #f0f4f9;
+}
