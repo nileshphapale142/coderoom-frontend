@@ -130,48 +130,6 @@ const SignUp = () => {
   const Inputs: React.ReactNode[] = [
     <div className='flex min-w-20r flex-col items-start justify-start'>
       <div className='flex w-full items-center justify-between pl-12'>
-        {/* <div
-          className='google-bw-bg box-border flex cursor-pointer flex-col items-center 
-        justify-around rounded-7 border border-solid border-gray p-8 px-12'
-        >
-          <div className='box-border flex items-center justify-center'>
-            <div className='p-2'>
-              <Image
-                src={'https://img.icons8.com/ios/50/teacher.png'}
-                alt='Teacher logo'
-                width={'50'}
-                height={'50'}
-              />
-            </div>
-          </div>
-          <div className='flex items-center justify-center'>
-            <div className='text-style inline-block p-2 '>
-              <span>Teacher</span>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className='google-bw-bg box-border flex cursor-pointer flex-col items-center 
-        justify-around rounded-7 border border-solid border-gray p-8 px-12'
-        >
-          <div className='box-border flex items-center justify-center'>
-            <div className='p-2'>
-              <Image
-                src={'https://img.icons8.com/ios/50/graduation-cap.png'}
-                alt='Student logo'
-                width={'50'}
-                height={'50'}
-              />
-            </div>
-          </div>
-          <div className='flex items-center justify-center'>
-            <div className='text-style inline-block p-2 '>
-              <span>Student</span>
-            </div>
-          </div>
-        </div> */}
-
           <RoleBox
             imgLink='https://img.icons8.com/ios/50/teacher.png'
             role='Teacher'
