@@ -37,3 +37,8 @@ export const signUpPageNo = atom({
     key: 'signUpPageNo',
     default: 0
 })
+
+export const userRoleSelected = atom<string | null>({
+    key: 'useRoleKey',
+    default: null
+})

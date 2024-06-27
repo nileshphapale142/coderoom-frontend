@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { BasicInput } from '@/components/Inputs';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { signUpPageNo } from '@/Recoil';
+import { useRecoilState, useRecoilStoreID, useRecoilValue } from 'recoil';
+import { signUpPageNo, userRoleSelected } from '@/Recoil';
 import { RoundedSmBtn } from '@/components/Buttons';
-
-
+import Image from 'next/image';
 
 //todo: modularity
 //todo: Starting page with teacher or student
@@ -23,7 +22,7 @@ const Page = ({
   const [pageNo, setPageNo] = useRecoilState(signUpPageNo);
 
   return (
-    <div className='w-70r mx-auto rounded-7 border-none bg-white p-9 py-12 '>
+    <div className='mx-auto w-70r rounded-7 border-none bg-white p-9 py-12 '>
       <div className='flex flex-grow flex-row'>
         <div className='flex flex-grow flex-row flex-wrap'>
           <div className='flex w-1/2 flex-col items-start justify-start pr-6'>
@@ -39,7 +38,7 @@ const Page = ({
           </div>
 
           {/* //todo: make this rigit component responsive */}
-          <div className='max-w-50p min-h-10r flex-grow pl-6 '>{children}</div>
+          <div className='min-h-10r max-w-50p flex-grow pl-6 '>{children}</div>
 
           {/* //todo: divide into component */}
           {/* //todo: button click logic: increment page count; check for empty inputs */}
@@ -55,7 +54,7 @@ const Page = ({
                 <div className='w-1'></div>
               )}
 
-              {pageNo !== 2 ? (
+              {pageNo !== 3 ? (
                 <RoundedSmBtn
                   name={'Next'}
                   action={() => setPageNo((prev) => prev + 1)}
@@ -71,24 +70,120 @@ const Page = ({
   );
 };
 
+
+const RoleBox = ({imgLink, role}: {imgLink:string; role:string;}) => {
+
+  const [userRole, setUserRole] = useRecoilState(userRoleSelected)
+
+  return (
+    <div
+      className={
+        `google-bw-bg box-border flex cursor-pointer flex-col items-center 
+        justify-around rounded-7 border border-solid  p-8 px-12 ` +
+        (userRole === role
+          ? ' border-blue-1 border-2'
+          : ' border-gray ' )
+      }
+      onClick={() => setUserRole(role)}
+    >
+      <div className='box-border flex items-center justify-center'>
+        <div className='p-2'>
+          <Image
+            src={imgLink}
+            alt={`${role} logo`}
+            width={'50'}
+            height={'50'}
+          />
+        </div>
+      </div>
+      <div className='flex items-center justify-center'>
+        <div className='text-style inline-block p-2 '>
+          <span>{role}</span>
+        </div>
+      </div>
+    </div>
+  );
+
+}
+
 const SignUp = () => {
   const pageNo = useRecoilValue(signUpPageNo);
 
   const Descriptions = [
-    { title: 'Create your account', subtitle: 'Enter your name' },
+    {
+      title: 'Who are you?',
+      subtitle:
+        'Are you a teacher or a student? Select your role to get started.',
+    },
+    { title: 'Create your account', subtitle: 'Enter your name.' },
     {
       title: 'Use your email address',
-      subtitle: 'Use your institute email address',
+      subtitle: 'Use your institute email address.',
     },
     {
       title: 'Create a strong Password',
       subtitle:
-        'Create a strong password with a mix of letters, numbers and symbols',
+        'Create a strong password with a mix of letters, numbers and symbols.',
     },
   ];
 
   const Inputs: React.ReactNode[] = [
-    <div className='min-w-20r flex flex-col items-start justify-start'>
+    <div className='flex min-w-20r flex-col items-start justify-start'>
+      <div className='flex w-full items-center justify-between pl-12'>
+        {/* <div
+          className='google-bw-bg box-border flex cursor-pointer flex-col items-center 
+        justify-around rounded-7 border border-solid border-gray p-8 px-12'
+        >
+          <div className='box-border flex items-center justify-center'>
+            <div className='p-2'>
+              <Image
+                src={'https://img.icons8.com/ios/50/teacher.png'}
+                alt='Teacher logo'
+                width={'50'}
+                height={'50'}
+              />
+            </div>
+          </div>
+          <div className='flex items-center justify-center'>
+            <div className='text-style inline-block p-2 '>
+              <span>Teacher</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className='google-bw-bg box-border flex cursor-pointer flex-col items-center 
+        justify-around rounded-7 border border-solid border-gray p-8 px-12'
+        >
+          <div className='box-border flex items-center justify-center'>
+            <div className='p-2'>
+              <Image
+                src={'https://img.icons8.com/ios/50/graduation-cap.png'}
+                alt='Student logo'
+                width={'50'}
+                height={'50'}
+              />
+            </div>
+          </div>
+          <div className='flex items-center justify-center'>
+            <div className='text-style inline-block p-2 '>
+              <span>Student</span>
+            </div>
+          </div>
+        </div> */}
+
+          <RoleBox
+            imgLink='https://img.icons8.com/ios/50/teacher.png'
+            role='Teacher'
+          />
+          <RoleBox
+            imgLink='https://img.icons8.com/ios/50/graduation-cap.png'
+            role='Student'
+          />
+      </div>
+    </div>,
+
+    <div className='flex min-w-20r flex-col items-start justify-start'>
       <div className='w-full '>
         <BasicInput title='First Name' inputHandler={() => {}} width={'100%'} />
       </div>
@@ -98,7 +193,7 @@ const SignUp = () => {
       </div>
     </div>,
 
-    <div className='min-w-20r flex flex-col items-start justify-start'>
+    <div className='flex min-w-20r flex-col items-start justify-start'>
       <div className='w-full '>
         <BasicInput title='Roll No' inputHandler={() => {}} width={'100%'} />
       </div>
@@ -108,7 +203,7 @@ const SignUp = () => {
       </div>
     </div>,
 
-    <div className='min-w-20r flex flex-col items-start justify-start'>
+    <div className='flex min-w-20r flex-col items-start justify-start'>
       <div className='w-full '>
         <BasicInput title='Password' inputHandler={() => {}} width={'100%'} />
       </div>
