@@ -17,7 +17,7 @@ class Solution(object):
   `;
 
   return (
-    <div className='flex flex-row justify-between h-full'>
+    <div className='flex h-full flex-row justify-between'>
       <div className='flex flex-col items-start justify-center p-8'>
         {/* // TODO: Separate into another component */}
         <div className='text-heading flex items-start justify-start'>

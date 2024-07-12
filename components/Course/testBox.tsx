@@ -8,8 +8,10 @@ export const TestBox = () => {
       className='relative box-border bg-transparent transition-all duration-300 
                  hover:overflow-hidden hover:rounded-2 hover:shadow-test-box'
     >
-      <Link href={"/c/1/t/1"}
-      className='absolute top-0 left-0 right-0 bottom-0 h-full z-20' />
+      <Link
+        href={'/c/1/t/1'}
+        className='absolute bottom-0 left-0 right-0 top-0 z-20 h-full'
+      />
       <div
         className='relative z-0 box-border flex h-15 
                   cursor-pointer flex-row items-center border-b-[0.0625rem] border-solid border-transparent 

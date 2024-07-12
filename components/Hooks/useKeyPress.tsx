@@ -1,29 +1,29 @@
-'use client'
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export const useKeyPress = function (targetKey:any) {
+export const useKeyPress = function (targetKey: any) {
   const [keyPressed, setKeyPressed] = useState(false);
 
-  function downHandler({ key }:any) {
+  function downHandler({ key }: any) {
     if (key === targetKey) {
       setKeyPressed(true);
     }
   }
 
-  const upHandler = ({ key }:any) => {
+  const upHandler = ({ key }: any) => {
     if (key === targetKey) {
       setKeyPressed(false);
     }
   };
 
   React.useEffect(() => {
-    document.addEventListener("keydown", downHandler);
-    document.addEventListener("keyup", upHandler);
+    document.addEventListener('keydown', downHandler);
+    document.addEventListener('keyup', upHandler);
 
     return () => {
-      document.removeEventListener("keydown", downHandler);
-      document.removeEventListener("keyup", upHandler);
+      document.removeEventListener('keydown', downHandler);
+      document.removeEventListener('keyup', upHandler);
     };
   });
 

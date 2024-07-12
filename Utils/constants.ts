@@ -73,9 +73,8 @@ export const languageOptions = [
   },
 ];
 
-
 export const customStyles = {
-  control: (styles:any) => ({
+  control: (styles: any) => ({
     ...styles,
     width: '100%',
     maxWidth: '14rem',
@@ -94,7 +93,7 @@ export const customStyles = {
     },
   }),
 
-  option: (styles:any) => {
+  option: (styles: any) => {
     return {
       ...styles,
       color: '#000',
@@ -109,7 +108,7 @@ export const customStyles = {
       },
     };
   },
-  menu: (styles:any) => {
+  menu: (styles: any) => {
     return {
       ...styles,
       backgroundColor: '#fff',
@@ -120,7 +119,7 @@ export const customStyles = {
     };
   },
 
-  placeholder: (defaultStyles:any) => {
+  placeholder: (defaultStyles: any) => {
     return {
       ...defaultStyles,
       color: '#000',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { classnames } from '@/Utils';
 
-export const CustomInput = ({ customInput, setCustomInput }:any) => {
+export const CustomInput = ({ customInput, setCustomInput }: any) => {
   return (
     <>
       {' '}

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import {
@@ -21,15 +21,16 @@ export const DropDown = ({
   name: string;
   options: string[];
 }) => {
-
-    const [option, setOption] = React.useState<string | null>(null)
+  const [option, setOption] = React.useState<string | null>(null);
 
   return (
     <Menu as='div' className='relative  flex flex-col justify-end '>
       <div className='flex flex-col'>
-        <MenuButton className='inline-flex w-full justify-center gap-x-1.5 
+        <MenuButton
+          className='inline-flex w-full justify-center gap-x-1.5 
         rounded-md bg-white px-3 py-2 text-sm font-normal text-gray-900 
-        shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 '>
+        shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 '
+        >
           {option ? option : name}
           <ChevronDownIcon
             className='-mr-1 h-5 w-5 text-gray-400'
@@ -46,9 +47,11 @@ export const DropDown = ({
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <MenuItems className='relative z-10 mt-2 w-56 origin-top-right 
-        rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 
-        focus:outline-none w-full'>
+        <MenuItems
+          className='relative z-10 mt-2 w-56 w-full 
+        origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black 
+        ring-opacity-5 focus:outline-none'
+        >
           <div className='py-1'>
             {options.map((opt) => (
               <MenuItem>
@@ -57,7 +60,6 @@ export const DropDown = ({
                     className={classNames(
                       focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block px-4 py-2 text-sm'
-
                     )}
                     onClick={() => setOption(opt)}
                   >

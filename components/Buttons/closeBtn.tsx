@@ -8,7 +8,7 @@ export const CloseBtn = ({ action }: { action: () => void }) => {
       className='z-2 h-10
                 w-10 cursor-pointer rounded-full border border-solid border-transparent 
                 bg-none p-2 text-gray-4 outline-0 '
-        onClick={action}
+      onClick={action}
     >
       <svg
         className='fill-current'

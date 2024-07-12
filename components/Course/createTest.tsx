@@ -5,8 +5,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 export const CreateTest = () => {
-
-  const [_, setCreateTestPopUpOpen] = useRecoilState(isBasicPopUpOpen)
+  const [_, setCreateTestPopUpOpen] = useRecoilState(isBasicPopUpOpen);
 
   return (
     <div className='flex items-center justify-center screen120:mb-4'>

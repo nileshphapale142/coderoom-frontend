@@ -15,7 +15,7 @@ export const BasicPopUp = ({
   children: React.ReactNode;
   title: string;
   isJoinValid: () => boolean;
-  joinBtnName: string
+  joinBtnName: string;
 }) => {
   const [isOpen, setIsOpen] = useRecoilState(isBasicPopUpOpen);
   const ref = React.useRef<HTMLDivElement>(null);

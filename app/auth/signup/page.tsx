@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
-import { BasicInput } from '@/components/Inputs';
-import { useRecoilState, useRecoilStoreID, useRecoilValue } from 'recoil';
 import { signUpPageNo, userRoleSelected } from '@/Recoil';
 import { RoundedSmBtn } from '@/components/Buttons';
+import { BasicInput } from '@/components/Inputs';
 import Image from 'next/image';
+import React from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 //todo: modularity
 //todo: Starting page with teacher or student
@@ -70,19 +70,15 @@ const Page = ({
   );
 };
 
-
-const RoleBox = ({imgLink, role}: {imgLink:string; role:string;}) => {
-
-  const [userRole, setUserRole] = useRecoilState(userRoleSelected)
+const RoleBox = ({ imgLink, role }: { imgLink: string; role: string }) => {
+  const [userRole, setUserRole] = useRecoilState(userRoleSelected);
 
   return (
     <div
       className={
-        `google-bw-bg box-border flex cursor-pointer flex-col items-center 
+        `google-bw-bg box-border flex cursor-pointer flex-col items-center
         justify-around rounded-7 border border-solid  p-8 px-12 ` +
-        (userRole === role
-          ? ' border-blue-1 border-2'
-          : ' border-gray ' )
+        (userRole === role ? ' border-2 border-blue-1' : ' border-gray ')
       }
       onClick={() => setUserRole(role)}
     >
@@ -103,11 +99,9 @@ const RoleBox = ({imgLink, role}: {imgLink:string; role:string;}) => {
       </div>
     </div>
   );
-
-}
-
+};
 const SignUp = () => {
-  const pageNo = useRecoilValue(signUpPageNo);
+  const pageNo = useRecoilValue<number>(signUpPageNo);
 
   const Descriptions = [
     {
@@ -131,7 +125,7 @@ const SignUp = () => {
     <div className='flex min-w-20r flex-col items-start justify-start'>
       <div className='flex w-full items-center justify-between pl-12'>
         {/* <div
-          className='google-bw-bg box-border flex cursor-pointer flex-col items-center 
+          className='google-bw-bg box-border flex cursor-pointer flex-col items-center
         justify-around rounded-7 border border-solid border-gray p-8 px-12'
         >
           <div className='box-border flex items-center justify-center'>
@@ -152,7 +146,7 @@ const SignUp = () => {
         </div>
 
         <div
-          className='google-bw-bg box-border flex cursor-pointer flex-col items-center 
+          className='google-bw-bg box-border flex cursor-pointer flex-col items-center
         justify-around rounded-7 border border-solid border-gray p-8 px-12'
         >
           <div className='box-border flex items-center justify-center'>
@@ -172,14 +166,14 @@ const SignUp = () => {
           </div>
         </div> */}
 
-          <RoleBox
-            imgLink='https://img.icons8.com/ios/50/teacher.png'
-            role='Teacher'
-          />
-          <RoleBox
-            imgLink='https://img.icons8.com/ios/50/graduation-cap.png'
-            role='Student'
-          />
+        <RoleBox
+          imgLink='https://img.icons8.com/ios/50/teacher.png'
+          role='Teacher'
+        />
+        <RoleBox
+          imgLink='https://img.icons8.com/ios/50/graduation-cap.png'
+          role='Student'
+        />
       </div>
     </div>,
 

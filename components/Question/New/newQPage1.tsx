@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Example, Page1Inputs } from './';
 
 export const NewQPage1 = () => {
-
   return (
-    <div className='flex flex-row justify-between h-full'>
+    <div className='flex h-full flex-row justify-between'>
       <div className='flex flex-col items-start justify-center p-8'>
         {/* // TODO: Separate into another component */}
         <div className='text-heading flex items-start justify-start'>
@@ -13,7 +12,7 @@ export const NewQPage1 = () => {
           </span>
         </div>
         <div className='h-8'></div>
-        <Page1Inputs/>
+        <Page1Inputs />
       </div>
 
       <Example>
@@ -49,4 +48,4 @@ export const NewQPage1 = () => {
       </Example>
     </div>
   );
-}
+};

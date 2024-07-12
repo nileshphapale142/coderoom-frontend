@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import { BasicInput } from '@/components/Inputs'
+import { BasicInput } from '@/components/Inputs';
 import Link from 'next/link';
-import React from 'react'    
+import React from 'react';
 
 const SignIn = () => {
-  //todo: add modularity 
+  //todo: add modularity
   return (
     <div className='google-bw-bg absolute bottom-0 left-0 right-0 top-0'>
       <div className='mx-auto flex h-full flex-col items-center justify-center'>
@@ -70,6 +70,6 @@ const SignIn = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SignIn
+export default SignIn;

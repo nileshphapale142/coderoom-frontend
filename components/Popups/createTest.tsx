@@ -6,15 +6,13 @@ import { BasicPopUp } from './basic';
 import { DatePicker, DropDown, TimePicker } from '../Utils';
 
 export const CreateTestPopUp = () => {
-
-    //TODO: add create button color change logic (all inputs entered) 
+  //TODO: add create button color change logic (all inputs entered)
   return (
     <BasicPopUp
       title='Create Test'
       isJoinValid={() => false}
       joinBtnName='Create'
     >
-
       <span
         className='display relative block flex-shrink-[2] flex-grow-[2] overflow-y-auto 
             px-5 py-0 text-sm font-normal leading-5 tracking-[0.2px] outline-none'

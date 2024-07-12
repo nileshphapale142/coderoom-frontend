@@ -1,19 +1,24 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
 import { Editor } from '@monaco-editor/react';
 
 interface CodeEditorProps {
-  onChange:(arg0:string, arg1:string) => void;
-  language:string
-  code:string
-  theme:string
+  onChange: (arg0: string, arg1: string) => void;
+  language: string;
+  code: string;
+  theme: string;
 }
 
-export const CodeEditor = ({onChange, language, code, theme}:CodeEditorProps) => {
+export const CodeEditor = ({
+  onChange,
+  language,
+  code,
+  theme,
+}: CodeEditorProps) => {
   const [value, setValue] = React.useState<string>(code || '');
 
-  const handleEditorChange = (value:string) => {
+  const handleEditorChange = (value: string) => {
     setValue(value);
     onChange('code', value);
   };
@@ -31,4 +36,4 @@ export const CodeEditor = ({onChange, language, code, theme}:CodeEditorProps) =>
       />
     </div>
   );
-}
+};

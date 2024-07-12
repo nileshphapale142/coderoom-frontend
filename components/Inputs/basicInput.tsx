@@ -72,7 +72,7 @@ w-full max-w-full text-left '
                 'pointer-events-none relative left-1 right-auto top-1/2 inline-block origin-top-left ' +
                 ' cursor-text overflow-hidden text-ellipsis text-nowrap text-left ' +
                 ' text-base font-normal tracking-very-sm transition-transform duration-150 ease-navbar-bezier ' +
-                ' will-change-transform border-solid' +
+                ' border-solid will-change-transform' +
                 (isFocused || input.length !== 0
                   ? clickedStyleMain
                   : normalStyleMain)
