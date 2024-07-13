@@ -8,6 +8,7 @@ import {
   userPassword,
   userRoleSelected,
   userRollNo,
+  userSignInInfo,
 } from './atoms';
 import { isValidCourseCode, isValidInstituteEmail } from '@/Utils';
 
@@ -68,5 +69,13 @@ export const isUserPasswordFilled = selector({
       pass.confirmPassword === pass.password &&
       !/\s/.test(pass.password)
     );
+  },
+});
+
+export const isSignInInfoFilled = selector({
+  key: 'isSignInInfoFilled',
+  get: ({ get }) => {
+    const info = get(userSignInInfo);
+    return info.email.length > 0 && info.email.length > 0;
   },
 });

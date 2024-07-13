@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { signUpPageNo } from "@/Recoil";
-import { useRecoilState } from "recoil";
-import { RoundedSmBtn } from "../Buttons";
+import { signUpPageNo } from '@/Recoil';
+import { useRecoilState } from 'recoil';
+import { RoundedSmBtn } from '../Buttons';
 
 export const Page = ({
   title,
@@ -10,12 +10,16 @@ export const Page = ({
   children,
   inputsFilled,
   handleSubmit = () => {},
+  maxPageNo = 3,
+  submitBtnName = 'Create',
 }: {
   title: string;
   subtitle: string;
   children: React.ReactNode;
   inputsFilled: boolean;
   handleSubmit?: () => void;
+  maxPageNo?: number;
+  submitBtnName?: string;
 }) => {
   const [pageNo, setPageNo] = useRecoilState(signUpPageNo);
 
@@ -63,12 +67,14 @@ export const Page = ({
             <div className='w-1'></div>
           )}
 
-          {pageNo !== 3 ? (
-            <RoundedSmBtn name={'Next'} action={nextPageHandler} 
-            id='nextBtn'/>
+          {pageNo !== maxPageNo ? (
+            <RoundedSmBtn name={'Next'} action={nextPageHandler} id='nextBtn' />
           ) : (
-            <RoundedSmBtn name={'Create'} action={handleSubmit} 
-            id='createBtn'/>
+            <RoundedSmBtn
+              name={submitBtnName}
+              action={handleSubmit}
+              id='createBtn'
+            />
           )}
         </div>
       </div>

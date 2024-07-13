@@ -74,3 +74,14 @@ export const userPassword = atom<{
     confirmPassword: '',
   },
 });
+
+export const userSignInInfo = atom<{
+  email: string;
+  password: string;
+}>({
+  key: 'userSignInInfo',
+  default: {
+    email: '',
+    password: '',
+  },
+});

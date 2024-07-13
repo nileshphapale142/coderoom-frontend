@@ -3,7 +3,7 @@ import React from 'react';
 export const RoundedSmBtn = ({
   name,
   action,
-  id = ''
+  id = '',
 }: {
   name: string;
   action: () => void;
