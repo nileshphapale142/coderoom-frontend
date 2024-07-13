@@ -35,17 +35,17 @@ const SignUp = () => {
   const email = useRecoilValue(userEmail);
   const rollNo = useRecoilValue(userRollNo);
   const password = useRecoilValue(userPassword);
-  
-  const isPasswordFilled = useRecoilValue(isUserPasswordFilled)
-  
+
+  const isPasswordFilled = useRecoilValue(isUserPasswordFilled);
+
   const router = useRouter();
 
   const handleUserCreation = async () => {
     if (!isPasswordFilled) {
-      alert('Fill the password')
+      alert('Fill the password');
       return;
     }
-    
+
     const data: SignUpDto = {
       name: name.first + ' ' + name.last,
       email: email,
@@ -61,7 +61,6 @@ const SignUp = () => {
 
       localStorage.setItem('access_token', resData.access_token);
       router.push('/');
-      
     } catch (err: any) {
       if (err.response) {
         if (err.response?.status === 400) alert('Data validation unsuccessful');
