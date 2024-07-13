@@ -7,7 +7,7 @@ export const PlusSign = () => {
       <div>
         <div className='my-0 ml-2 mr-4'>
           <span>
-            <JoinCourse/>
+            <JoinCourse />
           </span>
         </div>
       </div>

@@ -1,18 +1,20 @@
-'use client'
+'use client';
 
 import { closeJoinClassPopUp } from '@/Recoil';
 import React from 'react';
 import { useRecoilState } from 'recoil';
+import { usePathname } from 'next/navigation';
 
 export const JoinCourse = () => {
-  
-  const [_, setClose] = useRecoilState(closeJoinClassPopUp)
-  return (
+  const path = usePathname();
+
+  const [_, setClose] = useRecoilState(closeJoinClassPopUp);
+  return path === '/' ? (
     <button
       className='relative z-0 m-[-12px] block h-12 
                 w-12 cursor-pointer overflow-visible border-none bg-transparent 
                 fill-current p-[12px] outline-none will-change-transform'
-    onClick={() => setClose(false)}
+      onClick={() => setClose(false)}
     >
       <span>
         <svg
@@ -26,5 +28,7 @@ export const JoinCourse = () => {
         </svg>
       </span>
     </button>
+  ) : (
+    <></>
   );
 };

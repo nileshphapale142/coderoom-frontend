@@ -1,3 +1,3 @@
-export * from './plusSign'
-export * from './profileSign'
-export * from './coderoomIcon'
+export * from './plusSign';
+export * from './profileSign';
+export * from './coderoomIcon';
