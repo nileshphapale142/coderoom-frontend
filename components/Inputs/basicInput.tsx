@@ -6,17 +6,21 @@ import { useClickOutside } from '../Hooks';
 export const BasicInput = ({
   title,
   inputHandler,
+  defaultInput = '',
+  inputType = '',
   width = '20rem',
 }: {
   title: string;
   inputHandler: (input: string) => void;
+  defaultInput?: string;
+  inputType?: string;
   width?: string;
 }) => {
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
   //todo: gap between border and text when clicked
 
   const [isFocused, setIsFocused] = React.useState(false);
-  const [input, setInput] = React.useState('');
+  const [input, setInput] = React.useState(defaultInput);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleFocus = () => {
@@ -54,7 +58,7 @@ w-full max-w-full text-left '
           <span
             className={
               'pointer-events-none box-border h-full w-3 rounded-bl rounded-tl border-r-0 border-solid ' +
-              (isFocused ? clickedStyle : normalStyle)
+              (isFocused || input.length !== 0 ? clickedStyle : normalStyle)
             }
           ></span>
 
@@ -95,6 +99,8 @@ w-full max-w-full text-left '
           className='round-0 flex h-full w-full min-w-0 appearance-none border-none bg-transparent 
 bg-none p-0 text-base font-normal tracking-very-sm text-gray-2 caret-blue-1 transition-opacity duration-150 focus:outline-none'
           onFocus={handleFocus}
+          value={input}
+          type={inputType}
           onChange={(e) => {
             inputHandler(e.target.value);
             setInput(e.target.value);

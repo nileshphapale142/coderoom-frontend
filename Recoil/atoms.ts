@@ -42,3 +42,35 @@ export const userRoleSelected = atom<string | null>({
   key: 'useRoleKey',
   default: null,
 });
+
+export const userName = atom<{
+  first: string;
+  last: string;
+}>({
+  key: 'userFirstLastName',
+  default: {
+    first: '',
+    last: '',
+  },
+});
+
+export const userEmail = atom({
+  key: 'userEmail',
+  default: '',
+});
+
+export const userRollNo = atom({
+  key: 'userRollNo',
+  default: '',
+});
+
+export const userPassword = atom<{
+  password: string;
+  confirmPassword: string;
+}>({
+  key: 'userPassword',
+  default: {
+    password: '',
+    confirmPassword: '',
+  },
+});

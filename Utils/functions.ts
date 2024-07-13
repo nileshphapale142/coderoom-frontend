@@ -10,3 +10,12 @@ export function isValidCourseCode(code: string): boolean {
 export const classnames = (...args: any) => {
   return args.join(' ');
 };
+
+export const isValidInstituteEmail = (email: string): boolean => {
+  // Regular expression to match common institute email formats including .ac.in
+  const regex =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(edu|ac\.uk|edu\.in|ac\.in)$/;
+
+  // Check if the email matches the regex pattern
+  return regex.test(email);
+};

@@ -1,25 +1,55 @@
 'use client';
 
-import { signUpPageNo, userRoleSelected } from '@/Recoil';
+import {
+  isEmailAndRollNoFilled,
+  isRoleSelected,
+  isUserNameFilled,
+  isUserPasswordFilled,
+  isUserStudent,
+  signUpPageNo,
+  userEmail,
+  userName,
+  userPassword,
+  userRollNo,
+} from '@/Recoil';
+import { Page1, Page2, Page3, Page4 } from '@/components/Auth';
 import { RoundedSmBtn } from '@/components/Buttons';
-import { BasicInput } from '@/components/Inputs';
-import Image from 'next/image';
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
-//todo: modularity
-//todo: Starting page with teacher or student
+interface SignUpDto {
+  name: string;
+  email: string;
+  password: string;
+  isTeacher: boolean;
+  enrollementId?: string;
+}
 
 const Page = ({
   title,
   subtitle,
   children,
+  inputsFilled,
+  handleSubmit = () => {},
 }: {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  inputsFilled: boolean;
+  handleSubmit?: () => void;
 }) => {
   const [pageNo, setPageNo] = useRecoilState(signUpPageNo);
+
+  const displayMsg = () => {
+    if (!inputsFilled) alert('Fill all the fields');
+  };
+
+  const nextPageHandler = () => {
+    if (inputsFilled) setPageNo((prev) => prev + 1);
+    else alert('Fill all the fields');
+  };
 
   return (
     <div className='mx-auto w-70r rounded-7 border-none bg-white p-9 py-12 '>
@@ -38,10 +68,13 @@ const Page = ({
           </div>
 
           {/* //todo: make this rigit component responsive */}
-          <div className='min-h-10r max-w-50p flex-grow pl-6 '>{children}</div>
+          <div className='min-h-10r max-w-50p flex-grow pl-6 '>
+            <div className='flex min-w-20r flex-col items-start justify-start'>
+              {children}
+            </div>
+          </div>
 
-          {/* //todo: divide into component */}
-          {/* //todo: button click logic: increment page count; check for empty inputs */}
+          {/* //todo: button click logic: check for empty inputs */}
 
           <div className='mt-10 w-full'>
             <div className='flex flex-row justify-between'>
@@ -55,12 +88,9 @@ const Page = ({
               )}
 
               {pageNo !== 3 ? (
-                <RoundedSmBtn
-                  name={'Next'}
-                  action={() => setPageNo((prev) => prev + 1)}
-                />
+                <RoundedSmBtn name={'Next'} action={nextPageHandler} />
               ) : (
-                <RoundedSmBtn name={'Create'} action={() => {}} />
+                <RoundedSmBtn name={'Create'} action={handleSubmit} />
               )}
             </div>
           </div>
@@ -70,38 +100,40 @@ const Page = ({
   );
 };
 
-const RoleBox = ({ imgLink, role }: { imgLink: string; role: string }) => {
-  const [userRole, setUserRole] = useRecoilState(userRoleSelected);
-
-  return (
-    <div
-      className={
-        `google-bw-bg box-border flex cursor-pointer flex-col items-center
-        justify-around rounded-7 border border-solid  p-8 px-12 ` +
-        (userRole === role ? ' border-2 border-blue-1' : ' border-gray ')
-      }
-      onClick={() => setUserRole(role)}
-    >
-      <div className='box-border flex items-center justify-center'>
-        <div className='p-2'>
-          <Image
-            src={imgLink}
-            alt={`${role} logo`}
-            width={'50'}
-            height={'50'}
-          />
-        </div>
-      </div>
-      <div className='flex items-center justify-center'>
-        <div className='text-style inline-block p-2 '>
-          <span>{role}</span>
-        </div>
-      </div>
-    </div>
-  );
-};
 const SignUp = () => {
-  const pageNo = useRecoilValue<number>(signUpPageNo);
+  const pageNo = useRecoilValue(signUpPageNo);
+  const isStudent = useRecoilValue(isUserStudent);
+  const name = useRecoilValue(userName);
+  const email = useRecoilValue(userEmail);
+  const rollNo = useRecoilValue(userRollNo);
+  const password = useRecoilValue(userPassword);
+
+  const router = useRouter();
+  const handleUserCreation = async () => {
+    const data: SignUpDto = {
+      name: name.first + ' ' + name.last,
+      email: email,
+      password: password.password,
+      isTeacher: !isStudent,
+    };
+
+    if (isStudent) data.enrollementId = rollNo;
+     
+    try {
+      const response = await axios.post('/signup', data);
+      const resData = response.data;
+
+      localStorage.setItem('access_token', resData.access_token);
+      router.push('/');
+    } catch (err: any) {
+      if (err.response) {
+        if (err.response?.status === 400) alert('Data validation unsuccessful');
+        else if (err.response?.status === 403) alert('User already exists');
+        else if (err.response?.status === 500) alert('Problem at server');
+        else alert(err.response?.message);
+      } else alert('Unknown problem');
+    }
+  };
 
   const Descriptions = [
     {
@@ -122,109 +154,17 @@ const SignUp = () => {
   ];
 
   const Inputs: React.ReactNode[] = [
-    <div className='flex min-w-20r flex-col items-start justify-start'>
-      <div className='flex w-full items-center justify-between pl-12'>
-        {/* <div
-          className='google-bw-bg box-border flex cursor-pointer flex-col items-center
-        justify-around rounded-7 border border-solid border-gray p-8 px-12'
-        >
-          <div className='box-border flex items-center justify-center'>
-            <div className='p-2'>
-              <Image
-                src={'https://img.icons8.com/ios/50/teacher.png'}
-                alt='Teacher logo'
-                width={'50'}
-                height={'50'}
-              />
-            </div>
-          </div>
-          <div className='flex items-center justify-center'>
-            <div className='text-style inline-block p-2 '>
-              <span>Teacher</span>
-            </div>
-          </div>
-        </div>
+    <Page1 />,
+    <Page2 />,
+    <Page3 />,
+    <Page4 />,
+  ];
 
-        <div
-          className='google-bw-bg box-border flex cursor-pointer flex-col items-center
-        justify-around rounded-7 border border-solid border-gray p-8 px-12'
-        >
-          <div className='box-border flex items-center justify-center'>
-            <div className='p-2'>
-              <Image
-                src={'https://img.icons8.com/ios/50/graduation-cap.png'}
-                alt='Student logo'
-                width={'50'}
-                height={'50'}
-              />
-            </div>
-          </div>
-          <div className='flex items-center justify-center'>
-            <div className='text-style inline-block p-2 '>
-              <span>Student</span>
-            </div>
-          </div>
-        </div> */}
-
-        <RoleBox
-          imgLink='https://img.icons8.com/ios/50/teacher.png'
-          role='Teacher'
-        />
-        <RoleBox
-          imgLink='https://img.icons8.com/ios/50/graduation-cap.png'
-          role='Student'
-        />
-      </div>
-    </div>,
-
-    <div className='flex min-w-20r flex-col items-start justify-start'>
-      <div className='w-full '>
-        <BasicInput title='First Name' inputHandler={() => {}} width={'100%'} />
-      </div>
-
-      <div className='mt-4 w-full'>
-        <BasicInput title='Last Name' inputHandler={() => {}} width={'100%'} />
-      </div>
-    </div>,
-
-    <div className='flex min-w-20r flex-col items-start justify-start'>
-      <div className='w-full '>
-        <BasicInput title='Roll No' inputHandler={() => {}} width={'100%'} />
-      </div>
-
-      <div className='mt-4 w-full'>
-        <BasicInput title='Email' inputHandler={() => {}} width={'100%'} />
-      </div>
-    </div>,
-
-    <div className='flex min-w-20r flex-col items-start justify-start'>
-      <div className='w-full '>
-        <BasicInput title='Password' inputHandler={() => {}} width={'100%'} />
-      </div>
-
-      <div className='mt-4 w-full'>
-        <BasicInput title='Confirm' inputHandler={() => {}} width={'100%'} />
-      </div>
-
-      {/* //todo: show password clicking triggering checkbox */}
-
-      <div className='ml-1 mt-2 w-full'>
-        <div className='flex items-start justify-start'>
-          <div className='flex cursor-pointer'>
-            <div className='flex items-center justify-center py-[0.15em]'>
-              <input
-                type='checkbox'
-                placeholder='Show Password'
-                className='cursor-pointer appearance-none rounded'
-              />
-            </div>
-            <div className='flex items-center justify-center pl-4'>
-              <span className='text-style cursor-pointer'>Show Password</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>,
+  const checkInputs: boolean[] = [
+    useRecoilValue(isRoleSelected),
+    useRecoilValue(isUserNameFilled),
+    useRecoilValue(isEmailAndRollNoFilled),
+    useRecoilValue(isUserPasswordFilled),
   ];
 
   return (
@@ -232,7 +172,13 @@ const SignUp = () => {
       <div className='flex h-full w-full flex-col justify-center'>
         <div className='flex-grow'></div>
 
-        <Page {...Descriptions[pageNo]}>{Inputs[pageNo]}</Page>
+        <Page
+          {...Descriptions[pageNo]}
+          inputsFilled={checkInputs[pageNo]}
+          handleSubmit={handleUserCreation}
+        >
+          {Inputs[pageNo]}
+        </Page>
 
         <div className='flex-grow'></div>
       </div>
