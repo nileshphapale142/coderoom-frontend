@@ -21,6 +21,7 @@ export const RoleSelect = ({
         (userRole === role ? ' border-2 border-blue-1' : ' border-gray ')
       }
       onClick={() => setUserRole(role)}
+      id={role.toLowerCase()}
     >
       <div className='box-border flex items-center justify-center'>
         <div className='p-2'>

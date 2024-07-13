@@ -20,6 +20,7 @@ export const Page2 = () => {
           }}
           defaultInput={name.first}
           width={'100%'}
+          id='firstName'
         />
       </div>
 
@@ -33,6 +34,7 @@ export const Page2 = () => {
           }}
           defaultInput={name.last}
           width={'100%'}
+          id='lastName'
         />
       </div>
     </>

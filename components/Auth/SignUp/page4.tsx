@@ -18,6 +18,7 @@ export const Page4 = () => {
           }}
           inputType={showPass ? '' : 'password'}
           width={'100%'}
+          id='password'
         />
       </div>
 
@@ -31,6 +32,7 @@ export const Page4 = () => {
           }}
           inputType={showPass ? '' : 'password'}
           width={'100%'}
+          id='confirmPassword'
         />
       </div>
 

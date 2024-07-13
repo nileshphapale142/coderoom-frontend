@@ -14,6 +14,7 @@ const RollNoInput = () => {
         }}
         defaultInput={rollNo}
         width={'100%'}
+        id='rollNo'
       />
     </div>
   );
@@ -34,6 +35,7 @@ export const Page3 = () => {
           inputType='email'
           defaultInput={email}
           width={'100%'}
+          id='email'
         />
       </div>
 

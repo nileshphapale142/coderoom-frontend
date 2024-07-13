@@ -8,12 +8,14 @@ export const BasicInput = ({
   inputHandler,
   defaultInput = '',
   inputType = '',
+  id = '',
   width = '20rem',
 }: {
   title: string;
   inputHandler: (input: string) => void;
   defaultInput?: string;
   inputType?: string;
+  id?: string;
   width?: string;
 }) => {
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
@@ -101,6 +103,7 @@ bg-none p-0 text-base font-normal tracking-very-sm text-gray-2 caret-blue-1 tran
           onFocus={handleFocus}
           value={input}
           type={inputType}
+          id={id}
           onChange={(e) => {
             inputHandler(e.target.value);
             setInput(e.target.value);
