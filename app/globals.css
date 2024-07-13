@@ -42,6 +42,27 @@ ol {
   padding: 0;
 }
 
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  outline-offset: 0;
+  border: none;
+  box-shadow: none;
+}
+
 input,
 textarea,
 keygen,
@@ -61,7 +82,7 @@ textarea {
   font-size: inherit;
   resize: none;
   outline: none;
-  overflow-y: auto
+  overflow-y: auto;
 }
 
 @layer components {
@@ -84,7 +105,7 @@ textarea {
   }
 
   .text-heading {
-    @apply font-bold text-xl leading-5 tracking-sm
+    @apply text-xl font-bold leading-5 tracking-sm;
   }
 
   .table-box {

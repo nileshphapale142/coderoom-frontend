@@ -4,13 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export const NavItem = ({
-  name,
-  route,
-}: {
-  name: string;
-  route: string;
-}) => {
+export const NavItem = ({ name, route }: { name: string; route: string }) => {
   const path = usePathname();
 
   return (
@@ -21,9 +15,9 @@ export const NavItem = ({
           'text-style relative box-border flex ' +
           ' h-12 items-center border-b-[.125rem] border-solid border-b-transparent ' +
           ' px-6 pb-0 pt-[.125rem] transition-background duration-200 ' +
-          (path === route ? 
-          ' fill-violet-500  text-violet-500 hover:cursor-pointer hover:bg-violet-200 ' :
-          ' fill-gray-500 text-gray-500 hover:cursor-pointer hover:text-black-4')
+          (path === route
+            ? ' fill-violet-500  text-violet-500 hover:cursor-pointer hover:bg-violet-200 '
+            : ' fill-gray-500 text-gray-500 hover:cursor-pointer hover:text-black-4')
         }
       >
         {name}

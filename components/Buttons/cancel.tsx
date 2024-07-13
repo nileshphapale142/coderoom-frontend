@@ -2,8 +2,7 @@
 
 import React from 'react';
 
-export const Cancel = ({handleOnClick}: {handleOnClick:() => void}) => {
-
+export const Cancel = ({ handleOnClick }: { handleOnClick: () => void }) => {
   return (
     <div
       className='relative z-0 inline-block min-w-auto cursor-pointer overflow-hidden

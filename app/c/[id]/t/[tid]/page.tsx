@@ -34,7 +34,6 @@ const TestHome = ({ params }: { params: { id: string; tid: string } }) => {
                   availablePts={98}
                   route={`/c/${params.id}/t/${params.tid}/q/1`}
                 />
-                
 
                 {/* //TODO: separate this into a component */}
 

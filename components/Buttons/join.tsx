@@ -2,7 +2,13 @@
 
 import React from 'react';
 
-export const Join = ({name,  isValid }: {name:string; isValid: () => boolean }) => {
+export const Join = ({
+  name,
+  isValid,
+}: {
+  name: string;
+  isValid: () => boolean;
+}) => {
   const bg = isValid() ? ' text-blue-600 ' : ' text-black-1 ';
 
   const style = isValid()

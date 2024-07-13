@@ -29,12 +29,12 @@ export const ProfileSign = () => {
                       height={'30'}
                     />
                   </Link> */}
-                  <ProfileOptionsBtn/> 
+                  <ProfileOptionsBtn />
                 </div>
               </div>
             </div>
 
-            <ProfileOptions/>
+            <ProfileOptions />
           </div>
         </div>
       </div>

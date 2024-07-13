@@ -1,8 +1,4 @@
-import {
-  CoderoomIcon,
-  PlusSign,
-  ProfileSign,
-} from '../Icons';
+import { CoderoomIcon, PlusSign, ProfileSign } from '../Icons';
 
 export const Navbar = () => {
   return (
@@ -20,7 +16,7 @@ export const Navbar = () => {
 
         <div className='flex flex-row items-center justify-end pr-2 navbar:min-w-0 navbar:flex-navbar'>
           <PlusSign />
-          <ProfileSign/>
+          <ProfileSign />
         </div>
       </div>
     </nav>

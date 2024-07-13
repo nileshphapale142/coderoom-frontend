@@ -26,9 +26,7 @@ const CourseBox = () => {
               <div className='truncate text-[1.375rem] font-bold leading-7 text-white'>
                 Some Course
               </div>
-              <div className='block truncate'>
-                Course Description
-              </div>
+              <div className='block truncate'>Course Description</div>
             </Link>
           </h2>
 

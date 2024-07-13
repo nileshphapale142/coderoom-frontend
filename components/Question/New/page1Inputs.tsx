@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { BasicInput } from '@/components/Inputs';
 
 export const Page1Inputs = () => {
-    const inputHanlde =  (input: string) => {};
+  const inputHanlde = (input: string) => {};
 
   return (
     <>
@@ -20,14 +20,14 @@ export const Page1Inputs = () => {
           />
         </div>
       </div>
-      <div className='text-style flex-grow flex flex-col items-start justify-start'>
+      <div className='text-style flex flex-grow flex-col items-start justify-start'>
         <span className='text-xl font-semibold text-gray-600'>
           Question Description*
         </span>
-        <div className='flex flex-grow mt-2 h-auto w-40r overflow-y-auto overflow-x-hidden'>
+        <div className='mt-2 flex h-auto w-40r flex-grow overflow-y-auto overflow-x-hidden'>
           {/* //TODO: onclick border chagnae not hover */}
           <div
-            className='border-gray-600 relative flex flex-grow w-full items-start 
+            className='border-gray-600 relative flex w-full flex-grow items-start 
                           justify-start overflow-y-auto overflow-x-hidden rounded-2 border border-solid hover:border-2 hover:border-blue-1'
           >
             {/* //TODO: separate component for text area */}

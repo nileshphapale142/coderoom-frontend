@@ -14,7 +14,7 @@ export const JoinClassPopUp = () => {
   const [isClose, setClose] = useRecoilState(closeJoinClassPopUp);
   const ref = React.useRef<HTMLDivElement>(null);
 
-  useClickOutside(ref, () => setClose(true))
+  useClickOutside(ref, () => setClose(true));
 
   return (
     // TODO: Add transition to open and close

@@ -1,2 +1,2 @@
-export * from './mainNavFiller'
-export * from './courseNavFiller'
+export * from './mainNavFiller';
+export * from './courseNavFiller';

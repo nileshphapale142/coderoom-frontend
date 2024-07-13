@@ -6,12 +6,11 @@ import { useClickOutside } from '../Hooks';
 import { currLanguage } from '@/Recoil';
 import { useRecoilState } from 'recoil';
 
-
 export const MyDropDown = () => {
-
   const [language, setLanguage] = useRecoilState(currLanguage);
-  
-  const [isOptionsVisible, setIsOptionsVisible] = React.useState<boolean>(false);
+
+  const [isOptionsVisible, setIsOptionsVisible] =
+    React.useState<boolean>(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
   useClickOutside(ref, () => setIsOptionsVisible(false));
@@ -45,8 +44,6 @@ export const MyDropDown = () => {
         </div>
       </button>
 
-
-    
       <div
         className={
           `absolute left-0 top-full z-50 mt-1 flex rounded-2 border-none

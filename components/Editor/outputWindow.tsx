@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const OutputWindow = ({ outputDetails }:any) => {
+export const OutputWindow = ({ outputDetails }: any) => {
   const getOutput = () => {
     let statusId = outputDetails?.status?.id;
 

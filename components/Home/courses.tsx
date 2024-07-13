@@ -1,4 +1,4 @@
-import CourseBox  from "./courseBox";
+import CourseBox from './courseBox';
 
 export const Courses = () => {
   return (
