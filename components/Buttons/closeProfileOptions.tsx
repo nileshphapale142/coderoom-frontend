@@ -5,9 +5,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 export const CloseProfileOptions = () => {
-  const [_, setIsProfileOptions] = useRecoilState(
-    isProfileOptionsOpen
-  );
+  const [_, setIsProfileOptions] = useRecoilState(isProfileOptionsOpen);
 
   return (
     <button

@@ -2,7 +2,24 @@ import React from 'react';
 import Link from 'next/link';
 import Shortcut from './shortcut';
 
-const CourseBox = () => {
+interface CourseProps {
+  name: string;
+  description: string;
+  teacher?: string;
+  id: number;
+}
+
+const CourseBox = ({
+  name,
+  description,
+  id,
+  teacher = '',
+}: {
+  name: string;
+  description: string;
+  teacher?: string;
+  id: number;
+}) => {
   return (
     <li
       className='relative mb-6 mr-6 flex w-[18.75rem] cursor-pointer 
@@ -14,27 +31,25 @@ const CourseBox = () => {
         <div className='absolute top-0 h-full w-full bg-violet-500'></div>
         <div className='relative flex h-[6.5rem] flex-col justify-between p-4 pb-3'>
           <Link
-            href='/c/1'
+            href={`/c/${id}`}
             className='absolute left-0 top-0 h-full w-full cursor-pointer text-white '
           />
           <h2 className='relative flex text-white'>
             <Link
-              href='/c/1'
+              href={`/c/${id}`}
               className='mx-[-0.25rem] my-0 block cursor-pointer truncate px-1 py-0 
                           text-white no-underline'
             >
               <div className='truncate text-[1.375rem] font-bold leading-7 text-white'>
-                Some Course
+                {name}
               </div>
-              <div className='block truncate'>
-                Course Description
-              </div>
+              <div className='block truncate'>{description}</div>
             </Link>
           </h2>
 
           <div className='flex flex-row items-center'>
             <div className='relative block cursor-pointer truncate text-white no-underline'>
-              Teacher Name
+              {teacher}
             </div>
           </div>
         </div>

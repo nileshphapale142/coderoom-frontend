@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/Course';
+import { SecondNavbar } from '@/components/Navbar';
 import React from 'react';
 
 interface LayoutProps {
@@ -8,16 +8,17 @@ interface LayoutProps {
   };
 }
 
-export default function CourseLayout({
-  children,
-  params,
-}: LayoutProps) {
-
-  const {id} = params;
-
+export default function CourseLayout({ children, params }: LayoutProps) {
+  const { id } = params;
   return (
     <>
-      <Navbar cid={id}/>
+      <SecondNavbar
+        navItems={[
+          { name: 'Tests', route: `/c/${id}` },
+          { name: 'Leaderboard', route: `/c/${id}/leaderboard` },
+        ]}
+      />
+      {/* <Navbar cid={id}/> */}
       {children}
     </>
   );

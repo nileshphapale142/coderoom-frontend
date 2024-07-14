@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,15 +9,15 @@ import { isProfileOptionsOpen } from '@/Recoil';
 import { useClickOutside } from '../Hooks';
 
 export const ProfileOptions = () => {
+  const [isVisible, setIsVisible] = useRecoilState(isProfileOptionsOpen);
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref, () => setIsVisible(false));
 
-  const [isVisible, setIsVisible] = useRecoilState(isProfileOptionsOpen) 
-  const ref = useRef<HTMLDivElement>(null)
-  useClickOutside(ref, () => setIsVisible(false))
-
-  return (
-    !isVisible ? <></> :
+  return !isVisible ? (
+    <></>
+  ) : (
     <div
-    ref={ref}
+      ref={ref}
       className='absolute right-0 top-0 mr-6 mt-[57px] h-54 max-h-calc-1 
     min-h-52 w-90 max-w-calc-1 overflow-hidden'
     >
@@ -34,14 +34,14 @@ export const ProfileOptions = () => {
                     <div
                       className='relative box-border h-auto min-w-60 max-w-109 px-3
                             pb-4 pt-2'
-                    >                      
-                      <CloseProfileOptions/>
+                    >
+                      <CloseProfileOptions />
 
                       <div
                         className='relative h-full w-full overflow-hidden
                         rounded-7 border-none bg-white-1 shadow-profile-options'
                       >
-                        <div className='block w-0 h-10'></div>
+                        <div className='block h-10 w-0'></div>
                         <div className='h-full  overflow-y-auto scroll-thin scroll-color'>
                           <div
                             className='relative box-border h-auto max-h-calc-6 min-w-unset 
@@ -52,19 +52,18 @@ export const ProfileOptions = () => {
                                 className='mx-4 mb-0 mt-3 overflow-hidden 
                                 rounded-7.5 border-0 text-left'
                               >
-
                                 {/* //TODO: Extract common out of following two make a component (if need to) */}
 
                                 <span className='mb-[2px] block rounded-1'>
                                   <Link
                                     href='profile'
-                                    className='rounded-tl-inherit rounded-tr-inherit box-border block h-calc-1 w-full
-                                  cursor-pointer overflow-hidden whitespace-nowrap border border-solid 
+                                    className='box-border block h-calc-1 w-full cursor-pointer overflow-hidden
+                                  whitespace-nowrap rounded-tl-inherit rounded-tr-inherit border border-solid 
                                   border-transparent bg-white-2 pb-0 pl-[23px] pr-[15px] pt-2.5
                                   outline-0 '
                                   >
                                     <span
-                                      className='text-gray-4 box-border inline-block w-8 p-0 align-top
+                                      className='box-border inline-block w-8 p-0 align-top text-gray-4
                                   opacity-100'
                                     >
                                       <div className='relative mx-0 my-[3px] inline-block h-8 align-top'>
@@ -81,8 +80,8 @@ export const ProfileOptions = () => {
                                     </span>
 
                                     <span
-                                      className='text-black-2 ml-3 mt-2 inline-block w-calc-8 max-w-unset align-middle
-                                    text-sm font-medium leading-tight tracking-normal'
+                                      className='ml-3 mt-2 inline-block w-calc-8 max-w-unset align-middle text-sm
+                                    font-medium leading-tight tracking-normal text-black-2'
                                     >
                                       <div className='h-auto pl-0'>
                                         <div className='relative overflow-hidden text-ellipsis'>
@@ -96,13 +95,13 @@ export const ProfileOptions = () => {
                                 <span className='mb-[2px] block rounded-1'>
                                   <Link
                                     href='/singout'
-                                    className='rounded-tl-inherit rounded-tr-inherit box-border block h-calc-1 w-full
-                                  cursor-pointer overflow-hidden whitespace-nowrap border border-solid 
+                                    className='box-border block h-calc-1 w-full cursor-pointer overflow-hidden
+                                  whitespace-nowrap rounded-tl-inherit rounded-tr-inherit border border-solid 
                                   border-transparent bg-white-2 pb-0 pl-[23px] pr-[15px] pt-2.5
                                   outline-0 '
                                   >
                                     <span
-                                      className='text-gray-4 box-border inline-block w-8 p-0 align-top
+                                      className='box-border inline-block w-8 p-0 align-top text-gray-4
                                   opacity-100'
                                     >
                                       <div className='relative mx-0 my-[3px] inline-block h-8 align-top'>
@@ -121,8 +120,8 @@ export const ProfileOptions = () => {
                                     </span>
 
                                     <span
-                                      className='text-black-2 ml-3 mt-2 inline-block w-calc-8 max-w-unset align-middle
-                                    text-sm font-medium leading-tight tracking-normal'
+                                      className='ml-3 mt-2 inline-block w-calc-8 max-w-unset align-middle text-sm
+                                    font-medium leading-tight tracking-normal text-black-2'
                                     >
                                       <div className='h-auto pl-0'>
                                         <div className='relative overflow-hidden text-ellipsis'>
@@ -136,7 +135,7 @@ export const ProfileOptions = () => {
                             </div>
                           </div>
                         </div>
-                        <div className='block w-0 h-4'></div>
+                        <div className='block h-4 w-0'></div>
                       </div>
                     </div>
                   </div>

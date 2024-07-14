@@ -5,6 +5,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/flowbite-react/lib/**/*.js',
   ],
   safelist: [
     'border-gray-600',
@@ -12,15 +13,25 @@ const config: Config = {
     'border-blue-500',
     'text-gray-600',
     'text-red-500',
+    'text-red-600',
     'text-blue-500',
     'border-blue-1',
     'text-blue-1',
     'opacity-100',
     'opacity-0',
     'text-green-600',
+    'text-green-700',
     'font-bold',
     'text-gray-900',
     'font-normal',
+    'text-yellow-500',
+    'border-r',
+    'border-r-gray',
+    'border-stone-500',
+    'border-stone-600',
+    'border-stone-700',
+    'border-stone-800',
+    'border-stone-900',
   ],
   theme: {
     extend: {
@@ -48,12 +59,18 @@ const config: Config = {
         screen120: '30rem',
         'screen260.5': '65.125rem',
       },
+      minHeight: {
+        '10r': '10rem',
+      },
       height: {
         'calc-1': 'calc(24px + 2.25rem)',
+        '111': 'calc(100vh - 30rem)',
+        'calc-que-box': 'calc(48px + 4rem)',
         '54': '216px',
         '15': '3.75rem',
         '13': '52px',
         mainNavHgt: '4.05rem',
+        '30r': '30rem',
       },
       maxHeight: {
         'calc-1': 'calc(100dvh - 61px)',
@@ -67,19 +84,34 @@ const config: Config = {
         'calc-33': 'calc(100% - 8.25rem)',
         'calc-17': 'calc(100% - 4.25rem)',
         '70': '280px',
+        '30': '120px',
+        '50': '150px',
+        '30r': '30rem',
+        '50r': '50rem',
+        '40r': '40rem',
+        'calc-24r': 'calc(100% - 24rem)',
+        '45p': '45%',
+        '70r': '70rem',
       },
       minWidth: {
         auto: 'auto',
         unset: 'unset',
         '28': '112px',
+        '30p': '30%',
+        '30r': '30rem',
+        '20r': '20rem',
       },
       maxWidth: {
+        '50p': '50%',
         'calc-3': 'calc(100% - 24px)',
         'calc-1': 'calc(100vw - 8px)',
         '109': '436px',
         unset: 'unset',
         '625r': '62.5rem',
         '70': '280px',
+        '50r': '50rem',
+        '80r': '80rem',
+        '70r': '80rem',
         '47.5': '11.875rem',
       },
       backgroundSize: {
@@ -92,6 +124,9 @@ const config: Config = {
         '7': '28px',
         '7.5': '30px',
         '25': '100px',
+        '3': '12px',
+        '4': '16px',
+        '5': '20px',
         inherit: 'inherit',
       },
       borderWidth: {
@@ -136,6 +171,7 @@ const config: Config = {
         'black-3': 'rgba(0,0,0,.549)',
         'black-4': 'rgb(32,33,36)',
         'blue-1': 'rgb(26, 115, 232)',
+        'violet-1': 'rgb(161, 108, 235)',
       },
       caretColor: {
         'blue-1': 'rgb(26,115,232)',
@@ -152,6 +188,7 @@ const config: Config = {
         'gray-3': '#5f6368',
         'white-1': '#e9eef6',
         'white-2': '#f8fafd',
+        'white-3': '#f0f4f9',
       },
       fill: {
         'black-1': 'rgba(0,0,0,.38)',
@@ -193,6 +230,7 @@ const config: Config = {
       };
       addUtilities(newUtilities, ['responsive', 'hover']);
     },
+    require('flowbite/plugin'),
   ],
 };
 export default config;

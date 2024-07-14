@@ -1,5 +1,5 @@
 import React from 'react';
-import { JoinCourse } from '../Buttons';
+import { JoinCourse, PlusButton } from '../Buttons';
 
 export const PlusSign = () => {
   return (
@@ -7,7 +7,7 @@ export const PlusSign = () => {
       <div>
         <div className='my-0 ml-2 mr-4'>
           <span>
-            <JoinCourse/>
+            <PlusButton />
           </span>
         </div>
       </div>

@@ -42,12 +42,47 @@ ol {
   padding: 0;
 }
 
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  outline-offset: 0;
+  border: none;
+  box-shadow: none;
+}
+
 input,
 textarea,
 keygen,
 select,
 button {
   font: inherit;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+  outline: none;
+  overflow-y: auto;
 }
 
 @layer components {
@@ -69,10 +104,25 @@ button {
     @apply block overflow-hidden text-ellipsis whitespace-nowrap;
   }
 
+  .text-heading {
+    @apply text-xl font-bold leading-5 tracking-sm;
+  }
+
   .table-box {
     border-bottom: 0.0625rem solid;
     border-right: 0.0625rem solid;
     @apply box-border h-full border-b-slate-300 border-r-slate-300 
     bg-white;
   }
+}
+
+.underline-custom {
+  text-decoration: underline;
+  text-decoration-color: rgb(161, 108, 235);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.google-bw-bg {
+  background-color: #f0f4f9;
 }
