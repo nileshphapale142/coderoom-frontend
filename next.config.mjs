@@ -62,6 +62,10 @@ const nextConfig = {
         source: '/u/c/all',
         destination: 'http://localhost:5000/user/getCourses',
       },
+      {
+        source: '/new/class',
+        destination: 'http://localhost:5000/course/create',
+      }
     ];
   },
 };

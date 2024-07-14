@@ -31,12 +31,12 @@ const CourseBox = ({
         <div className='absolute top-0 h-full w-full bg-violet-500'></div>
         <div className='relative flex h-[6.5rem] flex-col justify-between p-4 pb-3'>
           <Link
-            href='/c/1'
+            href={`/c/${id}`}
             className='absolute left-0 top-0 h-full w-full cursor-pointer text-white '
           />
           <h2 className='relative flex text-white'>
             <Link
-              href='/c/1'
+              href={`/c/${id}`}
               className='mx-[-0.25rem] my-0 block cursor-pointer truncate px-1 py-0 
                           text-white no-underline'
             >

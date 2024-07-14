@@ -11,11 +11,13 @@ export const BasicPopUp = ({
   title,
   isJoinValid,
   joinBtnName,
+  onClickHandler
 }: {
   children: React.ReactNode;
   title: string;
   isJoinValid: () => boolean;
   joinBtnName: string;
+  onClickHandler: () => void;
 }) => {
   const [isOpen, setIsOpen] = useRecoilState(isBasicPopUpOpen);
   const ref = React.useRef<HTMLDivElement>(null);
@@ -59,7 +61,7 @@ export const BasicPopUp = ({
             <div className='flex flex-shrink-0 justify-end pb-4 pl-6 pr-2 pt-4 leading-0'>
               <Cancel handleOnClick={handleCancel} />
 
-              <Join name={joinBtnName} isValid={isJoinValid} />
+              <Join name={joinBtnName} isValid={isJoinValid} onClickHandler={onClickHandler} />
             </div>
           </div>
 

@@ -1,9 +1,11 @@
 import React from 'react';
 
 export const BasicTextArea = ({
+  inputHandler,
   width = '40rem',
   height = '10rem',
 }: {
+  inputHandler: (str: string) => void;
   width?: string;
   height?: string;
 }) => {
@@ -15,12 +17,13 @@ export const BasicTextArea = ({
       {/* //TODO: onclick border chagnae not hover */}
       <div
         className='relative flex w-full flex-grow items-start justify-start 
-                      overflow-y-auto overflow-x-hidden rounded-2 border border-solid border-gray hover:border-2 hover:border-blue-1'
+        overflow-y-auto overflow-x-hidden rounded-2 border border-solid border-gray hover:border-2 hover:border-blue-1'
       >
         {/* //TODO: separate component for text area */}
         <textarea
           className='h-100% text-style h-full w-full border-none p-2 
           font-normal leading-6 text-gray-700'
+          onChange={(e) => inputHandler(e.target.value)}
         />
       </div>
     </div>

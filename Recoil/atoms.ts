@@ -90,3 +90,15 @@ export const userSignInInfo = atom<{
     password: '',
   },
 });
+
+
+export const createClassInfo = atom<{
+  name: string;
+  description: string;
+}>({
+  key: 'createClassInfo',
+  default: {
+    name: '',
+    description: ''
+  }
+})
