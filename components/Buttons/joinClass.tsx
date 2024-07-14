@@ -4,7 +4,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { validCourseCodeState } from '@/Recoil';
 
-export const JoinClass = () => {
+export const JoinClass = ({ handleOnClick }: { handleOnClick: () => void; }) => {
   const valid = useRecoilValue(validCourseCodeState);
 
   const style = valid
@@ -26,7 +26,8 @@ export const JoinClass = () => {
         className={'absolute bottom-0 left-0 right-0 top-0 opacity-0 ' + bg}
       ></div>
       <span className='relative flex items-center px-2 py-0'>
-        <span className='m-0 inline-block'>Join</span>
+        <span className='m-0 inline-block'
+          onClick={handleOnClick}>Join</span>
       </span>
     </div>
   );

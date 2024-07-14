@@ -3,6 +3,7 @@
 import { selector } from 'recoil';
 import {
   courseCodeInput,
+  createClassInfo,
   userEmail,
   userName,
   userPassword,
@@ -79,3 +80,12 @@ export const isSignInInfoFilled = selector({
     return info.email.length > 0 && info.email.length > 0;
   },
 });
+
+
+export const isCreateClassInfoFilled = selector({
+  key: 'isCreateClassInfoFilled',
+  get: ({get}) => {
+    const info = get(createClassInfo)
+    return info.name.length > 0 && info.description.length > 0;
+  }
+})
