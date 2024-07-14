@@ -57,13 +57,13 @@ export const Page = ({
       <div className='mt-10 w-full'>
         {isSignIn ? (
           <div className='flex flex-row justify-end'>
-            <RoundSmLink name={'Create account'} link='/auth/signup' id='signupLink' />
-            
-            <RoundedSmBtn
-              name={'Enter'}
-              action={handleSubmit}
-              id='signInBtn'
+            <RoundSmLink
+              name={'Create account'}
+              link='/auth/signup'
+              id='signupLink'
             />
+
+            <RoundedSmBtn name={'Enter'} action={handleSubmit} id='signInBtn' />
           </div>
         ) : (
           <div className='flex flex-row justify-between'>

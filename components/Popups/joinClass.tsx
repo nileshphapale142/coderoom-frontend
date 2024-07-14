@@ -18,7 +18,6 @@ export const JoinClassPopUp = () => {
     setIsOpen(false);
   };
 
-
   useClickOutside(ref, () => setIsOpen(false));
 
   return (
@@ -73,7 +72,7 @@ export const JoinClassPopUp = () => {
 
             <div className='flex flex-shrink-0 justify-end pb-4 pl-6 pr-2 pt-4 leading-0'>
               {/* <CancelJoinClass /> */}
-              <Cancel handleOnClick={handleCancel}/>
+              <Cancel handleOnClick={handleCancel} />
               <JoinClass />
             </div>
           </div>

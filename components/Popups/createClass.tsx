@@ -15,7 +15,7 @@ export const CreateClassPopup = () => {
         }}
       >
         <div className='block px-6'>
-          <div className='p-8 flex flex-col justify-start border rounded-2 border-gray-600 align-middle'>
+          <div className='border-gray-600 flex flex-col justify-start rounded-2 border p-8 align-middle'>
             <BasicInput
               title='Class Name'
               inputHandler={() => {}}

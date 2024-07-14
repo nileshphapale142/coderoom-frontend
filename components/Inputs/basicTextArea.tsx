@@ -1,13 +1,21 @@
 import React from 'react';
 
-export const BasicTextArea = ({ width = '40rem', height= "10rem"}: { width?: string, height?:string }) => {
+export const BasicTextArea = ({
+  width = '40rem',
+  height = '10rem',
+}: {
+  width?: string;
+  height?: string;
+}) => {
   return (
-    <div className='mt-2 flex h-auto flex-grow overflow-y-auto overflow-x-hidden'
-    style={{width: width, height:height}}>
+    <div
+      className='mt-2 flex h-auto flex-grow overflow-y-auto overflow-x-hidden'
+      style={{ width: width, height: height }}
+    >
       {/* //TODO: onclick border chagnae not hover */}
       <div
-        className='border-gray relative flex w-full flex-grow items-start 
-                      justify-start overflow-y-auto overflow-x-hidden rounded-2 border border-solid hover:border-2 hover:border-blue-1'
+        className='relative flex w-full flex-grow items-start justify-start 
+                      overflow-y-auto overflow-x-hidden rounded-2 border border-solid border-gray hover:border-2 hover:border-blue-1'
       >
         {/* //TODO: separate component for text area */}
         <textarea

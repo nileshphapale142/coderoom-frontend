@@ -1,4 +1,4 @@
 export * from './courseCode';
 export * from './testName';
 export * from './basicInput';
-export * from './basicTextArea'
+export * from './basicTextArea';

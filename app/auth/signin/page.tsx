@@ -28,6 +28,7 @@ const SignIn = () => {
       const response = await axios.post('/signin', data);
       const resData = response.data;
 
+      localStorage.removeItem('access_token');
       localStorage.setItem('access_token', resData.access_token);
 
       router.push('/');
