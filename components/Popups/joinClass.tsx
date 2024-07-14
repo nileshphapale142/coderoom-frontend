@@ -2,23 +2,28 @@
 
 import React from 'react';
 import { CourseCode } from '../Inputs';
-import { CancelJoinClass } from '../Buttons';
+import { Cancel, CancelJoinClass } from '../Buttons';
 import { JoinClass } from '../Buttons/joinClass';
 import { useRecoilState } from 'recoil';
-import { closeJoinClassPopUp } from '@/Recoil';
+import { closeJoinClassPopUp, isBasicPopUpOpen } from '@/Recoil';
 import { useClickOutside } from '../Hooks';
 
 // TODO: Separate the input into separate component
 
 export const JoinClassPopUp = () => {
-  const [isClose, setClose] = useRecoilState(closeJoinClassPopUp);
+  const [isOpen, setIsOpen] = useRecoilState(isBasicPopUpOpen);
   const ref = React.useRef<HTMLDivElement>(null);
 
-  useClickOutside(ref, () => setClose(true));
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
+
+  useClickOutside(ref, () => setIsOpen(false));
 
   return (
     // TODO: Add transition to open and close
-    isClose ? (
+    !isOpen ? (
       <></>
     ) : (
       <div
@@ -67,8 +72,8 @@ export const JoinClassPopUp = () => {
             </span>
 
             <div className='flex flex-shrink-0 justify-end pb-4 pl-6 pr-2 pt-4 leading-0'>
-              <CancelJoinClass />
-
+              {/* <CancelJoinClass /> */}
+              <Cancel handleOnClick={handleCancel}/>
               <JoinClass />
             </div>
           </div>

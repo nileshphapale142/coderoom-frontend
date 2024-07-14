@@ -16,7 +16,7 @@ export const Page1Inputs = () => {
           <BasicInput
             title='Question Name'
             inputHandler={inputHanlde}
-            width={30}
+            width={'30rem'}
           />
         </div>
       </div>

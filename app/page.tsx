@@ -1,12 +1,13 @@
 import React from 'react';
 import { Courses } from '@/components/Home';
-import { JoinClassPopUp } from '@/components/Popups';
+import { CreateClassPopup, JoinClassPopUp } from '@/components/Popups';
 
 const Home = () => {
   return (
     <>
       <Courses />
-      <JoinClassPopUp />
+      {/* <JoinClassPopUp /> */}
+      <CreateClassPopup/>
     </>
   );
 };
