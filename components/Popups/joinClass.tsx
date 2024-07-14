@@ -4,24 +4,59 @@ import React from 'react';
 import { CourseCode } from '../Inputs';
 import { Cancel, CancelJoinClass } from '../Buttons';
 import { JoinClass } from '../Buttons/joinClass';
-import { useRecoilState } from 'recoil';
-import { closeJoinClassPopUp, isBasicPopUpOpen } from '@/Recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { courseCodeInput, isBasicPopUpOpen } from '@/Recoil';
 import { useClickOutside } from '../Hooks';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 // TODO: Separate the input into separate component
 
 export const JoinClassPopUp = () => {
   const [isOpen, setIsOpen] = useRecoilState(isBasicPopUpOpen);
+  const courseCode = useRecoilValue(courseCodeInput)
+  const router = useRouter()
+  
   const ref = React.useRef<HTMLDivElement>(null);
+  
 
   const handleCancel = () => {
     setIsOpen(false);
   };
+  
+  const handleJoin = async () => {
+    const data = {
+      courseCode: courseCode
+    }
+    
+    try {
+
+      const response = await axios.post('http://localhost:5000/course/addStudent', data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+      })
+      
+      const resData = response.data
+      const courseId:number  = resData.course.id
+      
+      router.push(`/c/${courseId}`)
+      
+    } catch(err:any) {
+      if (err.response) {
+        if (err.response.status === 404) alert('Course not found')
+        else if (err.response.status === 500) alert('Problem at server') 
+        else alert('Error: ' + err.response.message)
+      }
+      else alert('Unknown error')
+    }
+  }
 
   useClickOutside(ref, () => setIsOpen(false));
 
   return (
     // TODO: Add transition to open and close
+    // todo: try to warp it inside basicPopup component
     !isOpen ? (
       <></>
     ) : (
@@ -73,7 +108,7 @@ export const JoinClassPopUp = () => {
             <div className='flex flex-shrink-0 justify-end pb-4 pl-6 pr-2 pt-4 leading-0'>
               {/* <CancelJoinClass /> */}
               <Cancel handleOnClick={handleCancel} />
-              <JoinClass />
+              <JoinClass handleOnClick={handleJoin}/>
             </div>
           </div>
 
