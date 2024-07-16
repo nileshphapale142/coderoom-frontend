@@ -3,47 +3,52 @@
 import React from 'react';
 import { useClickOutside } from '../Hooks';
 
-//todo: think about having id again
 interface Option {
   id: number;
   name: string;
 }
 
-export const MyDropDown = ({
+export const MultiSelectDropDown = ({
   options,
   title,
   selectHandler,
-  defaultValue = { name: 'Select', id: -1 },
 }: {
   options: Option[];
   title: string;
-  selectHandler: (arg: string) => void;
-  defaultValue?: Option;
+  selectHandler: (arg: string[]) => void;
 }) => {
-  const [selected, setSelected] = React.useState<Option>(defaultValue);
-
   const [isOptionsVisible, setIsOptionsVisible] =
     React.useState<boolean>(false);
+
+  const [selected, setSelected] = React.useState(new Set<string>());
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const handleSelect = (option: Option) => {
-    setSelected(option);
-    selectHandler(option.name);
+  const onSelectHandler = (name: string) => {
+    setSelected((prev) => {
+      const newSet = new Set(prev);
+      newSet.has(name) ? newSet.delete(name) : newSet.add(name);
+      return newSet;
+    });
   };
+
+  React.useEffect(() => {
+    selectHandler(Array.from(selected));
+  }, [selected]);
 
   useClickOutside(ref, () => setIsOptionsVisible(false));
 
+  //todo: make options absolute
   return (
     <div
       className='text-style relative flex h-auto flex-col  items-center
     justify-center rounded-2 font-normal text-gray-600 hover:bg-gray-200'
     >
       <button
-        className='flex w-full flex-row justify-between p-1'
+        className='relative flex w-full flex-row justify-between p-1'
         onClick={() => setIsOptionsVisible((prev) => !prev)}
       >
-        <span className='flex justify-center px-1'>{selected.name}</span>
-        <div className='flex items-center justify-center'>
+        <span className='flex justify-center'>{title}</span>
+        <div className='flex items-center justify-center pl-2'>
           <svg
             aria-hidden='true'
             focusable='false'
@@ -64,13 +69,13 @@ export const MyDropDown = ({
 
       <div
         className={
-          `relative left-0 top-0 z-50 mt-1 flex rounded-2 border-none
+          `relative left-0 top-full z-50 mt-1 flex rounded-2 border-none
           bg-white p-1 outline-none transition-transform duration-200 ease-linear ` +
           (isOptionsVisible ? ' visible scale-100 ' : ' hidden scale-0 ')
         }
         ref={ref}
       >
-        <div className='relative min-w-40 p-2 '>
+        <div className='relative min-w-60 p-2 '>
           <div className='flex flex-col '>
             {options.map((option, idx) => (
               <div
@@ -78,12 +83,11 @@ export const MyDropDown = ({
                 className='flex h-8 cursor-pointer flex-row rounded-2 border-none
             hover:bg-gray-200'
                 onClick={() => {
-                  handleSelect(option);
-                  setIsOptionsVisible(false);
+                  onSelectHandler(option.name);
                 }}
               >
                 <div className='flex w-10 items-center justify-center'>
-                  {option.id === selected.id ? (
+                  {selected.has(option.name) ? (
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'

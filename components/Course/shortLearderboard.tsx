@@ -9,19 +9,24 @@ interface UserProps {
 const LeaderboardRow = (user: UserProps) => {
   return (
     <tr className='dark:border-gray-700 border-b bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600'>
-                        <th
-                          scope='row'
-                          className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'
-                        >
-                          { user.name }
-                        </th>
-                        <td className='px-6 py-4'>{user.points
-                        }</td>
-                      </tr>
-  )
-}
+      <th
+        scope='row'
+        className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'
+      >
+        {user.name}
+      </th>
+      <td className='px-6 py-4'>{user.points}</td>
+    </tr>
+  );
+};
 
-export const ShortLearderboard = ({leaderboard, courseId}:{leaderboard:UserProps[], courseId:number}) => {
+export const ShortLearderboard = ({
+  leaderboard,
+  courseId,
+}: {
+  leaderboard: UserProps[];
+  courseId: number;
+}) => {
   return (
     <div className='relative m-[-1rem] ml-0 overflow-hidden p-4'>
       <div className='box-border rounded-2 border border-gray p-4 pt-0'>
@@ -43,8 +48,9 @@ export const ShortLearderboard = ({leaderboard, courseId}:{leaderboard:UserProps
                   </tr>
                 </thead>
                 <tbody>
-                
-                  {leaderboard.map((user, idx) => <LeaderboardRow key={idx} {...user} />)}
+                  {leaderboard.map((user, idx) => (
+                    <LeaderboardRow key={idx} {...user} />
+                  ))}
                 </tbody>
               </table>
               <div

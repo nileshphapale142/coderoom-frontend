@@ -101,3 +101,24 @@ export const createClassInfo = atom<{
     description: '',
   },
 });
+
+export const createTestInfo = atom<{
+  name: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  visibility: string;
+  evaluationScheme: string;
+  languages: string[];
+}>({
+  key: 'createTestInfo',
+  default: {
+    name: '',
+    date: '',
+    startTime: '',
+    endTime: '',
+    visibility: '',
+    evaluationScheme: '',
+    languages: [],
+  },
+});

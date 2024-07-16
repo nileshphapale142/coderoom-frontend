@@ -8,8 +8,13 @@ interface TestProps {
   startTime: string;
 }
 
-
-export const TestBox = ({ test, courseId }: { test: TestProps, courseId: number }) => {
+export const TestBox = ({
+  test,
+  courseId,
+}: {
+  test: TestProps;
+  courseId: number;
+}) => {
   return (
     <li
       className='relative box-border bg-transparent transition-all duration-300 
@@ -55,7 +60,7 @@ export const TestBox = ({ test, courseId }: { test: TestProps, courseId: number 
             className='text-style-1 text-wrapping ml-4 mr-[-.25rem] box-border 
                                     min-w-0 flex-30 pr-1 text-right text-black-3'
           >
-          {/* //todo: handle time format situation */}
+            {/* //todo: handle time format situation */}
             {new Date(test.startTime).toString()}
           </div>
         </div>

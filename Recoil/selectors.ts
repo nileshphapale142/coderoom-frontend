@@ -4,6 +4,7 @@ import { selector } from 'recoil';
 import {
   courseCodeInput,
   createClassInfo,
+  createTestInfo,
   userEmail,
   userName,
   userPassword,
@@ -86,5 +87,15 @@ export const isCreateClassInfoFilled = selector({
   get: ({ get }) => {
     const info = get(createClassInfo);
     return info.name.length > 0 && info.description.length > 0;
+  },
+});
+
+export const isCreateTestInfoFilled = selector({
+  key: 'isCreateTestInfoFilled',
+  get: ({ get }) => {
+    const info = get(createTestInfo);
+    return Object.values(info).every(
+      (value) => value !== '' || (Array.isArray(value) && value.length > 0)
+    );
   },
 });

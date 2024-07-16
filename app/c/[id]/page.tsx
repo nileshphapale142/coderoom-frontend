@@ -23,7 +23,6 @@ interface Course {
   leaderboard: { name: string; points: number }[];
 }
 
-
 export async function fetchCourseInfo(id: number) {
   const cookieStore = cookies();
   try {
@@ -62,7 +61,20 @@ export async function fetchCourseInfo(id: number) {
 const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
   const { props } = await fetchCourseInfo(id);
   const { course }: { course: Course } = props.data;
-  const isTeacher = cookies().get('is_teacher')?.value === 'true'
+  const isTeacher = cookies().get('is_teacher')?.value === 'true';
+  course.tests.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+  // const course: Course = {
+  //   id: 1,
+  //   name: 'Course',
+  //   description: 'Course desc',
+  //   teacher: {
+  //     name: 'Teacher',
+  //   },
+  //   teacherId: 1,
+  //   code: 'code',
+  //   tests: [],
+  //   leaderboard: [],
+  // };
 
   return (
     <>
@@ -83,20 +95,20 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
                 <main className='m-[-1rem] flex-grow overflow-hidden p-4'>
                   <div>
                     <div>
-                    
-                      {isTeacher ? <CreateTest/> : <></>}
+                      {isTeacher ? <CreateTest /> : <></>}
 
                       <div className='mb-8'>
                         <div>
                           <div className='relative'>
                             <div>
                               <ol>
-                              {course.tests.map((test, idx)  => 
-                                <TestBox key={idx}
-                                  test={test}
-                                  courseId={course.id}
-                                />
-                              )}
+                                {course.tests.map((test, idx) => (
+                                  <TestBox
+                                    key={idx}
+                                    test={test}
+                                    courseId={course.id}
+                                  />
+                                ))}
                               </ol>
                             </div>
                           </div>
@@ -106,14 +118,16 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
                   </div>
                 </main>
 
-                <ShortLearderboard leaderboard={course.leaderboard} courseId={course.id} />
+                <ShortLearderboard
+                  leaderboard={course.leaderboard}
+                  courseId={course.id}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-      {isTeacher ? <CreateTestPopUp /> : <></> }
-      
+      {isTeacher ? <CreateTestPopUp courseId={id} /> : <></>}
     </>
   );
 };
