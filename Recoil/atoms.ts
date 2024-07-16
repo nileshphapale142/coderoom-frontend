@@ -4,9 +4,9 @@ import { languageOptions } from '@/Utils';
 import { atom } from 'recoil';
 
 export const isUserTeacher = atom({
-  key: 'isUserTeacher', 
-  default: false
-})
+  key: 'isUserTeacher',
+  default: false,
+});
 
 export const courseCodeInput = atom({
   key: 'courseCodeInput',
@@ -91,7 +91,6 @@ export const userSignInInfo = atom<{
   },
 });
 
-
 export const createClassInfo = atom<{
   name: string;
   description: string;
@@ -99,6 +98,6 @@ export const createClassInfo = atom<{
   key: 'createClassInfo',
   default: {
     name: '',
-    description: ''
-  }
-})
+    description: '',
+  },
+});

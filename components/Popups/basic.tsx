@@ -11,7 +11,7 @@ export const BasicPopUp = ({
   title,
   isJoinValid,
   joinBtnName,
-  onClickHandler
+  onClickHandler,
 }: {
   children: React.ReactNode;
   title: string;
@@ -61,7 +61,11 @@ export const BasicPopUp = ({
             <div className='flex flex-shrink-0 justify-end pb-4 pl-6 pr-2 pt-4 leading-0'>
               <Cancel handleOnClick={handleCancel} />
 
-              <Join name={joinBtnName} isValid={isJoinValid} onClickHandler={onClickHandler} />
+              <Join
+                name={joinBtnName}
+                isValid={isJoinValid}
+                onClickHandler={onClickHandler}
+              />
             </div>
           </div>
 

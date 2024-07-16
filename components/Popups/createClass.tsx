@@ -15,39 +15,37 @@ interface Course {
   code: string;
   teacher: {
     name: string;
-  }
+  };
 }
 
 export const CreateClassPopup = () => {
-  
-  //todo: error handling on class creation 
-  
-  const [info, setInfo] = useRecoilState(createClassInfo)
-  const isInfoFilled = useRecoilValue(isCreateClassInfoFilled)
-  const router = useRouter()
-  
+  //todo: error handling on class creation
+
+  const [info, setInfo] = useRecoilState(createClassInfo);
+  const isInfoFilled = useRecoilValue(isCreateClassInfoFilled);
+  const router = useRouter();
+
   const handleClassCreation = async () => {
     try {
       const data = {
         name: info.name,
-        description: info.description
-      }
+        description: info.description,
+      };
 
       const response = await axios.post('/new/class', data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`
-        }
-      })
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
 
-      const resData = response.data
-      const course: Course = resData.course
-      router.push(`/c/${course.id}`)
-      
-    } catch(err:any) {
-      alert('Error  ' + err?.response.message)
+      const resData = response.data;
+      const course: Course = resData.course;
+      router.push(`/c/${course.id}`);
+    } catch (err: any) {
+      alert('Error  ' + err?.response.message);
     }
-  }
-  
+  };
+
   return (
     <>
       <BasicPopUp
@@ -64,8 +62,8 @@ export const CreateClassPopup = () => {
               title='Class Name'
               inputHandler={(name) => {
                 setInfo((prev) => {
-                  return {...prev, name: name}
-                })
+                  return { ...prev, name: name };
+                });
               }}
               width='100%'
               id='className'
@@ -75,12 +73,14 @@ export const CreateClassPopup = () => {
               <div className='text-style'>
                 <span className='font-normal'>Class Description</span>
               </div>
-              <BasicTextArea width='100%' 
-              inputHandler={(desc) => {
-                setInfo((prev) => {
-                  return {...prev, description: desc}
-                })
-              }}/>
+              <BasicTextArea
+                width='100%'
+                inputHandler={(desc) => {
+                  setInfo((prev) => {
+                    return { ...prev, description: desc };
+                  });
+                }}
+              />
             </div>
           </div>
         </div>

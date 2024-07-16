@@ -63,13 +63,17 @@ const nextConfig = {
         destination: 'http://localhost:5000/user/getCourses',
       },
       {
+        source: '/u/c/:id',
+        destination: 'http://localhost:5000/course/:id',
+      },
+      {
         source: '/new/class',
         destination: 'http://localhost:5000/course/create',
       },
       {
         source: '/join/class',
         destination: 'http://localhost:5000/course/addStudent',
-      }
+      },
     ];
   },
 };

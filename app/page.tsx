@@ -1,32 +1,57 @@
-'use client';
-
-import React from 'react';
 import { Courses } from '@/components/Home';
 import { CreateClassPopup, JoinClassPopUp } from '@/components/Popups';
-import { useRouter } from 'next/navigation';
-import Loading from './loading';
-import { useRecoilValue } from 'recoil';
-import { isUserTeacher } from '@/Recoil';
+import axios from 'axios';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-const Home = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const router = useRouter();
-  const isTeacher = useRecoilValue(isUserTeacher)
+export async function fetchCourses() {
+  const cookieStore = cookies();
+  try {
+    if (!cookieStore.get('access_token')) {
+      redirect('/auth/signin');
+      return {
+        props: {
+          data: null,
+        },
+      };
+    }
 
-  React.useEffect(() => {
-    if (!localStorage.getItem('access_token')) router.push('/auth/signin');
-    setIsLoading(false);
-  }, []);
+    const response = await axios.get('http://localhost:5000/user/getCourses', {
+      headers: {
+        Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,
+      },
+    });
 
-  if (isLoading) return <Loading />;
+    const data = response.data;
+
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (err: any) {
+    //todo: error handling
+    console.log('Error message : ', err);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
+}
+
+const Home = async () => {
+  const { props } = await fetchCourses();
+  const courses = props.data?.courses;
 
   return (
     <>
-      <Courses />
-      {
-        isTeacher ? <CreateClassPopup /> : <JoinClassPopUp />
-      }
-      
+      <Courses courses={courses} />
+      {cookies().get('is_teacher')?.value === 'true' ? (
+        <CreateClassPopup />
+      ) : (
+        <JoinClassPopUp />
+      )}
     </>
   );
 };

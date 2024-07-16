@@ -1,4 +1,7 @@
+import axios from 'axios';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 interface User {
@@ -6,6 +9,42 @@ interface User {
   points: number;
   tests: number[];
 }
+
+interface Student {
+  id: number;
+  name: string;
+}
+
+export const fetchLeaderboard = async (cid:number) => {
+  try {
+    if (!cookies().get('access_token')) {
+      redirect('/auth/signin');
+      return {
+        data: null
+      }
+    }
+    
+    const response = await axios.get(`http://localhost:5000/course/${cid}/leaderboard`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`
+      }
+    });
+    
+    const data = response.data;
+    
+    return {
+      data
+    }
+    
+  } catch(err:any) {
+    console.log('err : ', err)
+    return {
+      data: null
+    }
+  }
+}
+
+
 
 const SimpleCell = ({
   name,
@@ -105,25 +144,37 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-const Leaderboard = () => {
+const Leaderboard = async ({ params: { id } }: { params: { id: number; }}) => {
+  const { data } = await fetchLeaderboard(id);
+  let { students, tests, leaderboard } = data
+    
+  const sortedTests = 
+    Object.entries(tests)
+    .map(test => [test[0], test[1]])
+    .sort((a:any, b:any) => 
+      new Date(b[1].date).getTime() - new Date(a[1].date).getTime())
+  
+  
+  const Students = 
+    Object.entries(leaderboard)
+    .map((student:any) => {
+      const uid = student[0]
+      const user:User = {
+        name: students[uid].toString().toUpperCase(),
+        points: student[1].totalPoints,
+        tests: []
+      }
+      
+      user.tests = sortedTests.map((test:any) => student[1].testPoints[test[0]].points) 
+      
+      return user
+    }).sort((a, b) => b.points - a.points)
+  
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start
   //TODO: horizontal scrolling
 
-  const students: User[] = [
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15, 15, 15, 25] },
-    {
-      name: 'Adam Warlock name is too long',
-      points: 100,
-      tests: [15, 15, 15, 15, 15, 25],
-    },
-  ];
   return (
     <div
       className='overflow-y-[unset] visible static flex h-auto
@@ -151,47 +202,20 @@ const Leaderboard = () => {
                             <SimpleCell name='Rank' />
                             <SimpleCell name='Name of Student' />
                             <SimpleCell name='Total Points' />
-
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Some Test Name that is long'
-                              link='/c/1/'
-                              date='some date'
-                              outof='random'
-                            />
+                            
+                            {sortedTests.map((test:any, idx) => 
+                              <TestCell
+                              key={idx}
+                              name={test[1].name}
+                              link={`/c/${id}/t/${test[0]}`}
+                              date={`${new Date(test[1].date).toDateString()}`}
+                              outof={`${test[1].totalPoints}`}
+                              />
+                            )}
                           </tr>
                         </thead>
                         <tbody>
-                          {students.map((student, idx) => {
+                          {Students.map((student, idx) => {
                             return (
                               <tr key={idx}>
                                 <SimpleCell name={(idx + 1).toString()} />

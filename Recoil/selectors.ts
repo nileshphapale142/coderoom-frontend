@@ -81,11 +81,10 @@ export const isSignInInfoFilled = selector({
   },
 });
 
-
 export const isCreateClassInfoFilled = selector({
   key: 'isCreateClassInfoFilled',
-  get: ({get}) => {
-    const info = get(createClassInfo)
+  get: ({ get }) => {
+    const info = get(createClassInfo);
     return info.name.length > 0 && info.description.length > 0;
-  }
-})
+  },
+});
