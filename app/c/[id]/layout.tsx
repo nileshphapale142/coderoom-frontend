@@ -8,15 +8,10 @@ interface LayoutProps {
   };
 }
 
-export default function CourseLayout({
-  children,
-  params,
-}: LayoutProps) {
-
-  const {id} = params;
+export default function CourseLayout({ children, params }: LayoutProps) {
+  const { id } = params;
   return (
     <>
-
       <SecondNavbar
         navItems={[
           { name: 'Tests', route: `/c/${id}` },

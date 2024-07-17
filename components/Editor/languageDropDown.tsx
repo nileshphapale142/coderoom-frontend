@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
 import React from 'react';
 import Select from 'react-select';
 import { customStyles, languageOptions } from '@/Utils';
 
-export const LanguagesDropdown = ({ onSelectChange }:any) => {
+export const LanguagesDropdown = ({ onSelectChange }: any) => {
   return (
     <Select
       placeholder={`Filter By Category`}
@@ -12,7 +12,6 @@ export const LanguagesDropdown = ({ onSelectChange }:any) => {
       styles={customStyles}
       defaultValue={languageOptions[0]}
       // onChange={(selectedOption) => onSelectChange(selectedOption)}
-      
     />
   );
 };

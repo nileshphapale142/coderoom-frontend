@@ -1,7 +1,29 @@
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
-import Head from 'next/head';
+import axios from 'axios';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
+
+
+interface Submission {
+	submission: {
+    id: number,
+    code: string,
+		language: string,
+		time: string,
+    statusCode: number
+	},
+	student: {
+		id: number,
+    name: string
+	},
+	question: {
+		id: number,
+    name: string;
+	}
+};
+
 
 const Heading = ({ name }: { name: string }) => {
   return (
@@ -23,7 +45,7 @@ const SimpleCell = ({ name }: { name: string }) => {
   return (
     <td>
       <div className='p-2 '>
-        <div className='text-style text-gray-600 flex w-full items-center justify-start'>
+        <div className='text-style flex w-full items-center justify-start text-gray-600'>
           <div className='text-base font-normal'>
             <span>{name} </span>
           </div>
@@ -37,7 +59,7 @@ const LinkCell = ({ name, link }: { name: string; link: string }) => {
   return (
     <td>
       <div className='p-2 '>
-        <div className='text-style text-violet-1 flex w-full items-center justify-start'>
+        <div className='text-style flex w-full items-center justify-start text-violet-1'>
           <div className='text-base font-normal'>
             <Link
               href={link}
@@ -60,11 +82,46 @@ const BodyRowRenderer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const SubmissionPage = () => {
+export const fetchSubmissions = async (cid:number, tid:number) => {
+  try {
+    if (!cookies().get('access_token')) {
+      redirect('/auth/signin')
+      return {
+        data: null
+      }
+    }
+    
+    const response = await axios.get(`http://localhost:5000/test/${tid}/submissions`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`
+      }
+    });
+    
+    const data = response.data;
+    
+    return {
+      data
+    }
+  } catch(err:any) {
+    console.log('error: ', err);
+    if (err.response.status === 404) redirect('/not-found');
+    else if (err.response.status === 401) redirect(`/c/${cid}`);
+    else if (err.response.status === 500) redirect(`/c/${cid}`);
+    
+    return {
+      data: null,
+      status: err.response.status
+    };
+  };
+}
 
+const SubmissionPage = async ({params}: {params: {id: number, tid: number}}) => {
+  const { id, tid } = params;
+  const { data, status } = await fetchSubmissions(id, tid);
+  const { submissions }: {submissions: Submission[]} = data;
+  
   // todo: pagination
   // todo: status with color
-   
   return (
     <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>
       <div className='relative bottom-0 left-0 right-0 top-0 z-auto block min-h-full min-w-0 flex-1-auto'>
@@ -87,46 +144,24 @@ const SubmissionPage = () => {
                       </tr>
                     </thead>
                     <tbody>
+                    
+                      {submissions?.map(({ submission, question, student }, idx) => 
+                    
                       <BodyRowRenderer>
-                        <LinkCell name='Submission' link='submissionLink' />
-                        <LinkCell name='User Name' link='userLink' />
-                        <LinkCell name='Question Name' link='questionNameLink' />
-                        <SimpleCell name='random' />
-                        <SimpleCell name='random is tool long' />
-                        <SimpleCell name='random ' />
+                        <LinkCell name={submission.id.toString()} link='submissionLink' />
+                        <LinkCell name={student.name} link='userLink' />
+                        <LinkCell
+                          name={question.name}
+                          link={`/c/${id}/t/${tid}/q/${question.id}`}
+                        />
+                        {/* //todo: handle time situation */}
+                        <SimpleCell name={new Date(submission.time).toLocaleString()} />
+                        <SimpleCell name={submission.language} />
+                        <SimpleCell name={submission.statusCode.toString()} />
                       </BodyRowRenderer>
-                      <BodyRowRenderer>
-                        <LinkCell name='Submission' link='submissionLink' />
-                        <LinkCell name='User Name' link='userLink' />
-                        <LinkCell name='Question Name' link='questionNameLink' />
-                        <SimpleCell name='random' />
-                        <SimpleCell name='random is tool long' />
-                        <SimpleCell name='random ' />
-                      </BodyRowRenderer>
-                      <BodyRowRenderer>
-                        <LinkCell name='Submission' link='submissionLink' />
-                        <LinkCell name='User Name' link='userLink' />
-                        <LinkCell name='Question Name' link='questionNameLink' />
-                        <SimpleCell name='random' />
-                        <SimpleCell name='random is tool long' />
-                        <SimpleCell name='random ' />
-                      </BodyRowRenderer>
-                      <BodyRowRenderer>
-                        <LinkCell name='Submission' link='submissionLink' />
-                        <LinkCell name='User Name' link='userLink' />
-                        <LinkCell name='Question Name' link='questionNameLink' />
-                        <SimpleCell name='random' />
-                        <SimpleCell name='random is tool long' />
-                        <SimpleCell name='random ' />
-                      </BodyRowRenderer>
-                      <BodyRowRenderer>
-                        <LinkCell name='Submission' link='submissionLink' />
-                        <LinkCell name='User Name' link='userLink' />
-                        <LinkCell name='Question Name' link='questionNameLink' />
-                        <SimpleCell name='random' />
-                        <SimpleCell name='random is tool long' />
-                        <SimpleCell name='random ' />
-                      </BodyRowRenderer>
+                    
+                    )}
+                    
                     </tbody>
                   </table>
                 </div>

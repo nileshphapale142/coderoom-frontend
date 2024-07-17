@@ -1,75 +1,72 @@
-'use client'
+'use client';
 
-import { BasicInput } from '@/components/Inputs'
-import Link from 'next/link';
-import React from 'react'    
+import { Page, Page2, SignInSec } from '@/components/Auth';
+import { isSignInInfoFilled, userSignInInfo } from '@/Recoil';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 
 const SignIn = () => {
-  //todo: add modularity 
+  //todo: add modularity
+  const signInInfo = useRecoilValue(userSignInInfo);
+  const isInfoFilled = useRecoilValue(isSignInInfoFilled);
+  const router = useRouter();
+
+  const handleSignIn = async () => {
+    if (!isInfoFilled) {
+      alert('Fill all fields');
+      return;
+    }
+
+    const data = {
+      email: signInInfo.email,
+      password: signInInfo.password,
+    };
+
+    try {
+      const response = await axios.post('/signin', data);
+      const resData = response.data;
+
+      localStorage.removeItem('access_token');
+      localStorage.setItem('access_token', resData.access_token);
+
+      router.push('/');
+    } catch (err: any) {
+      if (err.response) {
+        if (err.response.status === 400) alert('Data not in correct format');
+        else if (err.response.status === 403)
+          alert('Either email or password incorrect');
+        else if (err.response.status === 500) alert('Problem at server');
+        else alert(err.response.message);
+      } else alert('Unknwon problem');
+    }
+  };
   return (
     <div className='google-bw-bg absolute bottom-0 left-0 right-0 top-0'>
-      <div className='mx-auto flex h-full flex-col items-center justify-center'>
-        <div className='w-full flex-grow'></div>
-        <div className='flex w-30r flex-col rounded-4 bg-white px-8'>
-          <div className='text-heading border-b py-4'>
-            <div className='flex w-full justify-start'>
-              <span className='font-semibold text-gray-800'>Sign In</span>
-            </div>
-          </div>
+      <div className='flex h-full w-full flex-col justify-center'>
+        <div className='flex-grow'></div>
 
-          <div className='mt-4 flex flex-col items-start justify-start '>
-            <div>
-              <BasicInput
-                title='Email'
-                inputHandler={(arg: string) => {}}
-                width={'26rem'}
-              />
-            </div>
-            <div className='mt-4'>
-              <BasicInput
-                title='Password'
-                inputHandler={(arg: string) => {}}
-                width={'26rem'}
-              />
-            </div>
-
-            <div className='mt-2'>
-              <div className='text-style cursor-pointer pl-2 text-xs font-normal text-blue-600'>
-                <span>Forgot password?</span>
-              </div>
-            </div>
-
-            <div className='mt-4 w-full'>
-              <div className='flex w-full items-center justify-center'>
-                <div className=''>
-                  <div className='text-style text-white'>
-                    <button
-                      className='flex h-10 w-auto items-center justify-center rounded-2 border-none bg-blue-600 px-4
-                py-2 opacity-100 transition-opacity hover:opacity-90'
-                      onClick={() => {}}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className='mt-4 w-full py-4'>
-            <div className='flex flex-row justify-center'>
-              <div className='flex-grow -translate-y-2 border-b'></div>
-              <div className='text-style flex justify-center px-2 font-normal text-blue-700'>
-                <Link href={'/auth/signup'}>Don't have an account?</Link>
-              </div>
-              <div className='flex-grow -translate-y-2 border-b'></div>
+        <div className='mx-auto w-70r rounded-7 border-none bg-white p-9 py-12 '>
+          <div className='flex flex-grow flex-row'>
+            <div className='flex flex-grow flex-row flex-wrap'>
+              <Page
+                title='Sign-In to your account'
+                subtitle='Enter email and password to sign-in'
+                inputsFilled={isInfoFilled}
+                isSignIn={true}
+                handleSubmit={handleSignIn}
+              >
+                <SignInSec />
+              </Page>
             </div>
           </div>
         </div>
-        <div className='w-full flex-grow'></div>
+
+        <div className='flex-grow'></div>
       </div>
     </div>
   );
-}
+};
 
-export default SignIn
+export default SignIn;

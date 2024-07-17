@@ -1,7 +1,13 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from 'react';
-import {CodeEditor, OutputDetails, OutputWindow, LanguagesDropdown, CustomInput} from './';
+import {
+  CodeEditor,
+  OutputDetails,
+  OutputWindow,
+  LanguagesDropdown,
+  CustomInput,
+} from './';
 import axios from 'axios';
 import { classnames, languageOptions } from '@/Utils';
 
@@ -55,7 +61,7 @@ export const Landing = () => {
   const enterPress = useKeyPress('Enter');
   const ctrlPress = useKeyPress('Control');
 
-  const onSelectChange = (sl:any) => {
+  const onSelectChange = (sl: any) => {
     console.log('selected Option...', sl);
     setLanguage(sl);
   };
@@ -67,7 +73,7 @@ export const Landing = () => {
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
-  const onChange = (action:string, data:string) => {
+  const onChange = (action: string, data: string) => {
     switch (action) {
       case 'code': {
         setCode(data);
@@ -124,7 +130,7 @@ export const Landing = () => {
       });
   };
 
-  const checkStatus = async (token:string) => {
+  const checkStatus = async (token: string) => {
     const options = {
       method: 'GET',
       url: process.env.REACT_APP_RAPID_API_URL + '/' + token,
@@ -159,23 +165,23 @@ export const Landing = () => {
     }
   };
 
-//   function handleThemeChange(th) {
-//     const theme = th;
-//     console.log('theme...', theme);
+  //   function handleThemeChange(th) {
+  //     const theme = th;
+  //     console.log('theme...', theme);
 
-//     if (['light', 'vs-dark'].includes(theme.value)) {
-//       setTheme(theme);
-//     } else {
-//       defineTheme(theme.value).then((_) => setTheme(theme));
-//     }
-//   }
-//   useEffect(() => {
-//     defineTheme('oceanic-next').then((_) =>
-//       setTheme({ value: 'oceanic-next', label: 'Oceanic Next' })
-//     );
-//   }, []);
+  //     if (['light', 'vs-dark'].includes(theme.value)) {
+  //       setTheme(theme);
+  //     } else {
+  //       defineTheme(theme.value).then((_) => setTheme(theme));
+  //     }
+  //   }
+  //   useEffect(() => {
+  //     defineTheme('oceanic-next').then((_) =>
+  //       setTheme({ value: 'oceanic-next', label: 'Oceanic Next' })
+  //     );
+  //   }, []);
 
-  const showSuccessToast = (msg:string) => {
+  const showSuccessToast = (msg: string) => {
     toast.success(msg || `Compiled Successfully!`, {
       position: 'top-right',
       autoClose: 1000,
@@ -186,7 +192,7 @@ export const Landing = () => {
       progress: undefined,
     });
   };
-  const showErrorToast = (msg?:string, timer?:number) => {
+  const showErrorToast = (msg?: string, timer?: number) => {
     toast.error(msg || `Something went wrong! Please try again.`, {
       position: 'top-right',
       autoClose: timer ? timer : 1000,

@@ -5,8 +5,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 export const OpenProblemListBtn = () => {
-
-    const [_, setIsOpen] = useRecoilState(isProblemListOpen)
+  const [_, setIsOpen] = useRecoilState(isProblemListOpen);
 
   return (
     <button
@@ -14,7 +13,9 @@ export const OpenProblemListBtn = () => {
                 items-center justify-center overflow-visible border-none 
                 bg-transparent fill-gray-600 p-3 text-2xl text-gray-3 outline-none
                 will-change-t-o '
-      onClick={() => {setIsOpen(true)}}
+      onClick={() => {
+        setIsOpen(true);
+      }}
     >
       <span>
         <svg

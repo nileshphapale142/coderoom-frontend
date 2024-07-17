@@ -15,7 +15,7 @@ export default function QuestionLayout({ children, params }: LayoutProps) {
 
   return (
     <>
-      <TestNavbar/>
+      <TestNavbar />
       {children}
     </>
   );

@@ -4,49 +4,111 @@ import {
   ShortLearderboard,
   TestBox,
 } from '@/components/Course';
-import { SecondNavbar } from '@/components/Navbar';
 import { CreateTestPopUp } from '@/components/Popups';
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
-import React from 'react';
+import axios from 'axios';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-interface CoursePageProps {
-  params: {
-    id: string;
+interface Course {
+  id: number;
+  name: string;
+  description: string;
+  code: string;
+  teacherId: number;
+  teacher: {
+    name: string;
   };
+  tests: { id: number; name: string; startTime: string }[];
+  leaderboard: { name: string; points: number }[];
 }
 
-const CourseDash = ({params}: CoursePageProps) => {
-  
-  const {id} = params
+export async function fetchCourseInfo(id: number) {
+  const cookieStore = cookies();
+  try {
+    if (!cookieStore.get('access_token')) {
+      redirect('/auth/signin');
+      return {
+        props: {
+          data: null,
+        },
+      };
+    }
+
+    const response = await axios.get(`http://localhost:5000/course/${id}`, {
+      headers: {
+        Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,
+      },
+    });
+
+    const data = response.data;
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (err: any) {
+    //todo: error handling
+    console.error('Error fetching course data:', err?.response.message);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
+}
+
+const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
+  const { props } = await fetchCourseInfo(id);
+  const { course }: { course: Course } = props.data;
+  const isTeacher = cookies().get('is_teacher')?.value === 'true';
+  course.tests.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+  // const course: Course = {
+  //   id: 1,
+  //   name: 'Course',
+  //   description: 'Course desc',
+  //   teacher: {
+  //     name: 'Teacher',
+  //   },
+  //   teacherId: 1,
+  //   code: 'code',
+  //   tests: [],
+  //   leaderboard: [],
+  // };
 
   return (
     <>
-    
       <div className='visible static flex h-auto min-h-0 overflow-y-hidden opacity-100 contain-style'>
         <div className='relative bottom-0 left-0 right-0 top-0 z-auto block min-h-full min-w-0 flex-1-auto'>
           <div className='min-h-auto relative z-auto h-auto backface-visibility-h '>
             <MainNavFiller />
             <CourseNavFiller />
             <div className='mx-auto my-0 flex w-calc-12 max-w-625r flex-col '>
-              <CourseInfo />
+              <CourseInfo
+                name={course.name}
+                description={course.description}
+                code={course.code}
+                teacher={course.teacher.name}
+              />
 
               <div className='mt-6 flex'>
                 <main className='m-[-1rem] flex-grow overflow-hidden p-4'>
                   <div>
                     <div>
-                      {/* Create test */}
-                      <CreateTest />
+                      {isTeacher ? <CreateTest /> : <></>}
 
                       <div className='mb-8'>
                         <div>
                           <div className='relative'>
                             <div>
                               <ol>
-                                {/* // TODO: Can add pagination for viewing test */}
-                                <TestBox />
-                                <TestBox />
-                                <TestBox />
-                                <TestBox />
+                                {course.tests.map((test, idx) => (
+                                  <TestBox
+                                    key={idx}
+                                    test={test}
+                                    courseId={course.id}
+                                  />
+                                ))}
                               </ol>
                             </div>
                           </div>
@@ -56,13 +118,16 @@ const CourseDash = ({params}: CoursePageProps) => {
                   </div>
                 </main>
 
-                <ShortLearderboard />
+                <ShortLearderboard
+                  leaderboard={course.leaderboard}
+                  courseId={course.id}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <CreateTestPopUp />
+      {isTeacher ? <CreateTestPopUp courseId={id} /> : <></>}
     </>
   );
 };

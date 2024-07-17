@@ -1,31 +1,48 @@
 'use client';
 
 import React from 'react';
-import { languageOptions } from '@/Utils';
 import { useClickOutside } from '../Hooks';
-import { currLanguage } from '@/Recoil';
-import { useRecoilState } from 'recoil';
 
+//todo: think about having id again
+interface Option {
+  id: number;
+  name: string;
+}
 
-export const MyDropDown = () => {
+export const MyDropDown = ({
+  options,
+  title,
+  selectHandler,
+  defaultValue = { name: 'Select', id: -1 },
+}: {
+  options: Option[];
+  title: string;
+  selectHandler: (arg: string) => void;
+  defaultValue?: Option;
+}) => {
+  const [selected, setSelected] = React.useState<Option>(defaultValue);
 
-  const [language, setLanguage] = useRecoilState(currLanguage);
-  
-  const [isOptionsVisible, setIsOptionsVisible] = React.useState<boolean>(false);
+  const [isOptionsVisible, setIsOptionsVisible] =
+    React.useState<boolean>(false);
   const ref = React.useRef<HTMLDivElement>(null);
+
+  const handleSelect = (option: Option) => {
+    setSelected(option);
+    selectHandler(option.name);
+  };
 
   useClickOutside(ref, () => setIsOptionsVisible(false));
 
   return (
     <div
-      className='text-style relative flex  h-full flex-col  items-center
+      className='text-style relative flex h-auto flex-col  items-center
     justify-center rounded-2 font-normal text-gray-600 hover:bg-gray-200'
     >
       <button
         className='flex w-full flex-row justify-between p-1'
         onClick={() => setIsOptionsVisible((prev) => !prev)}
       >
-        <span className='flex justify-center px-1'>{language.name}</span>
+        <span className='flex justify-center px-1'>{selected.name}</span>
         <div className='flex items-center justify-center'>
           <svg
             aria-hidden='true'
@@ -45,29 +62,28 @@ export const MyDropDown = () => {
         </div>
       </button>
 
-
-    
       <div
         className={
-          `absolute left-0 top-full z-50 mt-1 flex rounded-2 border-none
+          `relative left-0 top-0 z-50 mt-1 flex rounded-2 border-none
           bg-white p-1 outline-none transition-transform duration-200 ease-linear ` +
           (isOptionsVisible ? ' visible scale-100 ' : ' hidden scale-0 ')
         }
         ref={ref}
       >
-        <div className='relative min-w-60 p-2 '>
+        <div className='relative min-w-40 p-2 '>
           <div className='flex flex-col '>
-            {languageOptions.map((lang) => (
+            {options.map((option, idx) => (
               <div
+                key={idx}
                 className='flex h-8 cursor-pointer flex-row rounded-2 border-none
             hover:bg-gray-200'
                 onClick={() => {
-                  setLanguage(lang);
+                  handleSelect(option);
                   setIsOptionsVisible(false);
                 }}
               >
                 <div className='flex w-10 items-center justify-center'>
-                  {language.name === lang.name ? (
+                  {option.id === selected.id ? (
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'
@@ -76,9 +92,9 @@ export const MyDropDown = () => {
                       fill='currentColor'
                     >
                       <path
-                        fill-rule='evenodd'
+                        fillRule='evenodd'
                         d='M9.688 15.898l-3.98-3.98a1 1 0 00-1.415 1.414L8.98 18.02a1 1 0 001.415 0L20.707 7.707a1 1 0 00-1.414-1.414l-9.605 9.605z'
-                        clip-rule='evenodd'
+                        clipRule='evenodd'
                       ></path>
                     </svg>
                   ) : (
@@ -86,7 +102,7 @@ export const MyDropDown = () => {
                   )}
                 </div>
                 <div className='flex items-center justify-start'>
-                  {lang.name}
+                  {option.name}
                 </div>
               </div>
             ))}

@@ -10,7 +10,7 @@ export const TestNavbar = () => {
       duration-[240ms]'
       >
         <div
-          className='h-full flex w-full justify-between border-b-[0.0625rem]
+          className='flex h-full w-full justify-between border-b-[0.0625rem]
         border-b-gray-1 bg-white transition-[width] ease-bezier0021'
         >
           <div className='flex items-center justify-center overflow-hidden'>
@@ -18,7 +18,7 @@ export const TestNavbar = () => {
               <div className='h-full flex-shrink-0 '>
                 <div className='my-1 rounded-2 hover:bg-gray-200'>
                   <span>
-                    <OpenProblemListBtn/>
+                    <OpenProblemListBtn />
                   </span>
                 </div>
               </div>

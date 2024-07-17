@@ -14,16 +14,16 @@ export const CourseCode = () => {
 
   const handleClickOutside = (event: MouseEvent) => {
     if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
-      setInputClick(inputValue.length !== 0)
+      setInputClick(inputValue.length !== 0);
       if (inputValue.length === 0) setState('normal');
     }
   };
-  
+
   const handleFocus = () => {
     setInputClick(true);
-    setState((prev) => prev === 'danger' ? 'danger' : 'good');
+    setState((prev) => (prev === 'danger' ? 'danger' : 'good'));
   };
-  
+
   React.useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -108,12 +108,16 @@ bg-none p-0 text-base font-normal tracking-very-sm text-gray-2 caret-blue-1 tran
 
       <div className='box-border flex justify-between px-4'>
         <p
-          className={'m-0 mb-0 block text-xs font-normal leading-875 tracking-wide '
-       + ' text-red-500 transition-opacity will-change-opacity ' + (state === 'danger' ? ' opacity-100 pr-4' : ' opacity-0')}
+          className={
+            'm-0 mb-0 block text-xs font-normal leading-875 tracking-wide ' +
+            ' text-red-500 transition-opacity will-change-opacity ' +
+            (state === 'danger' ? ' pr-4 opacity-100' : ' opacity-0')
+          }
         >
           <span className='inline-block h-4 w-0'></span>
-          {state === 'danger' ? "Class codes are 5-7 characters including letters and numbers, and no spaces or symbols" : ""}
-          
+          {state === 'danger'
+            ? 'Class codes are 5-7 characters including letters and numbers, and no spaces or symbols'
+            : ''}
         </p>
       </div>
     </div>

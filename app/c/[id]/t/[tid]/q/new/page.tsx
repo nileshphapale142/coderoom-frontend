@@ -3,10 +3,9 @@ import { MainNavFiller, CourseNavFiller } from '@/components/Utils';
 import { NewQuestion } from '@/components/Question';
 
 const NewQuestionPage = () => {
-
   // TODO: add navigation button at the bottom (back and next)
   // TODO: pagination
-  
+
   return (
     <>
       <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>
@@ -14,7 +13,7 @@ const NewQuestionPage = () => {
           <div className='min-h-auto relative z-auto flex h-auto flex-col backface-visibility-h '>
             <MainNavFiller />
             <CourseNavFiller />
-            <NewQuestion/>
+            <NewQuestion />
           </div>
         </div>
       </div>

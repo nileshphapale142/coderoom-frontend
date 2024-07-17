@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -45,6 +46,35 @@ const nextConfig = {
         pathname: '/ios/50/graduation-cap.png',
       },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: '/signup',
+        destination: 'http://localhost:5000/auth/signup',
+      },
+      {
+        source: '/signin',
+        destination: 'http://localhost:5000/auth/signin',
+      },
+      {
+        source: '/u/c/all',
+        destination: 'http://localhost:5000/user/getCourses',
+      },
+      {
+        source: '/u/c/:id',
+        destination: 'http://localhost:5000/course/:id',
+      },
+      {
+        source: '/new/class',
+        destination: 'http://localhost:5000/course/create',
+      },
+      {
+        source: '/join/class',
+        destination: 'http://localhost:5000/course/addStudent',
+      },
+    ];
   },
 };
 
