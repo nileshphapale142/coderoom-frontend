@@ -41,6 +41,7 @@ export const MyDropDown = ({
       <button
         className='flex w-full flex-row justify-between p-1'
         onClick={() => setIsOptionsVisible((prev) => !prev)}
+        id='dropdown'
       >
         <span className='flex justify-center px-1'>{selected.name}</span>
         <div className='flex items-center justify-center'>
@@ -77,6 +78,7 @@ export const MyDropDown = ({
                 key={idx}
                 className='flex h-8 cursor-pointer flex-row rounded-2 border-none
             hover:bg-gray-200'
+            id={'option' + option.id.toString()}
                 onClick={() => {
                   handleSelect(option);
                   setIsOptionsVisible(false);

@@ -5,25 +5,23 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-
 interface Submission {
-	submission: {
-    id: number,
-    code: string,
-		language: string,
-		time: string,
-    statusCode: number
-	},
-	student: {
-		id: number,
-    name: string
-	},
-	question: {
-		id: number,
+  submission: {
+    id: number;
+    code: string;
+    language: string;
+    time: string;
+    statusCode: number;
+  };
+  student: {
+    id: number;
     name: string;
-	}
-};
-
+  };
+  question: {
+    id: number;
+    name: string;
+  };
+}
 
 const Heading = ({ name }: { name: string }) => {
   return (
@@ -82,44 +80,51 @@ const BodyRowRenderer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const fetchSubmissions = async (cid:number, tid:number) => {
+export const fetchSubmissions = async (cid: number, tid: number) => {
   try {
     if (!cookies().get('access_token')) {
-      redirect('/auth/signin')
+      redirect('/auth/signin');
       return {
-        data: null
-      }
+        data: null,
+      };
     }
-    
-    const response = await axios.get(`http://localhost:5000/test/${tid}/submissions`, {
-      headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`
+
+    const response = await axios.get(
+      `http://localhost:5000/test/${tid}/submissions`,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
       }
-    });
-    
+    );
+
     const data = response.data;
-    
+
     return {
-      data
-    }
-  } catch(err:any) {
+      data,
+    };
+  } catch (err: any) {
     console.log('error: ', err);
     if (err.response.status === 404) redirect('/not-found');
     else if (err.response.status === 401) redirect(`/c/${cid}`);
     else if (err.response.status === 500) redirect(`/c/${cid}`);
-    
+
     return {
       data: null,
-      status: err.response.status
+      status: err.response.status,
     };
-  };
-}
+  }
+};
 
-const SubmissionPage = async ({params}: {params: {id: number, tid: number}}) => {
+const SubmissionPage = async ({
+  params,
+}: {
+  params: { id: number; tid: number };
+}) => {
   const { id, tid } = params;
   const { data, status } = await fetchSubmissions(id, tid);
-  const { submissions }: {submissions: Submission[]} = data;
-  
+  const { submissions }: { submissions: Submission[] } = data;
+
   // todo: pagination
   // todo: status with color
   return (
@@ -144,24 +149,29 @@ const SubmissionPage = async ({params}: {params: {id: number, tid: number}}) => 
                       </tr>
                     </thead>
                     <tbody>
-                    
-                      {submissions?.map(({ submission, question, student }, idx) => 
-                    
-                      <BodyRowRenderer>
-                        <LinkCell name={submission.id.toString()} link='submissionLink' />
-                        <LinkCell name={student.name} link='userLink' />
-                        <LinkCell
-                          name={question.name}
-                          link={`/c/${id}/t/${tid}/q/${question.id}`}
-                        />
-                        {/* //todo: handle time situation */}
-                        <SimpleCell name={new Date(submission.time).toLocaleString()} />
-                        <SimpleCell name={submission.language} />
-                        <SimpleCell name={submission.statusCode.toString()} />
-                      </BodyRowRenderer>
-                    
-                    )}
-                    
+                      {submissions?.map(
+                        ({ submission, question, student }, idx) => (
+                          <BodyRowRenderer>
+                            <LinkCell
+                              name={submission.id.toString()}
+                              link='submissionLink'
+                            />
+                            <LinkCell name={student.name} link='userLink' />
+                            <LinkCell
+                              name={question.name}
+                              link={`/c/${id}/t/${tid}/q/${question.id}`}
+                            />
+                            {/* //todo: handle time situation */}
+                            <SimpleCell
+                              name={new Date(submission.time).toLocaleString()}
+                            />
+                            <SimpleCell name={submission.language} />
+                            <SimpleCell
+                              name={submission.statusCode.toString()}
+                            />
+                          </BodyRowRenderer>
+                        )
+                      )}
                     </tbody>
                   </table>
                 </div>

@@ -19,3 +19,8 @@ export const isValidInstituteEmail = (email: string): boolean => {
   // Check if the email matches the regex pattern
   return regex.test(email);
 };
+
+export function isAbsoluteNumber(str: string) {
+  const regex = /^\d+$/;
+  return regex.test(str);
+}

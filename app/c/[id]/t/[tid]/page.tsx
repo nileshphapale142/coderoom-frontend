@@ -6,7 +6,6 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import axios from 'axios';
 
-
 interface Test {
   name: string;
   id: number;
@@ -15,50 +14,57 @@ interface Test {
     name: string;
     points: number;
   }[];
-};
+}
 
-
-export const fetchTestData = async (cid:number, tid: number) => {
+export const fetchTestData = async (cid: number, tid: number) => {
   try {
     if (!cookies().get('access_token')) {
-     redirect('/auth/sign');
-     return {
-       data: null
-     };
-    };
-   
+      redirect('/auth/sign');
+      return {
+        data: null,
+      };
+    }
+
     const response = await axios.get(`http://localhost:5000/test/${tid}`, {
       headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`
-      }
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      },
     });
-    
-    const data = response.data
-    
+
+    const data = response.data;
+
     return {
-      data
-    }
-  } catch(err:any) {
+      data,
+    };
+  } catch (err: any) {
     //todo: error handling;
     console.log('error : ', err.response.status);
-    
+
     if (err.response.status === 404) redirect('/not-found');
     else if (err.response.status === 401) redirect(`/c/${cid}`);
     else if (err.response.status === 500) redirect(`/c/${cid}`);
-    
+
     return {
       data: null,
-      status: err.response.status
+      status: err.response.status,
     };
   }
-}
+};
 
-const TestHome = async ({ params }: { params: { id: number; tid: number } }) => {
+const TestHome = async ({
+  params,
+}: {
+  params: { id: number; tid: number };
+}) => {
   const { id, tid } = params;
   const { data, status } = await fetchTestData(id, tid);
-  const { test }: {test: Test} = data;
+  const { test }: { test: Test } = data;
   
-   
+  console.log(test.questions)
+
   return (
     <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>
       <div className='relative bottom-0 left-0 right-0 top-0 z-auto block min-h-full min-w-0 flex-1-auto'>
@@ -71,16 +77,15 @@ const TestHome = async ({ params }: { params: { id: number; tid: number } }) => 
                 className='relative flex w-full flex-col rounded-7 border-none bg-white
                 px-8'
               >
-              
-                {test.questions.map((que, idx) => 
+                {test.questions.map((que, idx) => (
                   <QuestionBox
-                  key={idx}
-                  name={que.name}
-                  maxPts={que.points}
-                  availablePts={que.points}
-                  route={`/c/${id}/t/${tid}/q/${que.id}`}
+                    key={idx}
+                    name={que.name}
+                    maxPts={que.points}
+                    availablePts={que.points}
+                    route={`/c/${id}/t/${tid}/q/${que.id}`}
                   />
-                )}
+                ))}
 
                 {/* //TODO: separate this into a component */}
 

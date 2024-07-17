@@ -4,17 +4,26 @@ import { Page2Inputs } from './page2Inputs';
 import { CodeBlock } from '@/components/Utils';
 
 export const NewQPage2 = () => {
-  const exampleCode = `
-class Solution(object): 
-  def twoSum(self, nums, target):
-    match = {}
-    for idx, n in enumerate(nums): 
-      if n not in match:
-        match[target - n] = idx 
-      else: 
-        return match[n], idx 
-    return -1, -1
-  `;
+  const exampleCode = `#include <bits/stdc++.h>
+using namespace std;           
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<int> nums;
+    for (int i = 0; i < n; i ++) {
+      int temp;
+      cin >> temp;
+      nums.push_back(temp);
+    }
+    cout << *min_element(nums.begin(), nums.end()) << endl;
+  }
+
+  return 0;
+}`;
 
   return (
     <div className='flex h-full flex-row justify-between'>
@@ -32,7 +41,7 @@ class Solution(object):
           <span className='text-heading text-xl text-gray-600'>
             Code (Python)
           </span>
-          <div>
+          <div className='relative overflow-y-scroll'>
             <span className='text-style flex flex-col font-normal text-gray-600'>
               <span className='mt-2 rounded-7 border-none'>
                 <CodeBlock language='Python' value={exampleCode} />

@@ -122,3 +122,44 @@ export const createTestInfo = atom<{
     languages: [],
   },
 });
+
+export const newQuestion = atom<{
+  name: string;
+  description: string;
+  points: string;
+}>({
+  key: 'newQuestion',
+  default: {
+    name: '',
+    description: '',
+    points: '',
+  },
+});
+
+export const solutionCode = atom<{
+  language: string;
+  code: string;
+}>({
+  key: 'solutionCode',
+  default: {
+    language: '',
+    code: '',
+  },
+});
+
+export const testCases = atom<string>({
+  key: 'testCases',
+  default: '',
+});
+
+export const exampleTestCases = atom<
+  {
+    id: number;
+    input: string;
+    output: string;
+    explaination: string;
+  }[]
+>({
+  key: 'exampleTestCases',
+  default: [],
+});
