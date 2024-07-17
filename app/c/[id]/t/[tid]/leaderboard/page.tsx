@@ -1,10 +1,16 @@
+import axios from 'axios';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
+
+
+//todo: extract common leaderboard logic
 
 interface User {
   name: string;
   points: number;
-  tests: number[];
+  questions: number[];
 }
 
 const SimpleCell = ({
@@ -105,25 +111,63 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-const LeaderboardPage = () => {
+export const fetchLeaderboard = async (cid:number, tid:number) => {
+  try {
+    if (!cookies().get('access_token')) {
+      redirect('/auth/signin')
+      return {
+        data: null
+      }
+    }
+    
+    const response = await axios.get(`http://localhost:5000/test/${tid}/leaderboard`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`
+      }
+    });
+    
+    const data = response.data;
+    
+    return {
+      data
+    }
+  } catch(err:any) {
+    console.log('error: ', err);
+    if (err.response.status === 404) redirect('/not-found');
+    else if (err.response.status === 401) redirect(`/c/${cid}`);
+    else if (err.response.status === 500) redirect(`/c/${cid}`);
+    
+    return {
+      data: null,
+      status: err.response.status
+    };
+  };
+}
+
+const LeaderboardPage = async ({params }: {params: {id:number, tid:number}}) => {
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start
   //TODO: horizontal scrolling
-
-  const students: User[] = [
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
-    { name: 'Adam Warlock', points: 100, tests: [15, 15, 15] },
-    {
-      name: 'Adam Warlock name is too long',
-      points: 100,
-      tests: [15, 15, 15],
-    },
-  ];
+  
+  const { id, tid } = params;
+  const { data } = await fetchLeaderboard(id, tid);
+  const { students, questions, leaderboard } = data;
+  
+  let Students = Object.entries(leaderboard)
+    .map((student:any) => {
+      const uid = student[0];
+      const user: User = {
+        name: students[uid].toString().toUpperCase(),
+        points: student[1].totalPoints,
+        questions: []
+      } 
+      
+      user.questions = Object.values(student[1].quePoints).map((points:any) => points["points"])
+      
+      return user;
+    }).sort((a, b) => b.points - a.points)
+  
   return (
     <div
       className='overflow-y-[unset] visible static flex h-auto
@@ -151,29 +195,20 @@ const LeaderboardPage = () => {
                             <SimpleCell name='Rank' />
                             <SimpleCell name='Name of Student' />
                             <SimpleCell name='Total Points' />
-
+                            {Object.entries(questions).map((que:any, idx) => 
                             <TestCell
-                              name='Question No. 1'
-                              link='/c/1/t/1/q/1'
+                            key={idx}
+                              name={que[1].name}
+                              link={`/c/${id}/t/${tid}/q/${que[0]}`}
                               // date='some date'
-                              outof='random'
+                              outof={que[1].maxPoints.toString()}
                             />
-                            <TestCell
-                              name='Question NO. 2'
-                              link='/c/1/t/1/q/2'
-                              // date='some date'
-                              outof='random'
-                            />
-                            <TestCell
-                              name='Question No. 3'
-                              link='/c/1/t/1/q/3'
-                              // date='some date'
-                              outof='random'
-                            />
+                              
+                            )}
                           </tr>
                         </thead>
                         <tbody>
-                          {students.map((student, idx) => {
+                          {Students.map((student, idx) => {
                             return (
                               <tr key={idx}>
                                 <SimpleCell name={(idx + 1).toString()} />
@@ -184,10 +219,10 @@ const LeaderboardPage = () => {
                                   color='green-600'
                                   isNumber={true}
                                 />
-                                {student.tests.map((test, idx2) => (
+                                {student.questions.map((que, idx2) => (
                                   <SimpleCell
                                     key={idx2}
-                                    name={test.toString()}
+                                    name={que.toString()}
                                     widthReq={true}
                                     color='blue-500'
                                     isNumber={true}

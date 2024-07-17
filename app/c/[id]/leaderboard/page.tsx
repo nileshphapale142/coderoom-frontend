@@ -146,7 +146,7 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
 
 const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
   const { data } = await fetchLeaderboard(id);
-  let { students, tests, leaderboard } = data;
+  const { students, tests, leaderboard } = data;
 
   const sortedTests = Object.entries(tests)
     .map((test) => [test[0], test[1]])
