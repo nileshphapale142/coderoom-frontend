@@ -97,6 +97,7 @@ const SignUp = () => {
     <Page4 />,
   ];
 
+
   const checkInputs: boolean[] = [
     useRecoilValue(isRoleSelected),
     useRecoilValue(isUserNameFilled),
