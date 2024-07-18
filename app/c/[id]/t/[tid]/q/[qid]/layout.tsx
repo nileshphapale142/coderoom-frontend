@@ -1,4 +1,4 @@
-import { SecondNavbar, TestNavbar } from '@/components/Navbar';
+import { TestNavbar } from '@/components/Navbar';
 import React from 'react';
 
 interface LayoutProps {

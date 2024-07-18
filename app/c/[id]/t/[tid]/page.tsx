@@ -29,8 +29,8 @@ export const fetchTestData = async (cid: number, tid: number) => {
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Expires': '0',
+        Pragma: 'no-cache',
+        Expires: '0',
       },
     });
 
@@ -62,8 +62,8 @@ const TestHome = async ({
   const { id, tid } = params;
   const { data, status } = await fetchTestData(id, tid);
   const { test }: { test: Test } = data;
-  
-  console.log(test.questions)
+
+  console.log(test.questions);
 
   return (
     <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>

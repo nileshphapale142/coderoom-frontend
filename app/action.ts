@@ -48,7 +48,7 @@ export const createTestAction = async (test: Test) => {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
     });
-    
+
     const data = response.data;
 
     return { data, status: 201 };

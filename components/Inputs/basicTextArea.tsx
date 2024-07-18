@@ -12,7 +12,7 @@ export const BasicTextArea = ({
   height?: string;
   id?: string;
   defaultValue?: string;
-}) => {
+}): React.ReactNode => {
   return (
     <div
       className='mt-2 flex h-auto flex-grow overflow-y-auto overflow-x-hidden'

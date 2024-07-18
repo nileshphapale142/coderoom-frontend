@@ -14,13 +14,16 @@ export const MyDropDown = ({
   title,
   selectHandler,
   defaultValue = { name: 'Select', id: -1 },
+  isAbsolute = false,
 }: {
   options: Option[];
   title: string;
   selectHandler: (arg: string) => void;
   defaultValue?: Option;
+  isAbsolute?: boolean;
 }) => {
   const [selected, setSelected] = React.useState<Option>(defaultValue);
+  // console.log(selected);
 
   const [isOptionsVisible, setIsOptionsVisible] =
     React.useState<boolean>(false);
@@ -65,9 +68,10 @@ export const MyDropDown = ({
 
       <div
         className={
-          `relative left-0 top-0 z-50 mt-1 flex rounded-2 border-none
+          `left-0 z-50 mt-1 flex rounded-2 border-none
           bg-white p-1 outline-none transition-transform duration-200 ease-linear ` +
-          (isOptionsVisible ? ' visible scale-100 ' : ' hidden scale-0 ')
+          (isOptionsVisible ? ' visible scale-100 ' : ' hidden scale-0 ') +
+          (isAbsolute ? ' absolute  top-full ' : ' relative top-0 ')
         }
         ref={ref}
       >
@@ -78,7 +82,7 @@ export const MyDropDown = ({
                 key={idx}
                 className='flex h-8 cursor-pointer flex-row rounded-2 border-none
             hover:bg-gray-200'
-            id={'option' + option.id.toString()}
+                id={'option' + option.id.toString()}
                 onClick={() => {
                   handleSelect(option);
                   setIsOptionsVisible(false);
