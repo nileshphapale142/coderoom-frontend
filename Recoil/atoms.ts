@@ -192,5 +192,5 @@ export const userCode = atom({
 
 export const currInfoPage = atom({
   key: 'currInfoPage',
-  default: 1
-})
+  default: 1,
+});

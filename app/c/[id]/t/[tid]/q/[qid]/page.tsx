@@ -1,14 +1,52 @@
-'use client';
-
 import { MainNavFiller } from '@/components/Utils';
 import { QuestionSideBar } from '@/components/Popups';
 import { EditorSection } from '@/components/Question/Solve/Editor/editorSection';
 import { InformationSection } from '@/components/Question/Solve/Information/informationSection';
+import { use } from 'react';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import axios from 'axios';
 
-const QuestionPage = () => {
-  //todo: make separate directory for all the components
-  //todo: test, test result and current submission result page to be added
-  //todo: fucking separate into components
+interface Question {
+  id: 24;
+  name: string;
+  statement: string;
+  points: number;
+  testId: number;
+  exampleTestCases: {
+    input: string;
+    output: string;
+    explaination: string;
+  }[];
+}
+
+const fetchQuestion = async (qid: number) => {
+  if (!cookies().get('access_token')) {
+    redirect('/auth/signin');
+    return {
+      data: null,
+    };
+  }
+
+  try {
+    const response = await axios.get(`http://localhost:5000/question/${qid}`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+      },
+    });
+
+    const data = response.data;
+    return { data };
+  } catch (err) {
+    console.log(err);
+    // todo: error handling
+    return { data: null };
+  }
+};
+
+const QuestionPage = async ({ params }: { params: { qid: number } }) => {
+  const { data } = await fetchQuestion(params.qid);
+  const { question }: { question: Question } = data;
 
   return (
     <>
@@ -19,7 +57,7 @@ const QuestionPage = () => {
             <div className='h-14'></div>
 
             <div className='relative flex h-[calc(100vh-120px)] flex-row overflow-hidden'>
-              <InformationSection />
+              <InformationSection question={question} />
 
               {/* //todo: add slider if want to */}
               {/* <div className='h-full w-2 bg-black'>{'||'}</div> */}

@@ -29,11 +29,11 @@ export const RunBtn = () => {
   const code = useRecoilValue(userCode);
   const testIn = useRecoilValue(testCaseInput);
   const setTestOut = useSetRecoilState(testCasesOutput);
-  const setPage = useSetRecoilState(currInfoPage)
+  const setPage = useSetRecoilState(currInfoPage);
 
   const runCode = async () => {
-    setPage(4)
-    
+    setPage(4);
+
     const submission = {
       language_id: langValue[lang as LangKey].id,
       source_code: btoa(code),
@@ -54,13 +54,12 @@ export const RunBtn = () => {
       );
 
       const data: JudgeResponse = response.data;
-      
+
       setTestOut({
         output: atob(data.stdout || ''),
-        error: atob((data.compile_output || data.stderr) || '' ),
+        error: atob(data.compile_output || data.stderr || ''),
       });
       return;
-      
     } catch (err: any) {
       console.log(err);
       setTestOut({

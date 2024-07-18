@@ -9,6 +9,7 @@ import { courseCodeInput, isBasicPopUpOpen } from '@/Recoil';
 import { useClickOutside } from '../Hooks';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { joinClassAction } from '@/app/action';
 
 // TODO: Separate the input into separate component
 
@@ -24,32 +25,17 @@ export const JoinClassPopUp = () => {
   };
 
   const handleJoin = async () => {
-    const data = {
+    const info = {
       courseCode: courseCode,
     };
 
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/course/addStudent',
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        }
-      );
+    const { data, status } = await joinClassAction(info);
 
-      const resData = response.data;
-      const courseId: number = resData.course.id;
-
-      router.push(`/c/${courseId}`);
-    } catch (err: any) {
-      if (err.response) {
-        if (err.response.status === 404) alert('Course not found');
-        else if (err.response.status === 500) alert('Problem at server');
-        else alert('Error: ' + err.response.message);
-      } else alert('Unknown error');
-    }
+    if (status === 201) router.push(`/c/${data.course.id}`);
+    else if (status === 401) router.push('/auth/sigin');
+    else if (status === 500) alert('serve error');
+    else if (status === 400) alert('bad request');
+    else alert('unknown problem');
   };
 
   useClickOutside(ref, () => setIsOpen(false));

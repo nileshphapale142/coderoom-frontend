@@ -1,6 +1,10 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
-export function usePeriodicSave(key: string, defaultValue: string = '', interval: number = 5000): Dispatch<SetStateAction<string>> {
+export function usePeriodicSave(
+  key: string,
+  defaultValue: string = '',
+  interval: number = 5000
+): Dispatch<SetStateAction<string>> {
   const [value, setValue] = useState<string>(() => {
     // Load the initial value from local storage
     if (typeof window !== 'undefined') {

@@ -2,18 +2,41 @@
 
 import { SubNavBarItem } from '../subNavBar';
 import { Description } from './description';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Submissions } from './submissions';
 import { TestCases } from './testCases';
 import { TestResult } from './testResult';
-import { useRecoilState } from 'recoil';
-import { currInfoPage } from '@/Recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { currInfoPage, testCaseInput } from '@/Recoil';
 
-export const InformationSection = () => {
+interface Question {
+  id: 24;
+  name: string;
+  statement: string;
+  points: number;
+  testId: number;
+  exampleTestCases: {
+    input: string;
+    output: string;
+    explaination: string;
+  }[];
+}
+
+export const InformationSection = ({ question }: { question: Question }) => {
   const [selected, setSelected] = useRecoilState(currInfoPage);
+  const setTCs = useSetRecoilState(testCaseInput)
+  
+  
+  useEffect(() => {
+    const tcs =
+    `${question.exampleTestCases.length}
+${question.exampleTestCases.map(tc => tc.input).join('\n')}`;
+    setTCs(tcs)
+  }, []);
+  
 
   const pages: React.ReactNode[] = [
-    <Description />,
+    <Description question={question} />,
     <Submissions />,
     <TestCases />,
     <TestResult />,

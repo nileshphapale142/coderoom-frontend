@@ -10,13 +10,12 @@ type LangKey = 'C' | 'C++' | 'Java' | 'Python';
 export const AcutalEditor = () => {
   const [code, setCode] = useRecoilState(userCode);
   const language = useRecoilValue(selectedLanguage);
-  const setStoredCode = usePeriodicSave('userStoredCode', '', 10000) 
-  
-  useEffect(() => {
-    setCode(localStorage.getItem('userStoredCode') || '')
-  }, [])
+  const setStoredCode = usePeriodicSave('userStoredCode', '', 10000);
 
-  
+  useEffect(() => {
+    setCode(localStorage.getItem('userStoredCode') || '');
+  }, []);
+
   return (
     <div className='z-1 flex h-full'>
       <Editor

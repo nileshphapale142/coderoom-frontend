@@ -27,7 +27,7 @@ export const FeatureRow = () => {
             options={languageOptions}
             selectHandler={(lang) => {
               setLanguage(lang);
-              localStorage.setItem('userLanguage', lang)
+              localStorage.setItem('userLanguage', lang);
             }}
             defaultValue={{ id: -1, name: language }}
             isAbsolute={true}
