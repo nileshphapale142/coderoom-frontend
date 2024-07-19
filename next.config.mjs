@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  env: {
+    X_RAPIDAPI_KEY: 'ea6410e850msh603cdbcd3cbc29cp120feejsn29f801f6a63f',
+    X_RAPIDAPI_HOST: 'judge0-ce.p.rapidapi.com',
+  },
+
   images: {
     remotePatterns: [
       {

@@ -20,6 +20,7 @@ export const BasicInput = ({
 }) => {
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
   //todo: gap between border and text when clicked
+  //todo: handle bug when input type number but entered is value is not
 
   const [isFocused, setIsFocused] = React.useState(false);
   const [input, setInput] = React.useState(defaultInput);

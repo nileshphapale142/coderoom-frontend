@@ -7,6 +7,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { createClassInfo, isCreateClassInfoFilled } from '@/Recoil';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { cookies } from 'next/headers';
+import { createClassAction } from '@/app/action';
 
 interface Course {
   name: string;
@@ -26,24 +28,14 @@ export const CreateClassPopup = () => {
   const router = useRouter();
 
   const handleClassCreation = async () => {
-    try {
-      const data = {
-        name: info.name,
-        description: info.description,
-      };
+    const { data, status } = await createClassAction(info);
 
-      const response = await axios.post('/new/class', data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      });
-
-      const resData = response.data;
-      const course: Course = resData.course;
-      router.push(`/c/${course.id}`);
-    } catch (err: any) {
-      alert('Error  ' + err?.response.message);
-    }
+    if (status === 201) {
+      router.push(`/c/${data.course.id}`);
+    } else if (status === 401) router.push('/auth/sigin');
+    else if (status === 400) alert('bad request');
+    else if (status === 500) alert('server problem');
+    else alert('unknown problem');
   };
 
   return (
@@ -80,6 +72,7 @@ export const CreateClassPopup = () => {
                     return { ...prev, description: desc };
                   });
                 }}
+                defaultValue={info.description}
               />
             </div>
           </div>

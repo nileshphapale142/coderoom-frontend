@@ -1,7 +1,10 @@
 import React from 'react';
 import { OpenProblemListBtn } from '../Buttons';
+import { SubmitBtn } from '../Question/Solve/Execution/submit';
+import { RunBtn } from '../Question/Solve/Execution/run';
+import { Clock } from '../Question/Solve/clock';
 
-export const TestNavbar = () => {
+export const TestNavbar = ({ qid }: { qid: number }) => {
   return (
     <nav className='fixed z-[978] block w-full'>
       <div className='h-[4.05rem]'></div>
@@ -32,23 +35,9 @@ export const TestNavbar = () => {
                   className='text-style text-normal flex flex-row items-center justify-between 
                 rounded-2 border-none py-1 text-base '
                 >
-                  <div
-                    className='mr-[0.1rem] w-full rounded-bl-2 rounded-tl-2 bg-gray-300 p-2 opacity-100
-                  transition-all hover:bg-black hover:text-gray-300'
-                  >
-                    <button className='flex items-center justify-center'>
-                      Run
-                    </button>
-                  </div>
+                  <RunBtn />
 
-                  <div
-                    className='w-full  rounded-br-2 rounded-tr-2 bg-gray-300 p-2 text-green-600
-                  transition-all hover:bg-green-600 hover:text-gray-300'
-                  >
-                    <button className='flex items-center justify-center'>
-                      Submit
-                    </button>
-                  </div>
+                  <SubmitBtn qid={qid} />
                 </div>
               </div>
             </div>
@@ -56,18 +45,7 @@ export const TestNavbar = () => {
 
           <div className='mr-9 flex flex-row items-center '>
             <div className='flex h-full items-center justify-center p-1'>
-              <div
-                className='relative flex cursor-default items-center justify-center rounded-2 border 
-              bg-gray-200 p-2 '
-              >
-                <span className='text-style text-normal flex flex-row items-center justify-between text-base'>
-                  <span className='p-1'>03</span>
-                  <span className='p-1'>:</span>
-                  <span className='p-1'>00</span>
-                  <span className='p-1'>:</span>
-                  <span className='p-1'>00</span>
-                </span>
-              </div>
+              <Clock />
             </div>
           </div>
         </div>

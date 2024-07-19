@@ -1,11 +1,24 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CloseBtn } from '../Buttons';
 import { useRecoilState } from 'recoil';
 import { isProblemListOpen } from '@/Recoil';
 import { useClickOutside } from '../Hooks';
+import { fetchQuestionList } from '@/app/action';
+
+interface Question {
+  id: number;
+  name: string;
+  points: number;
+}
+
+interface Test {
+  name: string;
+  id: number;
+  questions: Question[];
+}
 
 const QuestionLink = ({ name, link }: { name: string; link: string }) => {
   return (
@@ -19,36 +32,27 @@ const QuestionLink = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-export const QuestionSideBar = () => {
-  //todo: separete the components a
-  //todo: add open and close logic
+export const QuestionSideBar = ({ cid, tid }: { cid: number; tid: number }) => {
+  //todo: separete the components
 
   const [isOpen, setIsOpen] = useRecoilState(isProblemListOpen);
-  // const [isVisible, setIsVisible] = React.useState(false);
+  const [questions, setQuestions] = useState<Question[]>([]);
+
+  const fetchQuestions = async () => {
+    //todo: error handling
+    const { data, status } = await fetchQuestionList(cid, tid);
+    const { test }: { test: Test } = data;
+    setQuestions(test.questions);
+  };
+
+  useEffect(() => {
+    setIsOpen(false);
+    fetchQuestions();
+  }, []);
 
   const ref = useRef<HTMLDivElement>(null);
 
   useClickOutside(ref, () => setIsOpen(false));
-
-  // React.useEffect(() => {
-  //   if (isOpen) {
-  //     setIsVisible(true);
-  //   } else {
-  //     const handleTransitionEnd = () => setIsVisible(false);
-  //     // const handleTransitionStart = () => setIsVisible(true);
-
-  //     const node = ref.current;
-
-  //     if (node) {
-  //       node.addEventListener('transitionend', handleTransitionEnd);
-  //       // node.addEventListener('transitionstart', handleTransitionStart);
-  //       return () => {
-  //         node.removeEventListener('transitionend', handleTransitionEnd);
-  //         // node.removeEventListener('transitionstart', handleTransitionStart);
-  //       };
-  //     }
-  //   }
-  // }, [isOpen]);
 
   return (
     <div className=''>
@@ -56,7 +60,7 @@ export const QuestionSideBar = () => {
         className={
           `trasn fixed bottom-0 left-0 right-0 top-0 z-[1000] h-screen 
       w-full bg-[rgba(0,0,0,.5)] transition-all duration-300 ` +
-          (isOpen ? ' visible ' : ' hidden ')
+          (isOpen ? ' visible scale-100 ' : ' hidden scale-0 ')
         }
       ></div>
       <div
@@ -78,7 +82,7 @@ export const QuestionSideBar = () => {
             p-1 text-2xl text-gray-2'
             >
               <Link
-                href={'/c/1/t/1'}
+                href={`/c/${cid}/t/${tid}`}
                 className='transition-all hover:text-black hover:underline'
               >
                 Home
@@ -98,9 +102,14 @@ export const QuestionSideBar = () => {
             className='flex max-h-full w-full flex-col justify-start overflow-x-hidden overflow-y-visible 
             p-4 pl-8 pt-4'
           >
-            <QuestionLink name='Question 1' link='/c/1/t/1/q/1' />
-            <QuestionLink name='Question 2' link='/c/1/t/1/q/2' />
-            <QuestionLink name='Question 3' link='/c/1/t/1/q/3' />
+            {questions.map((que) => (
+              <QuestionLink
+                key={que.id}
+                name={que.name}
+                link={`/c/${cid}/t/${tid}/q/${que.id}`}
+              />
+            ))}
+
             <div className='p-10'></div>
           </div>
         </div>

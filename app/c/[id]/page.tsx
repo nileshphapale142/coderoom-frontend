@@ -25,16 +25,16 @@ interface Course {
 
 export async function fetchCourseInfo(id: number) {
   const cookieStore = cookies();
-  try {
-    if (!cookieStore.get('access_token')) {
-      redirect('/auth/signin');
-      return {
-        props: {
-          data: null,
-        },
-      };
-    }
+  if (!cookieStore.get('access_token')) {
+    redirect('/auth/signin');
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 
+  try {
     const response = await axios.get(`http://localhost:5000/course/${id}`, {
       headers: {
         Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,
@@ -62,7 +62,9 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
   const { props } = await fetchCourseInfo(id);
   const { course }: { course: Course } = props.data;
   const isTeacher = cookies().get('is_teacher')?.value === 'true';
-  course.tests.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+  course.tests.sort(
+    (a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
+  );
   // const course: Course = {
   //   id: 1,
   //   name: 'Course',

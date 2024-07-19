@@ -1,12 +1,12 @@
-import { SecondNavbar, TestNavbar } from '@/components/Navbar';
+import { TestNavbar } from '@/components/Navbar';
 import React from 'react';
 
 interface LayoutProps {
   children: React.ReactNode;
   params: {
-    id: string;
-    tid: string;
-    qid: string;
+    id: number;
+    tid: number;
+    qid: number;
   };
 }
 
@@ -15,7 +15,7 @@ export default function QuestionLayout({ children, params }: LayoutProps) {
 
   return (
     <>
-      <TestNavbar />
+      <TestNavbar qid={qid} />
       {children}
     </>
   );
