@@ -2,7 +2,11 @@ import React from 'react';
 import { MainNavFiller, CourseNavFiller } from '@/components/Utils';
 import { NewQuestion } from '@/components/Question';
 
-const NewQuestionPage = () => {
+const NewQuestionPage = ({
+  params,
+}: {
+  params: { id: number; tid: number };
+}) => {
   // TODO: add navigation button at the bottom (back and next)
   // TODO: pagination
 
@@ -13,7 +17,7 @@ const NewQuestionPage = () => {
           <div className='min-h-auto relative z-auto flex h-auto flex-col backface-visibility-h '>
             <MainNavFiller />
             <CourseNavFiller />
-            <NewQuestion />
+            <NewQuestion cid={params.id} tid={params.tid} />
           </div>
         </div>
       </div>

@@ -6,16 +6,15 @@ import { redirect } from 'next/navigation';
 
 export async function fetchCourses() {
   const cookieStore = cookies();
+  if (!cookieStore.get('access_token')) {
+    redirect('/auth/signin');
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
   try {
-    if (!cookieStore.get('access_token')) {
-      redirect('/auth/signin');
-      return {
-        props: {
-          data: null,
-        },
-      };
-    }
-
     const response = await axios.get('http://localhost:5000/user/getCourses', {
       headers: {
         Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,

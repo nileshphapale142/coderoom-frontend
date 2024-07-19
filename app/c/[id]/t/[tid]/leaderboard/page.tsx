@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-
 //todo: extract common leaderboard logic
 
 interface User {
@@ -111,63 +110,73 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-export const fetchLeaderboard = async (cid:number, tid:number) => {
+export const fetchLeaderboard = async (cid: number, tid: number) => {
   try {
     if (!cookies().get('access_token')) {
-      redirect('/auth/signin')
+      redirect('/auth/signin');
       return {
-        data: null
-      }
+        data: null,
+      };
     }
-    
-    const response = await axios.get(`http://localhost:5000/test/${tid}/leaderboard`, {
-      headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`
+
+    const response = await axios.get(
+      `http://localhost:5000/test/${tid}/leaderboard`,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
       }
-    });
-    
+    );
+
     const data = response.data;
-    
+
     return {
-      data
-    }
-  } catch(err:any) {
+      data,
+    };
+  } catch (err: any) {
     console.log('error: ', err);
     if (err.response.status === 404) redirect('/not-found');
     else if (err.response.status === 401) redirect(`/c/${cid}`);
     else if (err.response.status === 500) redirect(`/c/${cid}`);
-    
+
     return {
       data: null,
-      status: err.response.status
+      status: err.response.status,
     };
-  };
-}
+  }
+};
 
-const LeaderboardPage = async ({params }: {params: {id:number, tid:number}}) => {
+const LeaderboardPage = async ({
+  params,
+}: {
+  params: { id: number; tid: number };
+}) => {
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start
   //TODO: horizontal scrolling
-  
+
   const { id, tid } = params;
   const { data } = await fetchLeaderboard(id, tid);
   const { students, questions, leaderboard } = data;
-  
+
   let Students = Object.entries(leaderboard)
-    .map((student:any) => {
+    .map((student: any) => {
       const uid = student[0];
       const user: User = {
         name: students[uid].toString().toUpperCase(),
         points: student[1].totalPoints,
-        questions: []
-      } 
-      
-      user.questions = Object.values(student[1].quePoints).map((points:any) => points["points"])
-      
+        questions: [],
+      };
+
+      user.questions = Object.values(student[1].quePoints).map(
+        (points: any) => points['points']
+      );
+
       return user;
-    }).sort((a, b) => b.points - a.points)
-  
+    })
+    .sort((a, b) => b.points - a.points);
+
   return (
     <div
       className='overflow-y-[unset] visible static flex h-auto
@@ -195,16 +204,15 @@ const LeaderboardPage = async ({params }: {params: {id:number, tid:number}}) => 
                             <SimpleCell name='Rank' />
                             <SimpleCell name='Name of Student' />
                             <SimpleCell name='Total Points' />
-                            {Object.entries(questions).map((que:any, idx) => 
-                            <TestCell
-                            key={idx}
-                              name={que[1].name}
-                              link={`/c/${id}/t/${tid}/q/${que[0]}`}
-                              // date='some date'
-                              outof={que[1].maxPoints.toString()}
-                            />
-                              
-                            )}
+                            {Object.entries(questions).map((que: any, idx) => (
+                              <TestCell
+                                key={idx}
+                                name={que[1].name}
+                                link={`/c/${id}/t/${tid}/q/${que[0]}`}
+                                // date='some date'
+                                outof={que[1].maxPoints.toString()}
+                              />
+                            ))}
                           </tr>
                         </thead>
                         <tbody>

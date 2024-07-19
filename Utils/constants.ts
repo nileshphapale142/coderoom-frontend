@@ -1,35 +1,40 @@
 export const languageOptions = [
   {
     id: 50,
-    name: 'C (GCC 9.2.0)',
+    name: 'C',
     label: 'C (GCC 9.2.0)',
     value: 'c',
   },
   {
     id: 54,
-    name: 'C++ (GCC 9.2.0)',
+    name: 'C++',
     label: 'C++ (GCC 9.2.0)',
     value: 'cpp',
   },
   {
     id: 62,
-    name: 'Java (OpenJDK 13.0.1)',
+    name: 'Java',
     label: 'Java (OpenJDK 13.0.1)',
     value: 'java',
   },
   {
     id: 71,
-    name: 'Python (3.8.1)',
+    name: 'Python',
     label: 'Python (3.8.1)',
     value: 'python',
   },
 ];
 
-export const idToLang = {
-  '50': 'C (GCC 9.2.0)',
-  '54': 'C++ (GCC 9.2.0)',
-  '62': 'Java (OpenJDK 13.0.1)',
-  '71': 'Python (3.8.1)',
+type LangKey = 'C' | 'C++' | 'Java' | 'Python';
+type LangValue = {
+  [key in LangKey]: { value: string; id: number };
+};
+
+export const langValue: LangValue = {
+  C: { value: 'c', id: 50 },
+  'C++': { value: 'cpp', id: 54 },
+  Java: { value: 'java', id: 62 },
+  Python: { value: 'python', id: 71 },
 };
 
 export const customStyles = {
