@@ -2,7 +2,6 @@ import { MainNavFiller } from '@/components/Utils';
 import { QuestionSideBar } from '@/components/Popups';
 import { EditorSection } from '@/components/Question/Solve/Editor/editorSection';
 import { InformationSection } from '@/components/Question/Solve/Information/informationSection';
-import { use } from 'react';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import axios from 'axios';
@@ -44,7 +43,11 @@ const fetchQuestion = async (qid: number) => {
   }
 };
 
-const QuestionPage = async ({ params }: { params: { qid: number } }) => {
+const QuestionPage = async ({
+  params,
+}: {
+  params: { id: number; tid: number; qid: number };
+}) => {
   const { data } = await fetchQuestion(params.qid);
   const { question }: { question: Question } = data;
 
@@ -62,13 +65,13 @@ const QuestionPage = async ({ params }: { params: { qid: number } }) => {
               {/* //todo: add slider if want to */}
               {/* <div className='h-full w-2 bg-black'>{'||'}</div> */}
 
-              <EditorSection />
+              <EditorSection qid={params.qid} />
             </div>
           </div>
         </div>
       </div>
 
-      <QuestionSideBar />
+      <QuestionSideBar cid={params.id} tid={params.tid} />
     </>
   );
 };

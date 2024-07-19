@@ -1,4 +1,5 @@
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
+import { getStatusInfo } from '@/Utils';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
@@ -39,12 +40,20 @@ const Heading = ({ name }: { name: string }) => {
   );
 };
 
-const SimpleCell = ({ name }: { name: string }) => {
+const SimpleCell = ({
+  name,
+  isDanger = null,
+}: {
+  name: string;
+  isDanger?: boolean | null;
+}) => {
   return (
     <td>
       <div className='p-2 '>
         <div className='text-style flex w-full items-center justify-start text-gray-600'>
-          <div className='text-base font-normal'>
+          <div
+            className={`text-base font-normal ${isDanger === true ? 'text-red-600' : isDanger === false ? 'text-green-600' : ''}`}
+          >
             <span>{name} </span>
           </div>
         </div>
@@ -165,9 +174,17 @@ const SubmissionPage = async ({
                             <SimpleCell
                               name={new Date(submission.time).toLocaleString()}
                             />
-                            <SimpleCell name={submission.language} />
                             <SimpleCell
-                              name={submission.statusCode.toString()}
+                              name={
+                                submission.language[0].toUpperCase() +
+                                submission.language.slice(1)
+                              }
+                            />
+                            <SimpleCell
+                              name={getStatusInfo(submission.statusCode).name}
+                              isDanger={
+                                getStatusInfo(submission.statusCode).isDanger
+                              }
                             />
                           </BodyRowRenderer>
                         )

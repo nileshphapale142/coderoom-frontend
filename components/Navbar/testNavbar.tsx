@@ -4,7 +4,7 @@ import { SubmitBtn } from '../Question/Solve/Execution/submit';
 import { RunBtn } from '../Question/Solve/Execution/run';
 import { Clock } from '../Question/Solve/clock';
 
-export const TestNavbar = () => {
+export const TestNavbar = ({ qid }: { qid: number }) => {
   return (
     <nav className='fixed z-[978] block w-full'>
       <div className='h-[4.05rem]'></div>
@@ -37,7 +37,7 @@ export const TestNavbar = () => {
                 >
                   <RunBtn />
 
-                  <SubmitBtn />
+                  <SubmitBtn qid={qid} />
                 </div>
               </div>
             </div>

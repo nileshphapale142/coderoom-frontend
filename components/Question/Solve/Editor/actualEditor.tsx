@@ -7,14 +7,14 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 
 type LangKey = 'C' | 'C++' | 'Java' | 'Python';
 
-export const AcutalEditor = () => {
+export const AcutalEditor = ({ qid }: { qid: number }) => {
   const [code, setCode] = useRecoilState(userCode);
   const language = useRecoilValue(selectedLanguage);
-  const setStoredCode = usePeriodicSave('userStoredCode', '', 10000);
+  const setStoredCode = usePeriodicSave(`userStoredCodeQ${qid}`, '', 1000);
 
   useEffect(() => {
-    setCode(localStorage.getItem('userStoredCode') || '');
-  }, []);
+    setCode(localStorage.getItem(`userStoredCodeQ${qid}`) || '');
+  }, [language]);
 
   return (
     <div className='z-1 flex h-full'>

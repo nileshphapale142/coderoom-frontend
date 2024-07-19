@@ -1,4 +1,3 @@
-import React from 'react';
 import { MainNavFiller, CourseNavFiller } from '@/components/Utils';
 import { QuestionBox } from '@/components/Test';
 import Link from 'next/link';
@@ -62,8 +61,6 @@ const TestHome = async ({
   const { id, tid } = params;
   const { data, status } = await fetchTestData(id, tid);
   const { test }: { test: Test } = data;
-
-  console.log(test.questions);
 
   return (
     <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>

@@ -4,7 +4,7 @@ import { SubNavBarItem } from '../subNavBar';
 import { FeatureRow } from './featureRow';
 import { AcutalEditor } from './actualEditor';
 
-export const EditorSection = () => {
+export const EditorSection = ({ qid }: { qid: number }) => {
   return (
     <div
       className='google-bw-bg relative m-[0.1rem]  flex flex-1-auto flex-col
@@ -21,9 +21,9 @@ export const EditorSection = () => {
         </div>
       </div>
 
-      <FeatureRow />
+      <FeatureRow qid={qid} />
 
-      <AcutalEditor />
+      <AcutalEditor qid={qid} />
     </div>
   );
 };

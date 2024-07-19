@@ -12,9 +12,13 @@ interface Question {
 }
 
 const ExampleTestCaseRenderer = ({
-  input, output, explaination
+  input,
+  output,
+  explaination,
 }: {
-    input: string; output: string; explaination: string;
+  input: string;
+  output: string;
+  explaination: string;
 }) => {
   return (
     <div
@@ -25,36 +29,33 @@ const ExampleTestCaseRenderer = ({
         <span className='mr-1 inline-block font-semibold text-gray-800'>
           Input:
         </span>
-          {input.split('\n').map((line, idx) => 
-          
-            <span key={idx} className='block font-normal text-gray-500'>
+        {input.split('\n').map((line, idx) => (
+          <span key={idx} className='block font-normal text-gray-500'>
             {line}
-            </span>
-          )}
+          </span>
+        ))}
       </div>
 
       <div className=''>
         <span className='mr-1 inline-block font-semibold text-gray-800'>
           Output:
         </span>
-        {output.split('\n').map((line, idx) => 
-                  
-                    <span key={idx} className='block font-normal text-gray-500'>
-                    {line}
-                    </span>
-                  )}
+        {output.split('\n').map((line, idx) => (
+          <span key={idx} className='block font-normal text-gray-500'>
+            {line}
+          </span>
+        ))}
       </div>
 
       <div className=''>
         <span className='mr-1 inline-block font-semibold text-gray-800'>
           Explaination:
         </span>
-        {explaination.split('\n').map((line, idx) => 
-                  
-                    <span key={idx} className='block font-normal text-gray-500'>
-                    {line}
-                    </span>
-                  )}
+        {explaination.split('\n').map((line, idx) => (
+          <span key={idx} className='block font-normal text-gray-500'>
+            {line}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -100,9 +101,9 @@ export const Description = ({ question }: { question: Question }) => {
 
         <div className='mt-6 flex w-full flex-col items-start justify-start text-base'>
           <div className='block w-full '>
-            {question.exampleTestCases.map((etc, idx) => 
-              <ExampleTestCaseRenderer {...etc} key={idx}/>
-            )}
+            {question.exampleTestCases.map((etc, idx) => (
+              <ExampleTestCaseRenderer {...etc} key={idx} />
+            ))}
           </div>
         </div>
       </div>

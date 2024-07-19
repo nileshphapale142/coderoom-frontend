@@ -194,3 +194,8 @@ export const currInfoPage = atom({
   key: 'currInfoPage',
   default: 1,
 });
+
+export const submissionMade = atom({
+  key: 'submissionMade',
+  default: 0,
+});

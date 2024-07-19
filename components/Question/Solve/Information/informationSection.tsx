@@ -24,20 +24,17 @@ interface Question {
 
 export const InformationSection = ({ question }: { question: Question }) => {
   const [selected, setSelected] = useRecoilState(currInfoPage);
-  const setTCs = useSetRecoilState(testCaseInput)
-  
-  
+  const setTCs = useSetRecoilState(testCaseInput);
+
   useEffect(() => {
-    const tcs =
-    `${question.exampleTestCases.length}
-${question.exampleTestCases.map(tc => tc.input).join('\n')}`;
-    setTCs(tcs)
+    const tcs = `${question.exampleTestCases.length}
+${question.exampleTestCases.map((tc) => tc.input).join('\n')}`;
+    setTCs(tcs);
   }, []);
-  
 
   const pages: React.ReactNode[] = [
     <Description question={question} />,
-    <Submissions />,
+    <Submissions qid={question.id} />,
     <TestCases />,
     <TestResult />,
   ];

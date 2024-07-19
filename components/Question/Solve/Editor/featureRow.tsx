@@ -4,11 +4,11 @@ import { languageOptions } from '@/Utils';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
-export const FeatureRow = () => {
+export const FeatureRow = ({ qid }: { qid: number }) => {
   const [language, setLanguage] = useRecoilState(selectedLanguage);
 
   useEffect(() => {
-    setLanguage(localStorage.getItem('userLanguage') || 'C');
+    setLanguage(localStorage.getItem(`userLanguageQ${qid}`) || 'C');
   }, []);
 
   const requestFullScreen = () => {
@@ -27,7 +27,7 @@ export const FeatureRow = () => {
             options={languageOptions}
             selectHandler={(lang) => {
               setLanguage(lang);
-              localStorage.setItem('userLanguage', lang);
+              localStorage.setItem(`userLanguageQ${qid}`, lang);
             }}
             defaultValue={{ id: -1, name: language }}
             isAbsolute={true}
