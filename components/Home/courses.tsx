@@ -27,7 +27,7 @@ export const Courses = ({ courses }: { courses: Course[] }) => {
           <div>
             <div>
               <ol className='flex flex-wrap pl-6 pt-6 '>
-                {courses.map((course, id) => (
+                {courses?.map((course, id) => (
                   <CourseBox
                     key={id}
                     {...course}

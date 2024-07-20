@@ -22,7 +22,7 @@ export const NewQPage1 = () => {
           </span>
           <div>
             <span className='text-style font-normal text-gray-600'>
-              Target Sum
+              Smallest Interger
             </span>
           </div>
         </div>
@@ -33,14 +33,39 @@ export const NewQPage1 = () => {
           <div>
             <span className='text-style flex flex-col font-normal text-gray-600'>
               <span>
-                Given an array of integers, return indices of the two numbers
-                such that they add up to a specific target. You may assume that
-                each input would have exactly one solution, and you may not use
-                the same element twice.
+                Given an array of integers find out the smallest element in it.
               </span>
-              <span className='mt-2'>
-                Example: Given nums = [2, 7, 11, 15], target = 9, Because
-                nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].
+
+              <span>
+                <strong>Inputs:</strong>
+              </span>
+              <span>
+                First of line of testcaes is t: number of testCases, next line
+                contains n: size of array, next line contains nums array: n
+                space separated integers.
+              </span>
+              <span>
+                <strong>Outputs:</strong>
+              </span>
+              <span>
+                Print minimum element for each test case in a new line.
+              </span>
+
+              <span>
+                <strong>Constraints:</strong>
+              </span>
+              <span>
+                <ul>
+                  <li>
+                    1 {'<='} t {'<='} 100
+                  </li>
+                  <li>
+                    1 {'<='} n {'<='}100
+                  </li>
+                  <li>
+                    -100{'<='} nums[i] {'<='}100
+                  </li>
+                </ul>
               </span>
             </span>
           </div>

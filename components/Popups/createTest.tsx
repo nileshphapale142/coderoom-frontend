@@ -13,8 +13,6 @@ import { createTestInfo, isCreateTestInfoFilled } from '@/Recoil';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { createTestAction } from '@/app/action';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import Loading from '@/app/loading';
 
 interface Option {
   id: number;
