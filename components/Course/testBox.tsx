@@ -11,9 +11,11 @@ interface TestProps {
 export const TestBox = ({
   test,
   courseId,
+  isTeacher,
 }: {
   test: TestProps;
   courseId: number;
+  isTeacher: boolean;
 }) => {
   return (
     <li
@@ -21,7 +23,7 @@ export const TestBox = ({
                  hover:overflow-hidden hover:rounded-2 hover:shadow-test-box'
     >
       <Link
-        href={`/c/${courseId}/t/${test.id}`}
+        href={isTeacher ? `/c/${courseId}/t/${test.id}` : `/t/${test.id}`}
         className='absolute bottom-0 left-0 right-0 top-0 z-20 h-full'
       />
       <div
@@ -61,7 +63,7 @@ export const TestBox = ({
                                     min-w-0 flex-30 pr-1 text-right text-black-3'
           >
             {/* //todo: handle time format situation */}
-            {new Date(test.startTime).toString()}
+            {new Date(test.startTime).toLocaleString()}
           </div>
         </div>
       </div>

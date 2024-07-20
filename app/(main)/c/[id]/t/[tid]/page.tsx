@@ -8,6 +8,8 @@ import axios from 'axios';
 interface Test {
   name: string;
   id: number;
+  startTime: string;
+  endTime: string;
   questions: {
     id: number;
     name: string;
@@ -15,7 +17,7 @@ interface Test {
   }[];
 }
 
-export const fetchTestData = async (cid: number, tid: number) => {
+export const fetchTestData = async (tid: number) => {
   try {
     if (!cookies().get('access_token')) {
       redirect('/auth/sign');
@@ -43,8 +45,8 @@ export const fetchTestData = async (cid: number, tid: number) => {
     console.log('error : ', err.response.status);
 
     if (err.response.status === 404) redirect('/not-found');
-    else if (err.response.status === 401) redirect(`/c/${cid}`);
-    else if (err.response.status === 500) redirect(`/c/${cid}`);
+    else if (err.response.status === 401) redirect(`/auth/signin`);
+    else if (err.response.status === 500) redirect(`/`);
 
     return {
       data: null,
@@ -59,7 +61,7 @@ const TestHome = async ({
   params: { id: number; tid: number };
 }) => {
   const { id, tid } = params;
-  const { data, status } = await fetchTestData(id, tid);
+  const { data, status } = await fetchTestData(tid);
   const { test }: { test: Test } = data;
 
   return (

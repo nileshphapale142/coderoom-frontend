@@ -5,13 +5,12 @@ interface LayoutProps {
   children: React.ReactNode;
   params: {
     id: number;
-    tid: number;
     qid: number;
   };
 }
 
 export default function QuestionLayout({ children, params }: LayoutProps) {
-  const { id, tid, qid } = params;
+  const { id, qid } = params;
 
   return (
     <>

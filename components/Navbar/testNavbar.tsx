@@ -7,9 +7,8 @@ import { Clock } from '../Question/Solve/clock';
 export const TestNavbar = ({ qid }: { qid: number }) => {
   return (
     <nav className='fixed z-[978] block w-full'>
-      <div className='h-[4.05rem]'></div>
       <div
-        className='mt-[-.0625rem] h-14 transform-none transition-transform 
+        className='mt-[-.0625rem] h-16 transform-none transition-transform 
       duration-[240ms]'
       >
         <div
