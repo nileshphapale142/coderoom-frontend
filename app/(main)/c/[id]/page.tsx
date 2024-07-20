@@ -61,22 +61,12 @@ export async function fetchCourseInfo(id: number) {
 const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
   const { props } = await fetchCourseInfo(id);
   const { course }: { course: Course } = props.data;
+
   const isTeacher = cookies().get('is_teacher')?.value === 'true';
+
   course.tests.sort(
     (a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
   );
-  // const course: Course = {
-  //   id: 1,
-  //   name: 'Course',
-  //   description: 'Course desc',
-  //   teacher: {
-  //     name: 'Teacher',
-  //   },
-  //   teacherId: 1,
-  //   code: 'code',
-  //   tests: [],
-  //   leaderboard: [],
-  // };
 
   return (
     <>
@@ -109,6 +99,7 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
                                     key={idx}
                                     test={test}
                                     courseId={course.id}
+                                    isTeacher={isTeacher}
                                   />
                                 ))}
                               </ol>
