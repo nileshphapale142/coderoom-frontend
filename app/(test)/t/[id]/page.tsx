@@ -1,5 +1,6 @@
 import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/page';
 import { Leaderboard, NotStarted } from '@/components/Test';
+import { Attempt } from '@/components/Test';
 
 interface Test {
   name: string;
@@ -14,17 +15,23 @@ interface Test {
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const { data, status } = await fetchTestData(params.id);
-  const { test }: { test: Test } = data;
-  //todo: error handling
+  // const { data, status } = await fetchTestData(params.id);
+  // const { test }: { test: Test } = data;
+  //todo: only fetch test: {id, name, startTime, endTime}
   
-  const currTime = new Date();
-
-  return currTime < new Date(test.startTime) ? (
-    <NotStarted name={'My Test'} startTime={test.startTime} />
-  ) : currTime <= new Date(test.endTime) ? (
-    <div className='absolute left-1/2 top-1/2'>Test is going on</div>
-  ) : (
-    <Leaderboard tid={test.id}/>
-  );
+  //todo: error handling
+  // const currTime = new Date();
+  
+  
+  return (
+    <Attempt tid={ params.id} />
+  )
+  
+  // return currTime < new Date(test.startTime) ? (
+  //   <NotStarted name={'My Test'} startTime={test.startTime} />
+  // ) : currTime <= new Date(test.endTime) ? (
+  //   <div className='absolute left-1/2 top-1/2'>Test is going on</div>
+  // ) : (
+  //   <Leaderboard tid={test.id}/>
+  // );
 }

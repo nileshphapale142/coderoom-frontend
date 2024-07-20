@@ -237,7 +237,7 @@ export const getSubmissions = async (qid: number) => {
   }
 };
 
-export const fetchQuestionList = async (cid: number, tid: number) => {
+export const fetchQuestionList = async (tid: number) => {
   try {
     if (!cookies().get('access_token')) {
       redirect('/auth/sign');

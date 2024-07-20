@@ -32,7 +32,7 @@ const QuestionLink = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-export const QuestionSideBar = ({ cid, tid }: { cid: number; tid: number }) => {
+export const QuestionSideBar = ({ tid }: { tid: number }) => {
   //todo: separete the components
 
   const [isOpen, setIsOpen] = useRecoilState(isProblemListOpen);
@@ -40,7 +40,7 @@ export const QuestionSideBar = ({ cid, tid }: { cid: number; tid: number }) => {
 
   const fetchQuestions = async () => {
     //todo: error handling
-    const { data, status } = await fetchQuestionList(cid, tid);
+    const { data, status } = await fetchQuestionList(tid);
     const { test }: { test: Test } = data;
     setQuestions(test.questions);
   };
@@ -82,7 +82,7 @@ export const QuestionSideBar = ({ cid, tid }: { cid: number; tid: number }) => {
             p-1 text-2xl text-gray-2'
             >
               <Link
-                href={`/c/${cid}/t/${tid}`}
+                href={`/t/${tid}`}
                 className='transition-all hover:text-black hover:underline'
               >
                 Home
@@ -106,7 +106,7 @@ export const QuestionSideBar = ({ cid, tid }: { cid: number; tid: number }) => {
               <QuestionLink
                 key={que.id}
                 name={que.name}
-                link={`/c/${cid}/t/${tid}/q/${que.id}`}
+                link={`/t/${tid}/q/${que.id}`}
               />
             ))}
 
