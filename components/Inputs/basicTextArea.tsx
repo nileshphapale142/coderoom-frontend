@@ -13,7 +13,6 @@ export const BasicTextArea = ({
   id?: string;
   defaultValue?: string;
 }): React.ReactNode => {
-
   const [input, setInput] = useState(defaultValue);
 
   return (
@@ -31,7 +30,7 @@ export const BasicTextArea = ({
           className='h-100% text-style h-full w-full border-none p-2 
           font-normal leading-6 text-gray-700'
           value={input}
-          onChange={(e) => { 
+          onChange={(e) => {
             inputHandler(e.target.value);
             setInput(e.target.value);
           }}

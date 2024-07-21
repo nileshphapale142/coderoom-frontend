@@ -25,7 +25,6 @@ export const EditCourse = ({ name, description }: EditCourseProps) => {
     <div className='flex h-full flex-col'>
       <div className='block h-auto flex-grow'></div>
       <div className='relative mx-auto rounded-3 bg-white p-4'>
-        
         <div className='flex flex-col px-2'>
           <div className='text-style text-heading py-2'>
             <span className='text-2xl font-semibold'>Edit Class</span>
@@ -62,7 +61,6 @@ export const EditCourse = ({ name, description }: EditCourseProps) => {
           <div className='flex items-center justify-center py-2 pt-4'>
             <SimpleButton name='Edit' action={() => {}} />
           </div>
-
         </div>
       </div>
       <div className='block h-auto flex-grow'></div>

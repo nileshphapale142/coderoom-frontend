@@ -121,7 +121,7 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
         </div>
       </div>
       {isTeacher ? <CreateTestPopUp courseId={id} /> : <></>}
-      <FullScreenPopUp course={course}/>
+      <FullScreenPopUp course={course} />
     </>
   );
 };

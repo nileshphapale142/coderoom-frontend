@@ -13,7 +13,6 @@ interface secondNavProps {
 }
 
 export const SecondNavbar = (props: secondNavProps) => {
-
   return (
     <nav className='fixed z-[978] block w-full'>
       <div className='h-[4.05rem]'></div>
@@ -33,19 +32,17 @@ export const SecondNavbar = (props: secondNavProps) => {
             </div>
           </div>
 
-          
-          {
-            cookies().get('is_teacher')?.value === 'true' && 
+          {cookies().get('is_teacher')?.value === 'true' && (
             <div className='mr-9 flex flex-row items-center '>
               <div>
-                  <div className='mx-3 block'>
-                    <span>
-                      <Edit />
-                    </span>
-                  </div>
+                <div className='mx-3 block'>
+                  <span>
+                    <Edit />
+                  </span>
+                </div>
               </div>
             </div>
-          }
+          )}
         </div>
       </div>
     </nav>

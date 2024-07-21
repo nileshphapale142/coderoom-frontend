@@ -202,5 +202,5 @@ export const submissionMade = atom({
 
 export const isFullScreenPopUpOpen = atom({
   key: 'isFullScreenPopUpOpen',
-  default: false
-})
+  default: false,
+});

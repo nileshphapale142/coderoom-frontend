@@ -12,19 +12,24 @@ export const MultiSelectDropDown = ({
   options,
   title,
   selectHandler,
+  defaultValues = [],
 }: {
   options: Option[];
   title: string;
   selectHandler: (arg: string[]) => void;
+  defaultValues?: string[];
 }) => {
   const [isOptionsVisible, setIsOptionsVisible] =
     React.useState<boolean>(false);
 
-  const [selected, setSelected] = React.useState(new Set<string>());
+  const [selected, setSelected] = React.useState(
+    new Set<string>(defaultValues)
+  );
   const ref = React.useRef<HTMLDivElement>(null);
 
   const onSelectHandler = (name: string) => {
     setSelected((prev) => {
+      name = name.toLowerCase();
       const newSet = new Set(prev);
       newSet.has(name) ? newSet.delete(name) : newSet.add(name);
       return newSet;
@@ -87,7 +92,7 @@ export const MultiSelectDropDown = ({
                 }}
               >
                 <div className='flex w-10 items-center justify-center'>
-                  {selected.has(option.name) ? (
+                  {selected.has(option.name.toLowerCase()) ? (
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'

@@ -18,21 +18,17 @@ export const BasicInput = ({
   id?: string;
   width?: string;
 }) => {
-
-  
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
   //todo: gap between border and text when clicked
   //todo: handle bug when input type number but entered is value is not
 
-
   const [input, setInput] = React.useState(defaultInput);
   const [isFocused, setIsFocused] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  
+
   const handleFocus = () => {
     setIsFocused(true);
   };
-  
 
   useClickOutside(inputRef, () => setIsFocused(false));
 
@@ -104,7 +100,8 @@ w-full max-w-full text-left '
           className='round-0 flex h-full w-full min-w-0 appearance-none border-none bg-transparent 
 bg-none p-0 text-base font-normal tracking-very-sm text-gray-2 caret-blue-1 transition-opacity duration-150 focus:outline-none'
           onFocus={handleFocus}
-          value={input}
+          defaultValue={defaultInput}
+          // value={input}
           type={inputType}
           id={id}
           onChange={(e) => {
