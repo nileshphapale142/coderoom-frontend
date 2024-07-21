@@ -146,11 +146,7 @@ export const fetchLeaderboard = async (tid: number) => {
   }
 };
 
-export const Leaderboard = async ({
-  tid,
-}: {
-   tid: number
-}) => {
+export const Leaderboard = async ({ tid }: { tid: number }) => {
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start
@@ -186,7 +182,6 @@ export const Leaderboard = async ({
       block min-h-full min-w-0 flex-1-auto'
       >
         <div className='relative z-auto h-auto min-h-full backface-visibility-h'>
-          
           <div>
             <div>
               <div>

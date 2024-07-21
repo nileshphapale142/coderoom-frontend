@@ -7,7 +7,7 @@ interface TimerProps {
   endTime: Date;
 }
 
-const Count = ({ time }: { time: string; }) => {
+const Count = ({ time }: { time: string }) => {
   return (
     <div className='google-bw-bg mx-1 inline-block w-auto rounded-3 p-3 '>
       <div className='text-style block '>
@@ -21,7 +21,6 @@ export const FinishCountDown: React.FC<TimerProps> = ({ endTime }) => {
   const timeLeft = useTimer(endTime);
 
   const times = timeLeft.split(':');
-  
 
   return (
     <div className='flex w-full justify-center'>

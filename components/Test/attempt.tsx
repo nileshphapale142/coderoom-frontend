@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { FinishCountDown } from "./finishCountDown";
-import { fetchTestData } from "@/app/(main)/c/[id]/t/[tid]/page";
-import { QuestionBox } from "./Question";
+import Link from 'next/link';
+import { FinishCountDown } from './finishCountDown';
+import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/page';
+import { QuestionBox } from './Question';
 
 interface Test {
   name: string;
@@ -15,15 +15,14 @@ interface Test {
   }[];
 }
 
-
-export const Attempt = async ({ tid }: { tid: number; }) => {
+export const Attempt = async ({ tid }: { tid: number }) => {
   const { data, status } = await fetchTestData(tid);
   const { test }: { test: Test } = data;
   //todo: error handling
-  
+
   return (
     <div className='google-bw-bg absolute left-0 right-0 top-0 min-h-full'>
-      <nav className='z-[999] fixed block h-16 w-full border-b bg-white '>
+      <nav className='fixed z-[999] block h-16 w-full border-b bg-white '>
         <div className='flex h-full flex-row items-center justify-between'>
           <div className='ml-2 flex h-full items-center justify-between'>
             <div className='text-style text-heading text-2xl font-semibold'>
@@ -37,9 +36,7 @@ export const Attempt = async ({ tid }: { tid: number; }) => {
           </div>
           <div className='flex h-full items-center justify-center'>
             <div className='my-auto mr-2 block'>
-              <FinishCountDown
-                endTime={new Date(test.endTime)}
-              />
+              <FinishCountDown endTime={new Date(test.endTime)} />
             </div>
           </div>
         </div>
@@ -80,7 +77,6 @@ export const Attempt = async ({ tid }: { tid: number; }) => {
           </div>
         </div>
       </div>
-
     </div>
   );
-}
+};

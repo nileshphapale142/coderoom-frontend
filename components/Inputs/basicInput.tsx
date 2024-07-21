@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useClickOutside } from '../Hooks';
 
 export const BasicInput = ({
@@ -18,17 +18,21 @@ export const BasicInput = ({
   id?: string;
   width?: string;
 }) => {
+
+  
   //TODO: can add three state not-focused, focused-invalild input and facused-valid input like in joinclass popup
   //todo: gap between border and text when clicked
   //todo: handle bug when input type number but entered is value is not
 
-  const [isFocused, setIsFocused] = React.useState(false);
-  const [input, setInput] = React.useState(defaultInput);
-  const inputRef = React.useRef<HTMLInputElement>(null);
 
+  const [input, setInput] = React.useState(defaultInput);
+  const [isFocused, setIsFocused] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  
   const handleFocus = () => {
     setIsFocused(true);
   };
+  
 
   useClickOutside(inputRef, () => setIsFocused(false));
 
@@ -37,8 +41,6 @@ export const BasicInput = ({
   const normalStyle = `border border-${color}`;
   const clickedStyle = `border-2 border-${color}`;
 
-  // const width = title.length* 7
-  // console.log(width)
   const normalStyleMainDiv = `w-auto border-b border-t border-${color}`;
   const clickedStyleMainDiv = `border-${color} border-b-2  pt-[2px] border-t-0 pr-2 w-[74.35px]`;
 
