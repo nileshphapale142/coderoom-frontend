@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import axios from 'axios';
 
 interface Question {
-  id: 24;
+  id: number;
   name: string;
   statement: string;
   points: number;
@@ -19,7 +19,7 @@ interface Question {
   }[];
 }
 
-const fetchQuestion = async (qid: number) => {
+export const fetchQuestion = async (qid: number) => {
   if (!cookies().get('access_token')) {
     redirect('/auth/signin');
     return {

@@ -1,9 +1,6 @@
-import React from 'react';
-import { Example } from './example';
-import { Page2Inputs } from './';
-import { CodeBlock } from '@/components/Utils';
+import { Page2Inputs } from '../New';
 
-export const NewQPage2 = () => {
+export const EditQPage2 = () => {
   const exampleCode = `#include <bits/stdc++.h>
 using namespace std;           
 
@@ -35,21 +32,6 @@ int main() {
         <div className='h-8'></div>
         <Page2Inputs />
       </div>
-
-      <Example>
-        <div className='mt-4 flex w-full flex-col'>
-          <span className='text-heading text-xl text-gray-600'>
-            Code (Python)
-          </span>
-          <div className='relative overflow-y-scroll'>
-            <span className='text-style flex flex-col font-normal text-gray-600'>
-              <span className='mt-2 rounded-7 border-none'>
-                <CodeBlock language='Python' value={exampleCode} />
-              </span>
-            </span>
-          </div>
-        </div>
-      </Example>
     </div>
   );
 };

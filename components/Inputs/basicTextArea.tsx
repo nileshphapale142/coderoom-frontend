@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const BasicTextArea = ({
   inputHandler,
@@ -14,6 +14,10 @@ export const BasicTextArea = ({
   defaultValue?: string;
 }): React.ReactNode => {
   const [input, setInput] = useState(defaultValue);
+  
+  useEffect(() => {
+    setInput(defaultValue);
+  }, [defaultValue])
 
   return (
     <div

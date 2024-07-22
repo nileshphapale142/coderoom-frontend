@@ -25,6 +25,10 @@ export const BasicInput = ({
   const [input, setInput] = React.useState(defaultInput);
   const [isFocused, setIsFocused] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  
+  useEffect(() => {
+    setInput(defaultInput);
+  }, [defaultInput]);
 
   const handleFocus = () => {
     setIsFocused(true);

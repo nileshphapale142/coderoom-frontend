@@ -87,7 +87,8 @@ const TestHome = async ({
                       name={que.name}
                       maxPts={que.points}
                       availablePts={que.points}
-                      route={`/c/${id}/t/${tid}/q/${que.id}`}
+                      route={`/c/${id}/t/${tid}/q/${que.id}/edit`}
+                      isSolve={false}
                     />
                   ))}
 
