@@ -5,9 +5,11 @@ import React from 'react';
 export const Join = ({
   name,
   isValid,
+  onClickHandler,
 }: {
   name: string;
   isValid: () => boolean;
+  onClickHandler: () => void;
 }) => {
   const bg = isValid() ? ' text-blue-600 ' : ' text-black-1 ';
 
@@ -28,7 +30,9 @@ export const Join = ({
         className={'absolute bottom-0 left-0 right-0 top-0 opacity-0 ' + bg}
       ></div>
       <span className='relative flex items-center px-2 py-0'>
-        <span className='m-0 inline-block'>{name}</span>
+        <span className='m-0 inline-block' onClick={onClickHandler}>
+          {name}
+        </span>
       </span>
     </div>
   );

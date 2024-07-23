@@ -10,3 +10,5 @@ export * from './simpleButton';
 export * from './closeBtn';
 export * from './openProblemListBtn';
 export * from './roundedSmBtn';
+export * from './plusButton';
+export * from './edit';

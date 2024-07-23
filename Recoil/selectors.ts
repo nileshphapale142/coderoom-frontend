@@ -3,6 +3,12 @@
 import { selector } from 'recoil';
 import {
   courseCodeInput,
+  createClassInfo,
+  createTestInfo,
+  exampleTestCases,
+  newQuestion,
+  solutionCode,
+  testCases,
   userEmail,
   userName,
   userPassword,
@@ -10,7 +16,11 @@ import {
   userRollNo,
   userSignInInfo,
 } from './atoms';
-import { isValidCourseCode, isValidInstituteEmail } from '@/Utils';
+import {
+  isAbsoluteNumber,
+  isValidCourseCode,
+  isValidInstituteEmail,
+} from '@/Utils';
 
 export const validCourseCodeState = selector({
   key: 'validCourseCodeState',
@@ -77,5 +87,67 @@ export const isSignInInfoFilled = selector({
   get: ({ get }) => {
     const info = get(userSignInInfo);
     return info.email.length > 0 && info.email.length > 0;
+  },
+});
+
+export const isCreateClassInfoFilled = selector({
+  key: 'isCreateClassInfoFilled',
+  get: ({ get }) => {
+    const info = get(createClassInfo);
+    return info.name.length > 0 && info.description.length > 0;
+  },
+});
+
+export const isCreateTestInfoFilled = selector({
+  key: 'isCreateTestInfoFilled',
+  get: ({ get }) => {
+    const info = get(createTestInfo);
+    return Object.values(info).every(
+      (value) => value !== '' || (Array.isArray(value) && value.length > 0)
+    );
+  },
+});
+
+export const isQueInfoFilled = selector({
+  key: 'isQueInfoFilled',
+  get: ({ get }) => {
+    const info = get(newQuestion);
+    return (
+      info.name.length > 0 &&
+      info.description.length > 0 &&
+      isAbsoluteNumber(info.points)
+    );
+  },
+});
+
+export const isSolutinCodeFilled = selector({
+  key: 'isSolutinCodeFilled',
+  get: ({ get }) => {
+    const sol = get(solutionCode);
+    return sol.code.length > 0 && sol.language.length > 0;
+  },
+});
+
+export const isTestCasesFilled = selector({
+  key: 'isTestCasesFilled',
+  get: ({ get }) => {
+    const tc = get(testCases);
+    return tc.length > 0;
+  },
+});
+
+export const isExampleTestCasesFilled = selector({
+  key: 'isExampleTestCasesFilled',
+  get: ({ get }) => {
+    const etcs = get(exampleTestCases);
+    return (
+      etcs.length !== 0 &&
+      !etcs.some(
+        (etc) =>
+          etc.input.length === 0 ||
+          etc.output.length === 0 ||
+          etc.explaination.length === 0
+      )
+    );
   },
 });

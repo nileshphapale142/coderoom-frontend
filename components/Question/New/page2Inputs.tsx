@@ -1,34 +1,55 @@
 'use client';
 
 import React from 'react';
-import { DropDown } from '@/components/Utils';
+import { DropDown, MyDropDown } from '@/components/Utils';
+import { BasicTextArea } from '@/components/Inputs';
+import { useRecoilState } from 'recoil';
+import { solutionCode } from '@/Recoil';
 
 export const Page2Inputs = () => {
+  const options = [
+    { id: 1, name: 'C' },
+    { id: 2, name: 'C++' },
+    { id: 3, name: 'Java' },
+    { id: 4, name: 'Python' },
+  ];
+
+  const [sol, setSol] = useRecoilState(solutionCode);
+
   return (
     <>
       <div className='text-style flex flex-col items-start justify-start'>
-        <span className='text-xl font-semibold text-gray-600'>Language*</span>
+        <span className='text-xl font-semibold text-gray-600'>Language</span>
         <div className='py-2 '>
-          <DropDown name='Language' options={['C', 'C++', 'Java', 'Python']} />
+          <MyDropDown
+            options={options}
+            title='Language'
+            selectHandler={(language) => {
+              setSol((prev) => {
+                return { ...prev, language };
+              });
+            }}
+            defaultValue={
+              sol.language.length > 0
+                ? { id: 1, name: sol.language }
+                : undefined
+            }
+          />
         </div>
       </div>
       <div className='text-style flex flex-grow flex-col items-start justify-start'>
         <span className='text-xl font-semibold text-gray-600'>
-          Solution Code*
+          Solution Code
         </span>
-        <div className='mt-2 flex h-auto w-40r flex-grow overflow-y-auto overflow-x-hidden'>
-          {/* //TODO: onclick border chagnae not hover */}
-          <div
-            className='border-gray-600 relative flex w-full flex-grow 
-                          items-start justify-start overflow-y-auto overflow-x-hidden rounded-2 border border-solid hover:border-2 hover:border-blue-1'
-          >
-            {/* //TODO: separate component for text area */}
-            <textarea
-              className='h-100% text-style h-full w-full border-none p-2 
-                            font-normal leading-6 text-gray-700'
-            />
-          </div>
-        </div>
+        <BasicTextArea
+          inputHandler={(code) => {
+            setSol((prev) => {
+              return { ...prev, code };
+            });
+          }}
+          defaultValue={sol.code}
+          id='solCode'
+        />
       </div>
     </>
   );

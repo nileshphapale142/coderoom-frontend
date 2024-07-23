@@ -1,6 +1,18 @@
+import React from 'react';
 import CourseBox from './courseBox';
 
-export const Courses = () => {
+interface Course {
+  name: string;
+  description: string;
+  id: number;
+  code: string;
+  teacherId: number;
+  teacher?: {
+    name: string;
+  };
+}
+
+export const Courses = ({ courses }: { courses: Course[] }) => {
   return (
     <div className='visible static flex h-auto min-h-0 opacity-100 contain-style'>
       <div
@@ -15,7 +27,13 @@ export const Courses = () => {
           <div>
             <div>
               <ol className='flex flex-wrap pl-6 pt-6 '>
-                <CourseBox />
+                {courses?.map((course, id) => (
+                  <CourseBox
+                    key={id}
+                    {...course}
+                    teacher={course.teacher?.name}
+                  />
+                ))}
               </ol>
             </div>
           </div>

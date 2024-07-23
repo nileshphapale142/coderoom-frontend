@@ -2,14 +2,28 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const TestBox = () => {
+interface TestProps {
+  id: number;
+  name: string;
+  startTime: string;
+}
+
+export const TestBox = ({
+  test,
+  courseId,
+  isTeacher,
+}: {
+  test: TestProps;
+  courseId: number;
+  isTeacher: boolean;
+}) => {
   return (
     <li
       className='relative box-border bg-transparent transition-all duration-300 
                  hover:overflow-hidden hover:rounded-2 hover:shadow-test-box'
     >
       <Link
-        href={'/c/1/t/1'}
+        href={isTeacher ? `/c/${courseId}/t/${test.id}` : `/t/${test.id}`}
         className='absolute bottom-0 left-0 right-0 top-0 z-20 h-full'
       />
       <div
@@ -35,7 +49,7 @@ export const TestBox = () => {
           <div className='flex min-w-0 flex-51 flex-col'>
             <div className='text-style flex-row-container w-full text-gray-700'>
               <span className='block overflow-hidden text-ellipsis whitespace-nowrap'>
-                Test name comes here
+                {test.name}
               </span>
             </div>
           </div>
@@ -48,7 +62,8 @@ export const TestBox = () => {
             className='text-style-1 text-wrapping ml-4 mr-[-.25rem] box-border 
                                     min-w-0 flex-30 pr-1 text-right text-black-3'
           >
-            Test date and time
+            {/* //todo: handle time format situation */}
+            {new Date(test.startTime).toLocaleString()}
           </div>
         </div>
       </div>

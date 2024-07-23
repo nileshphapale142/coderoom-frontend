@@ -1,6 +1,13 @@
 import React from 'react';
 
-export const CourseInfo = () => {
+interface CourseInfoProps {
+  name: string;
+  description: string;
+  code: string;
+  teacher: string;
+}
+
+export const CourseInfo = (props: CourseInfoProps) => {
   return (
     <div className='mt-6 w-full overflow-hidden rounded-2 bg-violet-500 '>
       <div className='relative h-60 w-full '>
@@ -13,10 +20,10 @@ export const CourseInfo = () => {
             className='block overflow-hidden text-ellipsis whitespace-nowrap pr-8 text-4xl 
                   font-medium'
           >
-            Course Name comes here
+            {props.name}
           </h1>
           <div className='my-1 pr-8 text-1375 font-normal leading-7 text-white'>
-            Course description goes here
+            {props.description}
           </div>
         </div>
 
@@ -25,10 +32,10 @@ export const CourseInfo = () => {
             className='block overflow-hidden text-ellipsis whitespace-nowrap pr-8 text-2xl 
                   font-medium'
           >
-            Teacher Name comes here
+            {props.teacher}
           </h3>
           <div className='my-1 pr-8 text-1375 font-normal leading-7 text-black'>
-            Course Code comes here
+            {props.code}
           </div>
         </div>
       </div>
