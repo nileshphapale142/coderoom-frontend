@@ -20,6 +20,7 @@ interface Test {
 
 interface FullScreenPopUpProps {
   course?: {
+    id: number;
     name: string;
     description: string;
   };
@@ -46,9 +47,11 @@ export const FullScreenPopUp = (props: FullScreenPopUpProps) => {
             {path.includes('t') ? (
               props.test && <EditTest test={props.test} />
             ) : (
+              props.course && 
               <EditCourse
-                name={props.course?.name || ''}
-                description={props.course?.description || ''}
+                id={props.course.id}
+                name={props.course.name}
+                description={props.course.description}
               />
             )}
           </div>
