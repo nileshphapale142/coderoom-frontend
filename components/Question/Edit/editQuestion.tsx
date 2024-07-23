@@ -10,14 +10,17 @@ import {
   solutionCode,
   testCases,
 } from '@/Recoil';
-import { createQuestionAction, editQuestionAction, fetchQuestion } from '@/app/action';
+import {
+  createQuestionAction,
+  editQuestionAction,
+  fetchQuestion,
+} from '@/app/action';
 import { SimpleButton } from '@/components/Buttons';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { EditQPage1, EditQPage2, EditQPage3, EditQPage4 } from './';
 import { QuestionBox } from '@/components/Test';
-
 
 interface ExampleTestCase {
   input: string;
@@ -40,7 +43,6 @@ interface Question {
   exampleTestCases: ExampleTestCase[];
   testId: number;
 }
-
 
 interface QuestionFetched {
   id: number;
@@ -66,7 +68,15 @@ interface QuestionFetched {
   }[];
 }
 
-export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid: number; }) => {
+export const EditQuestion = ({
+  cid,
+  tid,
+  qid,
+}: {
+  cid: number;
+  tid: number;
+  qid: number;
+}) => {
   const [pageNo, setPageNo] = useState(0);
 
   const [que, setQue] = useRecoilState(newQuestion);
@@ -76,34 +86,35 @@ export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid:
   const [question, setQuestion] = useState<QuestionFetched | null>(null);
 
   const router = useRouter();
-  
+
   useEffect(() => {
     //todo: error handling;
     fetchQuestion(qid)
       .then(({ data }) => setQuestion(data.question))
       .catch(() => alert('Error occurred'));
   }, []);
-  
+
   useEffect(() => {
     if (!question) return;
 
     setQue({
       name: question.name,
       description: question.statement,
-      points: question.points.toString()
+      points: question.points.toString(),
     });
 
     setCode({
       code: atob(question.solution[0].code),
-      language: question.solution[0].language
+      language: question.solution[0].language,
     });
 
     setTcs(atob(question.testCases.input));
 
-    setEtcs(question.exampleTestCases.map((etc, idx) => {
-      return { ...etc, id: idx };
-    }));
-
+    setEtcs(
+      question.exampleTestCases.map((etc, idx) => {
+        return { ...etc, id: idx };
+      })
+    );
   }, [question]);
 
   const pages: React.ReactNode[] = [
@@ -157,31 +168,29 @@ export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid:
 
     const { data, status } = await editQuestionAction(updatedQuestion);
 
-    if (status === 200) { 
+    if (status === 200) {
       setQue({
         name: '',
         description: '',
-        points: ''
+        points: '',
       });
-      
+
       setCode({
         code: '',
-        language: ''
+        language: '',
       });
-      
+
       setTcs('');
-      
+
       setEtcs([]);
-          
+
       router.push(`/c/${cid}/t/${tid}`);
-    }
-    else if (status === 400) alert('data format not correct');
+    } else if (status === 400) alert('data format not correct');
     else if (status === 401) router.push(`/auth/signin`);
     else if (status === 403) {
       alert('Not authorized to edit');
       router.push(`/`);
-    } 
-    else if (status === 500) router.push('/');
+    } else if (status === 500) router.push('/');
     else {
       alert('some error occured');
       router.push(`/c/${cid}/t/${tid}`);
@@ -209,11 +218,7 @@ export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid:
             {pageNo !== pages.length - 1 ? (
               <SimpleButton name={'Next'} action={incrementPageNo} id='next' />
             ) : (
-              <SimpleButton
-                name={'Edit'}
-                action={handleEdit}
-                id='edit'
-              />
+              <SimpleButton name={'Edit'} action={handleEdit} id='edit' />
             )}
           </div>
         </div>

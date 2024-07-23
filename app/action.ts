@@ -48,7 +48,7 @@ interface Submission {
 
 export async function SignOut() {
   cookies().delete('access_token');
-  cookies().delete('is_teacher');  
+  cookies().delete('is_teacher');
 }
 
 export const createClassAction = async (info: {
@@ -278,7 +278,6 @@ export const fetchQuestionList = async (tid: number) => {
   }
 };
 
-
 export const fetchQuestion = async (qid: number) => {
   if (!cookies().get('access_token')) {
     redirect('/auth/signin');
@@ -330,14 +329,13 @@ export const editQuestionAction = async (question: Question) => {
     };
   } catch (err: any) {
     console.log(err);
-    console.log(err?.response?.data)
+    console.log(err?.response?.data);
     return {
       data: null,
       status: err?.response?.status,
     };
   }
 };
-
 
 export const editClassAction = async (info: {
   id: number;
@@ -388,12 +386,16 @@ export const editTestAction = async (test: Test) => {
         data: null,
         status: 401,
       };
-    
-    const response = await axios.patch(`http://localhost:5000/test/${test.id}/edit`, test, {
-      headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
-      },
-    });
+
+    const response = await axios.patch(
+      `http://localhost:5000/test/${test.id}/edit`,
+      test,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
+      }
+    );
 
     const data = response.data;
 
@@ -403,5 +405,49 @@ export const editTestAction = async (test: Test) => {
       data: null,
       status: err.response.status,
     };
+  }
+};
+
+export const getCourseName = async (id: number) => {
+  try {
+    if (!cookies().get('access_token'))
+      return {
+        name: null,
+        status: 401,
+      };
+
+    const response = await axios.get(
+      `http://localhost:5000/course/${id}/name`,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
+      }
+    );
+
+    return { name: response.data?.name, status: 200 };
+  } catch (err: any) {
+    console.log(err);
+    return { name: null, status: err?.resposne?.status };
+  }
+};
+
+export const getTestName = async (id: number) => {
+  try {
+    if (!cookies().get('access_token'))
+      return {
+        name: null,
+        status: 401,
+      };
+
+    const response = await axios.get(`http://localhost:5000/test/${id}/name`, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+      },
+    });
+
+    return { name: response.data?.name, status: 200 };
+  } catch (err: any) {
+    return { name: null, status: err?.resposne?.status };
   }
 };

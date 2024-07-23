@@ -100,8 +100,7 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
 
     if (status === 201) {
       router.push(`/c/${cid}/t/${tid}`);
-    } 
-    else if (status === 400) alert('data format not correct');
+    } else if (status === 400) alert('data format not correct');
     else if (status === 401) router.push(`/auth/signin`);
     else if (status === 500) router.push('/');
     else {

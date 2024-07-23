@@ -50,7 +50,7 @@ export const fetchTestData = async (tid: number) => {
 
     if (err?.response?.status === 404) redirect('/not-found');
     else if (err?.response?.status === 401) redirect(`/auth/signin`);
-      else if (err?.response?.status === 500) redirect(`/`);
+    else if (err?.response?.status === 500) redirect(`/`);
 
     return {
       data: null,
@@ -63,13 +63,13 @@ const TestHome = async ({
   params,
 }: {
   params: { id: number; tid: number };
-  }) => {
+}) => {
   const { id, tid } = params;
   const { data, status } = await fetchTestData(tid);
   //todo: error handling
-  
-  if (!data.test) return redirect('/not-found');
-  
+
+  if (!data?.test) return redirect('/not-found');
+
   const test: Test = data.test;
 
   return (

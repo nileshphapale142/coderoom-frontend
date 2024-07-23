@@ -45,16 +45,15 @@ export const FullScreenPopUp = (props: FullScreenPopUpProps) => {
           </div>
 
           <div className='relative flex-grow'>
-            {path.includes('t') ? (
-              props.test && <EditTest test={props.test} />
-            ) : (
-              props.course && 
-              <EditCourse
-                id={props.course.id}
-                name={props.course.name}
-                description={props.course.description}
-              />
-            )}
+            {path.includes('t')
+              ? props.test && <EditTest test={props.test} />
+              : props.course && (
+                  <EditCourse
+                    id={props.course.id}
+                    name={props.course.name}
+                    description={props.course.description}
+                  />
+                )}
           </div>
         </div>
       </div>

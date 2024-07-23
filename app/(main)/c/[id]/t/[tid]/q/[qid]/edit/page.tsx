@@ -4,7 +4,7 @@ import { EditQuestion } from '@/components/Question/Edit/editQuestion';
 const EditQuestionPage = ({
   params,
 }: {
-    params: { id: number; tid: number, qid: number; };
+  params: { id: number; tid: number; qid: number };
 }) => {
   // TODO: add navigation button at the bottom (back and next)
   // TODO: pagination
@@ -16,7 +16,7 @@ const EditQuestionPage = ({
           <div className='min-h-auto relative z-auto flex h-auto flex-col backface-visibility-h '>
             <MainNavFiller />
             <CourseNavFiller />
-            <EditQuestion cid={params.id} tid={params.tid} qid={ params.qid} />
+            <EditQuestion cid={params.id} tid={params.tid} qid={params.qid} />
           </div>
         </div>
       </div>
