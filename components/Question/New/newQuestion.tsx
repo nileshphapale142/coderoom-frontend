@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 
 interface ExampleTestCase {
   input: string;
-  ouput: string;
+  output: string;
   explaination: string;
 }
 
@@ -89,7 +89,7 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
       exampleTestCases: etcs.map((etc) => {
         return {
           input: etc.input,
-          ouput: etc.output,
+          output: etc.output,
           explaination: etc.explaination,
         };
       }),
@@ -98,7 +98,9 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
 
     const { data, status } = await createQuestionAction(question);
 
-    if (status === 201) router.push(`/c/${cid}/t/${tid}`);
+    if (status === 201) {
+      router.push(`/c/${cid}/t/${tid}`);
+    } 
     else if (status === 400) alert('data format not correct');
     else if (status === 401) router.push(`/auth/signin`);
     else if (status === 500) router.push('/');

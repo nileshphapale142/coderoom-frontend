@@ -10,7 +10,7 @@ import {
   solutionCode,
   testCases,
 } from '@/Recoil';
-import { createQuestionAction, fetchQuestion } from '@/app/action';
+import { createQuestionAction, editQuestionAction, fetchQuestion } from '@/app/action';
 import { SimpleButton } from '@/components/Buttons';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ import { QuestionBox } from '@/components/Test';
 
 interface ExampleTestCase {
   input: string;
-  ouput: string;
+  output: string;
   explaination: string;
 }
 
@@ -31,6 +31,7 @@ interface Code {
 }
 
 interface Question {
+  id?: number;
   name: string;
   description: string;
   points: number;
@@ -134,7 +135,8 @@ export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid:
       return;
     }
 
-    const question: Question = {
+    const updatedQuestion: Question = {
+      id: question?.id,
       name: que.name,
       description: que.description,
       points: parseInt(que.points),
@@ -146,18 +148,39 @@ export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid:
       exampleTestCases: etcs.map((etc) => {
         return {
           input: etc.input,
-          ouput: etc.output,
+          output: etc.output,
           explaination: etc.explaination,
         };
       }),
       testId: tid,
     };
 
-    const { data, status } = await createQuestionAction(question);
+    const { data, status } = await editQuestionAction(updatedQuestion);
 
-    if (status === 201) router.push(`/c/${cid}/t/${tid}`);
+    if (status === 200) { 
+      setQue({
+        name: '',
+        description: '',
+        points: ''
+      });
+      
+      setCode({
+        code: '',
+        language: ''
+      });
+      
+      setTcs('');
+      
+      setEtcs([]);
+          
+      router.push(`/c/${cid}/t/${tid}`);
+    }
     else if (status === 400) alert('data format not correct');
     else if (status === 401) router.push(`/auth/signin`);
+    else if (status === 403) {
+      alert('Not authorized to edit');
+      router.push(`/`);
+    } 
     else if (status === 500) router.push('/');
     else {
       alert('some error occured');

@@ -46,15 +46,15 @@ export const fetchTestData = async (tid: number) => {
     };
   } catch (err: any) {
     //todo: error handling;
-    console.log('error : ', err.response.status);
+    console.log('error : ', err);
 
-    if (err.response.status === 404) redirect('/not-found');
-    else if (err.response.status === 401) redirect(`/auth/signin`);
-    else if (err.response.status === 500) redirect(`/`);
+    if (err?.response?.status === 404) redirect('/not-found');
+    else if (err?.response?.status === 401) redirect(`/auth/signin`);
+      else if (err?.response?.status === 500) redirect(`/`);
 
     return {
       data: null,
-      status: err.response.status,
+      status: err?.response?.status,
     };
   }
 };
@@ -63,10 +63,10 @@ const TestHome = async ({
   params,
 }: {
   params: { id: number; tid: number };
-}) => {
+  }) => {
   const { id, tid } = params;
   const { data, status } = await fetchTestData(tid);
-  const { test }: { test: Test } = data;
+  const test: Test | null = data?.test;
 
   return (
     <>
@@ -81,7 +81,7 @@ const TestHome = async ({
                   className='relative flex w-full flex-col rounded-7 border-none bg-white
                 px-8'
                 >
-                  {test.questions.map((que, idx) => (
+                  {test?.questions.map((que, idx) => (
                     <QuestionBox
                       key={idx}
                       name={que.name}
@@ -113,7 +113,7 @@ const TestHome = async ({
           </div>
         </div>
       </div>
-      <FullScreenPopUp test={test} />
+      <FullScreenPopUp test={test || undefined} />
     </>
   );
 };

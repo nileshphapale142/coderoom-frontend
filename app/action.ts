@@ -17,7 +17,7 @@ interface Test {
 
 interface ExampleTestCase {
   input: string;
-  ouput: string;
+  output: string;
   explaination: string;
 }
 
@@ -27,6 +27,7 @@ interface Code {
 }
 
 interface Question {
+  id?: number;
   name: string;
   description: string;
   points: number;
@@ -293,5 +294,40 @@ export const fetchQuestion = async (qid: number) => {
     console.log(err);
     // todo: error handling
     return { data: null };
+  }
+};
+
+export const editQuestionAction = async (question: Question) => {
+  try {
+    if (!cookies().get('access_token')) {
+      return {
+        data: null,
+        status: 401,
+      };
+    }
+
+    const response = await axios.patch(
+      `http://localhost:5000/question/${question.id}/edit`,
+      question,
+      {
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
+      }
+    );
+
+    const data = response.data;
+
+    return {
+      data,
+      status: 200,
+    };
+  } catch (err: any) {
+    console.log(err);
+    console.log(err?.response?.data)
+    return {
+      data: null,
+      status: err?.response?.status,
+    };
   }
 };
