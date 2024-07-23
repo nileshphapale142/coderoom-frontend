@@ -89,7 +89,7 @@ export const MyDropDown = ({
                 }}
               >
                 <div className='flex w-10 items-center justify-center'>
-                  {option.id === selected.id ? (
+                  {option.name.toLowerCase() === selected.name.toLowerCase() ? (
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'

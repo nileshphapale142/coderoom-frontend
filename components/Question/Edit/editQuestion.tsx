@@ -1,9 +1,5 @@
 'use client';
 
-import React, { useState } from 'react';
-import { NewQPage1, NewQPage2, NewQPage3, NewQPage4 } from './';
-import { SimpleButton } from '@/components/Buttons';
-import { useRecoilValue } from 'recoil';
 import {
   exampleTestCases,
   isExampleTestCasesFilled,
@@ -14,8 +10,14 @@ import {
   solutionCode,
   testCases,
 } from '@/Recoil';
-import { createQuestionAction } from '@/app/action';
+import { createQuestionAction, editQuestionAction, fetchQuestion } from '@/app/action';
+import { SimpleButton } from '@/components/Buttons';
 import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { EditQPage1, EditQPage2, EditQPage3, EditQPage4 } from './';
+import { QuestionBox } from '@/components/Test';
+
 
 interface ExampleTestCase {
   input: string;
@@ -29,6 +31,7 @@ interface Code {
 }
 
 interface Question {
+  id?: number;
   name: string;
   description: string;
   points: number;
@@ -38,21 +41,76 @@ interface Question {
   testId: number;
 }
 
-export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
+
+interface QuestionFetched {
+  id: number;
+  name: string;
+  statement: string;
+  points: number;
+  testId: number;
+  exampleTestCases: {
+    id: number;
+    input: string;
+    output: string;
+    explaination: string;
+  }[];
+  testCases: {
+    id: number;
+    input: string;
+    output: string;
+  };
+  solution: {
+    id: number;
+    language: string;
+    code: string;
+  }[];
+}
+
+export const EditQuestion = ({ cid, tid, qid }: { cid: number; tid: number, qid: number; }) => {
   const [pageNo, setPageNo] = useState(0);
 
-  const que = useRecoilValue(newQuestion);
-  const code = useRecoilValue(solutionCode);
-  const tcs = useRecoilValue(testCases);
-  const etcs = useRecoilValue(exampleTestCases);
+  const [que, setQue] = useRecoilState(newQuestion);
+  const [code, setCode] = useRecoilState(solutionCode);
+  const [tcs, setTcs] = useRecoilState(testCases);
+  const [etcs, setEtcs] = useRecoilState(exampleTestCases);
+  const [question, setQuestion] = useState<QuestionFetched | null>(null);
 
   const router = useRouter();
+  
+  useEffect(() => {
+    //todo: error handling;
+    fetchQuestion(qid)
+      .then(({ data }) => setQuestion(data.question))
+      .catch(() => alert('Error occurred'));
+  }, []);
+  
+  useEffect(() => {
+    if (!question) return;
+
+    setQue({
+      name: question.name,
+      description: question.statement,
+      points: question.points.toString()
+    });
+
+    setCode({
+      code: atob(question.solution[0].code),
+      language: question.solution[0].language
+    });
+
+    setTcs(atob(question.testCases.input));
+
+    setEtcs(question.exampleTestCases.map((etc, idx) => {
+      return { ...etc, id: idx };
+    }));
+
+  }, [question]);
 
   const pages: React.ReactNode[] = [
-    <NewQPage1 />,
-    <NewQPage2 />,
-    <NewQPage3 />,
-    <NewQPage4 />,
+    <EditQPage1 />,
+    <EditQPage2 />,
+    <EditQPage3 />,
+    <EditQPage4 />,
   ];
 
   const validInputs = [
@@ -71,13 +129,14 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
     setPageNo((prev) => prev - 1);
   };
 
-  const handleCreation = async () => {
+  const handleEdit = async () => {
     if (!validInputs[pageNo]) {
       alert('fill all the fields or atleast add one test case');
       return;
     }
 
-    const question: Question = {
+    const updatedQuestion: Question = {
+      id: question?.id,
       name: que.name,
       description: que.description,
       points: parseInt(que.points),
@@ -96,13 +155,32 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
       testId: tid,
     };
 
-    const { data, status } = await createQuestionAction(question);
+    const { data, status } = await editQuestionAction(updatedQuestion);
 
-    if (status === 201) {
+    if (status === 200) { 
+      setQue({
+        name: '',
+        description: '',
+        points: ''
+      });
+      
+      setCode({
+        code: '',
+        language: ''
+      });
+      
+      setTcs('');
+      
+      setEtcs([]);
+          
       router.push(`/c/${cid}/t/${tid}`);
-    } 
+    }
     else if (status === 400) alert('data format not correct');
     else if (status === 401) router.push(`/auth/signin`);
+    else if (status === 403) {
+      alert('Not authorized to edit');
+      router.push(`/`);
+    } 
     else if (status === 500) router.push('/');
     else {
       alert('some error occured');
@@ -132,9 +210,9 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
               <SimpleButton name={'Next'} action={incrementPageNo} id='next' />
             ) : (
               <SimpleButton
-                name={'Submit'}
-                action={handleCreation}
-                id='submit'
+                name={'Edit'}
+                action={handleEdit}
+                id='edit'
               />
             )}
           </div>

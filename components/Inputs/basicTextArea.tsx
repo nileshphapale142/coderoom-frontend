@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const BasicTextArea = ({
   inputHandler,
@@ -13,6 +13,12 @@ export const BasicTextArea = ({
   id?: string;
   defaultValue?: string;
 }): React.ReactNode => {
+  const [input, setInput] = useState(defaultValue);
+  
+  useEffect(() => {
+    setInput(defaultValue);
+  }, [defaultValue])
+
   return (
     <div
       className='mt-2 flex h-auto flex-grow overflow-y-auto overflow-x-hidden'
@@ -27,8 +33,11 @@ export const BasicTextArea = ({
         <textarea
           className='h-100% text-style h-full w-full border-none p-2 
           font-normal leading-6 text-gray-700'
-          value={defaultValue}
-          onChange={(e) => inputHandler(e.target.value)}
+          value={input}
+          onChange={(e) => {
+            inputHandler(e.target.value);
+            setInput(e.target.value);
+          }}
           id={id}
         />
       </div>

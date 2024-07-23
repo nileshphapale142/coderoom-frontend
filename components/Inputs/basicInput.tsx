@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useClickOutside } from '../Hooks';
 
 export const BasicInput = ({
@@ -22,9 +22,13 @@ export const BasicInput = ({
   //todo: gap between border and text when clicked
   //todo: handle bug when input type number but entered is value is not
 
-  const [isFocused, setIsFocused] = React.useState(false);
   const [input, setInput] = React.useState(defaultInput);
+  const [isFocused, setIsFocused] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  
+  useEffect(() => {
+    setInput(defaultInput);
+  }, [defaultInput]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -37,8 +41,6 @@ export const BasicInput = ({
   const normalStyle = `border border-${color}`;
   const clickedStyle = `border-2 border-${color}`;
 
-  // const width = title.length* 7
-  // console.log(width)
   const normalStyleMainDiv = `w-auto border-b border-t border-${color}`;
   const clickedStyleMainDiv = `border-${color} border-b-2  pt-[2px] border-t-0 pr-2 w-[74.35px]`;
 
@@ -102,7 +104,8 @@ w-full max-w-full text-left '
           className='round-0 flex h-full w-full min-w-0 appearance-none border-none bg-transparent 
 bg-none p-0 text-base font-normal tracking-very-sm text-gray-2 caret-blue-1 transition-opacity duration-150 focus:outline-none'
           onFocus={handleFocus}
-          value={input}
+          defaultValue={defaultInput}
+          // value={input}
           type={inputType}
           id={id}
           onChange={(e) => {

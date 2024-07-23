@@ -18,15 +18,12 @@ export default async function Page({ params }: { params: { id: number } }) {
   // const { data, status } = await fetchTestData(params.id);
   // const { test }: { test: Test } = data;
   //todo: only fetch test: {id, name, startTime, endTime}
-  
+
   //todo: error handling
   // const currTime = new Date();
-  
-  
-  return (
-    <Attempt tid={ params.id} />
-  )
-  
+
+  return <Attempt tid={params.id} />;
+
   // return currTime < new Date(test.startTime) ? (
   //   <NotStarted name={'My Test'} startTime={test.startTime} />
   // ) : currTime <= new Date(test.endTime) ? (

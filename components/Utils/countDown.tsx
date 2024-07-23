@@ -6,25 +6,21 @@ interface TimerProps {
   endTime: Date;
 }
 
-const Count = ({time, type}: {time:string; type:string;}) => {
+const Count = ({ time, type }: { time: string; type: string }) => {
   return (
-    <div className='google-bw-bg inline-block rounded-3 p-4 mx-1 w-24 '>
+    <div className='google-bw-bg mx-1 inline-block w-24 rounded-3 p-4 '>
       <div className='text-style block p-1'>
         <div className='flex items-center justify-center text-3xl'>{time}</div>
-        <div className=' flex items-center justify-center'>
-          {type}
-        </div>
+        <div className=' flex items-center justify-center'>{type}</div>
       </div>
     </div>
   );
-}
-
+};
 
 export const CountDown: React.FC<TimerProps> = ({ endTime }) => {
   const [timeLeft, setTimeLeft] = useState<string>('');
 
   useEffect(() => {
-
     const timer = setInterval(() => {
       const now = new Date();
       const difference = endTime.getTime() - now.getTime();
@@ -50,7 +46,6 @@ export const CountDown: React.FC<TimerProps> = ({ endTime }) => {
 
     return () => clearInterval(timer);
   }, [endTime]);
-
 
   const times = timeLeft.split(':');
 

@@ -18,7 +18,6 @@ export default function CourseLayout({ children, params }: LayoutProps) {
           { name: 'Leaderboard', route: `/c/${id}/leaderboard` },
         ]}
       />
-      {/* <Navbar cid={id}/> */}
       {children}
     </>
   );

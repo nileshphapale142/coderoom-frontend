@@ -1,11 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import { isSolutinCodeFilled } from '@/Recoil';
 
 interface QuestionBoxProps {
   route: string;
   name: string;
   maxPts: number;
   availablePts: number;
+  isSolve: boolean;
 }
 
 export const QuestionBox = (question: QuestionBoxProps) => {
@@ -40,7 +42,7 @@ export const QuestionBox = (question: QuestionBoxProps) => {
                         border-black p-2 font-semibold hover:bg-[#f0f4f9]'
           >
             <span className='flex w-full items-center justify-center'>
-              Solve
+              {question.isSolve ?  "Solve" : "Edit"} 
             </span>
           </Link>
         </div>

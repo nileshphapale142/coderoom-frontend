@@ -4,7 +4,7 @@ import {
   ShortLearderboard,
   TestBox,
 } from '@/components/Course';
-import { CreateTestPopUp } from '@/components/Popups';
+import { CreateTestPopUp, FullScreenPopUp } from '@/components/Popups';
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
 import axios from 'axios';
 import { cookies } from 'next/headers';
@@ -121,6 +121,7 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
         </div>
       </div>
       {isTeacher ? <CreateTestPopUp courseId={id} /> : <></>}
+      <FullScreenPopUp course={course} />
     </>
   );
 };
