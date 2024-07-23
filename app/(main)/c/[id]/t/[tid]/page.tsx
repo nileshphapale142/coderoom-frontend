@@ -66,7 +66,11 @@ const TestHome = async ({
   }) => {
   const { id, tid } = params;
   const { data, status } = await fetchTestData(tid);
-  const test: Test | null = data?.test;
+  //todo: error handling
+  
+  if (!data.test) return redirect('/not-found');
+  
+  const test: Test = data.test;
 
   return (
     <>
@@ -113,7 +117,7 @@ const TestHome = async ({
           </div>
         </div>
       </div>
-      <FullScreenPopUp test={test || undefined} />
+      <FullScreenPopUp test={{ ...test, courseId: id }} />
     </>
   );
 };

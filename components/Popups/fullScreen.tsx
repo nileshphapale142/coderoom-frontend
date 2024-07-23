@@ -16,6 +16,7 @@ interface Test {
   allowedLanguages: string[];
   evaluationScheme: string;
   visibility: string;
+  courseId: number;
 }
 
 interface FullScreenPopUpProps {

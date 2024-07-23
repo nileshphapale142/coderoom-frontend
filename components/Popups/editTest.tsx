@@ -1,7 +1,7 @@
 'use client';
 
-import { createTestInfo } from '@/Recoil';
-import { useRecoilState } from 'recoil';
+import { createTestInfo, isCreateTestInfoFilled, isFullScreenPopUpOpen } from '@/Recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { BasicInput } from '../Inputs';
 import {
   DatePicker,
@@ -12,6 +12,8 @@ import {
 import { languageOptions } from '@/Utils';
 import { useEffect } from 'react';
 import { SimpleButton } from '../Buttons';
+import { editTestAction } from '@/app/action';
+import { useRouter } from 'next/navigation';
 
 interface Test {
   name: string;
@@ -21,6 +23,7 @@ interface Test {
   allowedLanguages: string[];
   evaluationScheme: string;
   visibility: string;
+  courseId: number;
 }
 
 interface Option {
@@ -30,6 +33,9 @@ interface Option {
 
 export const EditTest = ({ test }: { test: Test }) => {
   const [testInfo, setTestInfo] = useRecoilState(createTestInfo);
+  const isInfoFilled = useRecoilValue(isCreateTestInfoFilled);
+  const setIsPopUpOpen = useSetRecoilState(isFullScreenPopUpOpen);
+  const router = useRouter();
 
   const languages: Option[] = languageOptions;
   const visibilities: Option[] = [
@@ -53,6 +59,39 @@ export const EditTest = ({ test }: { test: Test }) => {
       visibility: test.visibility,
     });
   }, []);
+  
+  
+  const handleEdit = async () => {
+    if (!isInfoFilled) {
+      alert('Fill all the fields');
+      return;
+    }
+    
+        
+    const { data, status } = await editTestAction({ ...testInfo, courseId: test.courseId, id: test.id});
+    
+    if (status === 200) {
+      setIsPopUpOpen(false); 
+      setTestInfo({
+        name: '',
+        date: '',
+        startTime: '',
+        endTime: '',
+        languages: [],
+        evaluationScheme: '',
+        visibility: '',
+      });
+      router.push(`/c/${test.courseId}/t/${test.id}`);
+    } else if (status === 401) router.push('/auth/signin');
+    else if (status === 403) {
+      alert('Not authorized to edit');
+      router.push('/');
+    } else if (status === 500) {
+      alert('problem at server');
+    } else if (status === 400) alert('Data format error');
+    else alert('Unkwon problem');
+  }
+  
 
   return (
     <div className=''>
@@ -198,7 +237,7 @@ export const EditTest = ({ test }: { test: Test }) => {
             </div>
           <div className='w-full py-4 flex justify-center items-center'>
             <SimpleButton name='Edit'
-            action={() => {}}/>
+            action={handleEdit}/>
           </div>
           </div>
         </div>

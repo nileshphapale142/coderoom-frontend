@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 interface Test {
+  id?: number;
   name: string;
   date: string;
   startTime: string;
@@ -371,6 +372,31 @@ export const editClassAction = async (info: {
     return {
       data: null,
       status: err?.response?.status,
+    };
+  }
+};
+
+export const editTestAction = async (test: Test) => {
+  try {
+    if (!cookies().get('access_token'))
+      return {
+        data: null,
+        status: 401,
+      };
+    
+    const response = await axios.patch(`http://localhost:5000/test/${test.id}/edit`, test, {
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+      },
+    });
+
+    const data = response.data;
+
+    return { data, status: 200 };
+  } catch (err: any) {
+    return {
+      data: null,
+      status: err.response.status,
     };
   }
 };
