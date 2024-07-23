@@ -46,6 +46,11 @@ interface Submission {
   questionId: number;
 }
 
+export async function SignOut() {
+  cookies().delete('access_token');
+  cookies().delete('is_teacher');  
+}
+
 export const createClassAction = async (info: {
   name: string;
   description: string;
