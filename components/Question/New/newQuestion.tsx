@@ -5,14 +5,14 @@ import { NewQPage1, NewQPage2, NewQPage3, NewQPage4 } from './';
 import { SimpleButton } from '@/components/Buttons';
 import { useRecoilValue } from 'recoil';
 import {
-  exampleTestCases,
-  isExampleTestCasesFilled,
-  isQueInfoFilled,
-  isSolutinCodeFilled,
-  isTestCasesFilled,
-  newQuestion,
-  solutionCode,
-  testCases,
+    exampleTestCases,
+    isExampleTestCasesFilled,
+    isQueInfoFilled,
+    isSolutinCodeFilled,
+    isTestCasesFilled,
+    newQuestion,
+    solutionCode,
+    testCases,
 } from '@/Recoil';
 import { createQuestionAction } from '@/app/action';
 import { useRouter } from 'next/navigation';
@@ -49,10 +49,10 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
   const router = useRouter();
 
   const pages: React.ReactNode[] = [
-    <NewQPage1 />,
-    <NewQPage2 />,
-    <NewQPage3 />,
-    <NewQPage4 />,
+    <NewQPage1 key={0} />,
+    <NewQPage2 key={1} />,
+    <NewQPage3 key={2} />,
+    < NewQPage4 key={3} />,
   ];
 
   const validInputs = [

@@ -53,8 +53,8 @@ export const DropDown = ({
         ring-opacity-5 focus:outline-none'
         >
           <div className='py-1'>
-            {options.map((opt) => (
-              <MenuItem>
+            {options.map((opt, idx) => (
+              <MenuItem key={idx}>
                 {({ focus }) => (
                   <span
                     className={classNames(

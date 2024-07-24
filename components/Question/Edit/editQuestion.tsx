@@ -1,26 +1,24 @@
 'use client';
 
 import {
-  exampleTestCases,
-  isExampleTestCasesFilled,
-  isQueInfoFilled,
-  isSolutinCodeFilled,
-  isTestCasesFilled,
-  newQuestion,
-  solutionCode,
-  testCases,
+    exampleTestCases,
+    isExampleTestCasesFilled,
+    isQueInfoFilled,
+    isSolutinCodeFilled,
+    isTestCasesFilled,
+    newQuestion,
+    solutionCode,
+    testCases,
 } from '@/Recoil';
 import {
-  createQuestionAction,
-  editQuestionAction,
-  fetchQuestion,
+    editQuestionAction,
+    fetchQuestion
 } from '@/app/action';
 import { SimpleButton } from '@/components/Buttons';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { EditQPage1, EditQPage2, EditQPage3, EditQPage4 } from './';
-import { QuestionBox } from '@/components/Test';
 
 interface ExampleTestCase {
   input: string;
@@ -118,10 +116,10 @@ export const EditQuestion = ({
   }, [question]);
 
   const pages: React.ReactNode[] = [
-    <EditQPage1 />,
-    <EditQPage2 />,
-    <EditQPage3 />,
-    <EditQPage4 />,
+    <EditQPage1 key={0}/>,
+    <EditQPage2 key={1}/>,
+    <EditQPage3 key={2}/>,
+    <EditQPage4 key={3} />,
   ];
 
   const validInputs = [

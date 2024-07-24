@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FinishCountDown } from './finishCountDown';
-import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/page';
 import { QuestionBox } from './Question';
+import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/action';
 
 interface Test {
   name: string;
@@ -52,6 +52,7 @@ export const Attempt = async ({ tid }: { tid: number }) => {
             {test.questions.map((que, idx) => (
               <QuestionBox
                 key={idx}
+                isSolve={false}
                 name={que.name}
                 maxPts={que.points}
                 availablePts={que.points}

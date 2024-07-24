@@ -4,7 +4,7 @@ import { SignOut } from '@/app/action';
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
 
-const SignOutPage = async () => {
+const SignOutPage = () => {
   useEffect(() => {
     SignOut().then(redirect('/auth/signin'));
   });

@@ -33,10 +33,10 @@ ${question.exampleTestCases.map((tc) => tc.input).join('\n')}`;
   }, []);
 
   const pages: React.ReactNode[] = [
-    <Description question={question} />,
-    <Submissions qid={question.id} />,
-    <TestCases />,
-    <TestResult />,
+    <Description question={question} key={0}/>,
+    <Submissions qid={question.id} key={1}/>,
+    <TestCases key={2}/>,
+    <TestResult key={3} />,
   ];
   return (
     <div

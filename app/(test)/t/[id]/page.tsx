@@ -1,8 +1,6 @@
-import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/page';
-import NotFound from '@/app/(main)/not-found';
+import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/action';
 import { Leaderboard, NotStarted } from '@/components/Test';
 import { Attempt } from '@/components/Test';
-import { cookies } from 'next/headers';
 
 interface Test {
   name: string;
