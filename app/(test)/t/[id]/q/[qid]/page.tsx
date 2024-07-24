@@ -1,4 +1,3 @@
-import { MainNavFiller } from '@/components/Utils';
 import { QuestionSideBar } from '@/components/Popups';
 import { EditorSection } from '@/components/Question/Solve/Editor/editorSection';
 import { InformationSection } from '@/components/Question/Solve/Information/informationSection';
@@ -48,6 +47,7 @@ const QuestionPage = async ({
 }: {
   params: { id: number; qid: number };
 }) => {
+
   const { data } = await fetchQuestion(params.qid);
   const { question }: { question: Question } = data;
 

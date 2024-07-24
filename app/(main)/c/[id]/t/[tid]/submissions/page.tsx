@@ -66,11 +66,11 @@ const LinkCell = ({ name, link }: { name: string; link: string }) => {
   return (
     <td>
       <div className='p-2 '>
-        <div className='text-style flex w-full items-center justify-start text-violet-1'>
+        <div className='text-style flex w-full items-center justify-start text-gray-600'>
           <div className='text-base font-normal'>
             <Link
               href={link}
-              className='underline-custom flex w-full items-center justify-start '
+              className='underline-custom flex w-full items-center justify-start hover:text-gray-800'
             >
               <span>{name}</span>
             </Link>
@@ -160,15 +160,11 @@ const SubmissionPage = async ({
                     <tbody>
                       {submissions?.map(
                         ({ submission, question, student }, idx) => (
-                          <BodyRowRenderer>
-                            <LinkCell
-                              name={submission.id.toString()}
-                              link='submissionLink'
-                            />
-                            <LinkCell name={student.name} link='userLink' />
-                            <LinkCell
+                          <BodyRowRenderer key={idx}>
+                            <SimpleCell name={submission.id.toString()} />
+                            <SimpleCell name={student.name} />
+                            <SimpleCell
                               name={question.name}
-                              link={`/c/${id}/t/${tid}/q/${question.id}`}
                             />
                             {/* //todo: handle time situation */}
                             <SimpleCell

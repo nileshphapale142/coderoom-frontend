@@ -2,6 +2,7 @@ import React from 'react';
 import { NavItem } from './';
 import { Edit } from '../Buttons';
 import { cookies } from 'next/headers';
+import { usePathname } from 'next/navigation';
 interface Item {
   name: string;
   route: string;

@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import axios from 'axios';
 import { FullScreenPopUp } from '@/components/Popups';
+import { EditTest } from '@/components/Popups/editTest';
 
 interface Test {
   name: string;
@@ -64,14 +65,16 @@ const TestHome = async ({
 }: {
   params: { id: number; tid: number };
 }) => {
+  
+  
   const { id, tid } = params;
   const { data, status } = await fetchTestData(tid);
   //todo: error handling
 
   if (!data?.test) return redirect('/not-found');
 
-  const test: Test = data.test;
-
+  const { test }: { test: Test } = data;
+  
   return (
     <>
       <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>
@@ -117,7 +120,14 @@ const TestHome = async ({
           </div>
         </div>
       </div>
-      <FullScreenPopUp test={{ ...test, courseId: id }} />
+      <FullScreenPopUp>
+        <EditTest
+          test={{
+            ...test,
+            courseId: id,
+          }}
+        />
+      </FullScreenPopUp>
     </>
   );
 };

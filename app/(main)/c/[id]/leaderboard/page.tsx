@@ -107,8 +107,8 @@ const TestCell = ({
             </div>
             <Link
               href={link}
-              className='text-style line-clamp-2 h-10 overflow-hidden
-                         text-ellipsis text-violet-500 underline'
+              className='text-style hover:undelin line-clamp-2 h-10
+                         overflow-hidden text-ellipsis text-gray-600'
             >
               {name}
             </Link>
@@ -134,7 +134,7 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
           <Link
             href={link}
             className='text-style text-wrapping 
-        max-w-47.5 text-gray-500 hover:text-violet-500 hover:underline'
+        max-w-47.5 text-gray-500 hover:text-gray-600 hover:underline'
           >
             {name}
           </Link>
@@ -237,9 +237,11 @@ const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
                                     isNumber={true}
                                   />
                                 ))}
+                                
                               </tr>
                             );
                           })}
+                          
                         </tbody>
                       </table>
                     </div>

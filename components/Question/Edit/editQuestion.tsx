@@ -96,7 +96,7 @@ export const EditQuestion = ({
 
   useEffect(() => {
     if (!question) return;
-
+    console.log(question);
     setQue({
       name: question.name,
       description: question.statement,

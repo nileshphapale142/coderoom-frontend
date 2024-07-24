@@ -8,6 +8,7 @@ import { submissionMade } from '@/Recoil';
 
 interface SubmissionType {
   submission: {
+    code:string;
     id: number;
     time: string;
     language: string;
@@ -43,7 +44,8 @@ export const Submissions = ({ qid }: { qid: number }) => {
               lang={toCamelCase(submission.language)}
               isDanger={getStatusInfo(submission.statusCode).isDanger}
               message={getStatusInfo(submission.statusCode).name}
-            />
+              code={atob(submission.code)}
+              />
           ))}
         </div>
       </div>

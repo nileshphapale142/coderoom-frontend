@@ -29,7 +29,7 @@ export const ShortLearderboard = ({
 }) => {
   return (
     <div className='relative m-[-1rem] ml-0 overflow-hidden p-4'>
-      <div className='box-border rounded-2 border border-gray p-4 pt-0'>
+      <div className='box-border rounded-3 border border-gray p-4 pt-0'>
         <div>
           <div className=' flex h-12 min-w-0 items-center justify-start'>
             <h1 className='text-style text-xl'>Leaderboard</h1>

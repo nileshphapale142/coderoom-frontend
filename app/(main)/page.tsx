@@ -46,6 +46,7 @@ const Home = async () => {
   return (
     <>
       <Courses courses={courses} />
+
       {cookies().get('is_teacher')?.value === 'true' ? (
         <CreateClassPopup />
       ) : (

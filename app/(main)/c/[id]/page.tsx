@@ -4,7 +4,7 @@ import {
   ShortLearderboard,
   TestBox,
 } from '@/components/Course';
-import { CreateTestPopUp, FullScreenPopUp } from '@/components/Popups';
+import { CreateTestPopUp, EditCourse, FullScreenPopUp } from '@/components/Popups';
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
 import axios from 'axios';
 import { cookies } from 'next/headers';
@@ -60,6 +60,9 @@ export async function fetchCourseInfo(id: number) {
 
 const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
   const { props } = await fetchCourseInfo(id);
+  
+  if (!props.data?.course) return <></>;
+
   const { course }: { course: Course } = props.data;
 
   const isTeacher = cookies().get('is_teacher')?.value === 'true';
@@ -70,12 +73,12 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
 
   return (
     <>
-      <div className='visible static flex h-auto min-h-0 overflow-y-hidden opacity-100 contain-style'>
-        <div className='relative bottom-0 left-0 right-0 top-0 z-auto block min-h-full min-w-0 flex-1-auto'>
-          <div className='min-h-auto relative z-auto h-auto backface-visibility-h '>
+      <div className='google-bw-bg visible absolute flex min-h-full w-full contain-style'>
+        <div className='relative z-auto block min-h-full min-w-0 flex-1-auto'>
+          <div className='min-h-auto relative z-auto flex h-auto flex-col backface-visibility-h'>
             <MainNavFiller />
             <CourseNavFiller />
-            <div className='mx-auto my-0 flex w-calc-12 max-w-625r flex-col '>
+            <div className='mx-auto my-0 flex h-full w-calc-12 max-w-625r flex-col'>
               <CourseInfo
                 name={course.name}
                 description={course.description}
@@ -83,17 +86,17 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
                 teacher={course.teacher.name}
               />
 
-              <div className='mt-6 flex'>
-                <main className='m-[-1rem] flex-grow overflow-hidden p-4'>
+              <div className='mt-6 flex h-full'>
+                <main className='h-full p-4 m-[-1rem] flex-grow '>
                   <div>
                     <div>
                       {isTeacher ? <CreateTest /> : <></>}
 
                       <div className='mb-8'>
                         <div>
-                          <div className='relative'>
+                          <div className='relative h-full'>
                             <div>
-                              <ol>
+                              <ol className='h-full'>
                                 {course.tests.map((test, idx) => (
                                   <TestBox
                                     key={idx}
@@ -121,7 +124,13 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
         </div>
       </div>
       {isTeacher ? <CreateTestPopUp courseId={id} /> : <></>}
-      <FullScreenPopUp course={course} />
+      <FullScreenPopUp>
+        <EditCourse
+          id={course.id}
+          name={course.name}
+          description={course.description}
+        />
+      </FullScreenPopUp>
     </>
   );
 };

@@ -1,5 +1,5 @@
 interface Question {
-  id: 24;
+  id: number;
   name: string;
   statement: string;
   points: number;

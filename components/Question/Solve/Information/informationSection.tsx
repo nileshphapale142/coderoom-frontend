@@ -10,7 +10,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { currInfoPage, testCaseInput } from '@/Recoil';
 
 interface Question {
-  id: 24;
+  id: number;
   name: string;
   statement: string;
   points: number;
