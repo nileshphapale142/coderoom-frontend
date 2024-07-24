@@ -1,8 +1,5 @@
-import axios from 'axios';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import { fetchLeaderboard } from './action';
 
 interface User {
   name: string;
@@ -15,36 +12,6 @@ interface Student {
   name: string;
 }
 
-export const fetchLeaderboard = async (cid: number) => {
-  try {
-    if (!cookies().get('access_token')) {
-      redirect('/auth/signin');
-      return {
-        data: null,
-      };
-    }
-
-    const response = await axios.get(
-      `http://localhost:5000/course/${cid}/leaderboard`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
-        },
-      }
-    );
-
-    const data = response.data;
-
-    return {
-      data,
-    };
-  } catch (err: any) {
-    console.log('err : ', err);
-    return {
-      data: null,
-    };
-  }
-};
 
 const SimpleCell = ({
   name,
@@ -145,7 +112,8 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
 };
 
 const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
-  const { data } = await fetchLeaderboard(id);
+  
+  const { data }: {data: any} = await fetchLeaderboard(id);
   const { students, tests, leaderboard } = data;
 
   const sortedTests = Object.entries(tests)

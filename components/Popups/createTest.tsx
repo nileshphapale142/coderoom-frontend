@@ -66,7 +66,7 @@ export const CreateTestPopUp = ({ courseId }: { courseId: number }) => {
     <>
       <BasicPopUp
         title='Create Test'
-        isJoinValid={() => useRecoilValue(isCreateTestInfoFilled)}
+        isJoinValid={() => isInfoFilled}
         joinBtnName='Create'
         onClickHandler={handleCreateTest}
       >

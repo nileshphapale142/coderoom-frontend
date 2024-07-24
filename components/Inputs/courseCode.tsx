@@ -29,7 +29,7 @@ export const CourseCode = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [inputValue]);
+  }, [inputValue, handleClickOutside]);
 
   React.useEffect(() => {
     if (inputClick) {
@@ -38,7 +38,7 @@ export const CourseCode = () => {
       if (!validInput) setState('danger');
       else setState('good');
     }
-  }, [inputValue]);
+  }, [inputValue, inputClick]);
 
   const color =
     state === 'normal' ? 'gray-600' : state === 'danger' ? 'red-500' : 'blue-1';
