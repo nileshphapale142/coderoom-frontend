@@ -1,4 +1,6 @@
+import NotFound from '@/app/(main)/not-found';
 import { SecondNavbar } from '@/components/Navbar';
+import { cookies } from 'next/headers';
 import React from 'react';
 
 interface LayoutProps {
@@ -11,6 +13,8 @@ interface LayoutProps {
 
 export default function TestLayout({ children, params }: LayoutProps) {
   const { id, tid } = params;
+  
+  if (cookies().get('is_teacher')?.value === 'false') return <NotFound/>
 
   return (
     <>

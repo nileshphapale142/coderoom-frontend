@@ -74,7 +74,7 @@ const TestCell = ({
             <Link
               href={link}
               className='text-style line-clamp-2 h-10 overflow-hidden
-                                     text-ellipsis text-violet-500 underline'
+                                     text-ellipsis text-gray-600 hover:underline'
             >
               {name}
             </Link>
@@ -100,7 +100,7 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
           <Link
             href={link}
             className='text-style text-wrapping 
-        max-w-47.5 text-gray-500 hover:text-violet-500 hover:underline'
+        max-w-47.5 text-gray-500 hover:text-gray-600 hover:underline'
           >
             {name}
           </Link>
@@ -208,7 +208,7 @@ const LeaderboardPage = async ({
                               <TestCell
                                 key={idx}
                                 name={que[1].name}
-                                link={`/c/${id}/t/${tid}/q/${que[0]}`}
+                                link={`/c/${id}/t/${tid}/q/${que[0]}/edit`}
                                 // date='some date'
                                 outof={que[1].maxPoints.toString()}
                               />

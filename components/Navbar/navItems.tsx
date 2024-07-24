@@ -36,7 +36,10 @@ export const NavItems = () => {
       })
       .catch((err) => console.log(err));
 
-    if (pathArray.length === 1) return;
+    if (pathArray.length === 1) {
+      setTestName(null);
+      return;
+    }
 
     getTestName(pathArray[1])
       .then(({ name, status }) => {
@@ -61,7 +64,7 @@ export const NavItems = () => {
             className='mx-2 ml-[.125rem] flex max-w-96 flex-col justify-center
           overflow-hidden text-black transition-all hover:text-blue-900 hover:underline
           '
-            href={'/c/1'}
+            href={`/c/${pathArray[0]}`}
           >
             <span className='text-style block overflow-hidden text-ellipsis whitespace-nowrap text-lg font-normal'>
               {courseName}
@@ -78,7 +81,7 @@ export const NavItems = () => {
           <Link
             className='mx-2 ml-[.125rem] flex max-w-96 flex-col justify-center overflow-hidden
           text-black transition-all hover:text-blue-900 hover:underline'
-            href={'/c/1/t/1'}
+            href={`/c/${pathArray[0]}/t/${pathArray[1]}`}
           >
             <span className='text-style block overflow-hidden text-ellipsis whitespace-nowrap text-lg font-normal  '>
               {testName}

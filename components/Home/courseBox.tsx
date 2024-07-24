@@ -23,12 +23,13 @@ const CourseBox = ({
   return (
     <li
       className='relative mb-6 mr-6 flex w-[18.75rem] cursor-pointer 
-                flex-col overflow-hidden rounded-2 border-0625 border-solid 
-                border-[#dadce0] bg-white bg-clip-padding text-left'
+                flex-col overflow-hidden rounded-3 
+              bg-white bg-clip-padding text-left
+                transition-all duration-100 hover:scale-105 hover:shadow-md'
     >
       {/* // * cousrse mini info */}
       <div className='relative'>
-        <div className='absolute top-0 h-full w-full bg-violet-500'></div>
+        <div className='absolute top-0 h-full w-full bg-gray-600'></div>
         <div className='relative flex h-[6.5rem] flex-col justify-between p-4 pb-3'>
           <Link
             href={`/c/${id}`}
@@ -66,16 +67,16 @@ const CourseBox = ({
         <Shortcut
           imageSrc='https://img.icons8.com/ios-glyphs/30/leaderboard.png'
           imageAlt='leaderboard'
-          href='/courseLeaderboard'
+          href={`/c/${id}/leaderboard`}
         />
 
-        <div>
+        {/* <div>
           <Shortcut
             imageSrc='https://img.icons8.com/ios-glyphs/30/conference-call--v1.png'
             imageAlt='People'
             href='enrolledStudents'
           />
-        </div>
+        </div> */}
       </div>
     </li>
   );

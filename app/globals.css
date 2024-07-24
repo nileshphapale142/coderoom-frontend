@@ -11,6 +11,9 @@ body {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.25rem;
+  height: 100%;
+  background-color: #f0f4f9;
+
 }
 
 div {
@@ -118,7 +121,7 @@ textarea {
 
 .underline-custom {
   text-decoration: underline;
-  text-decoration-color: rgb(161, 108, 235);
+  text-decoration-color: rgb(127, 125, 129);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
