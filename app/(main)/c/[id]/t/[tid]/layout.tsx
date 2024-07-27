@@ -13,8 +13,8 @@ interface LayoutProps {
 
 export default function TestLayout({ children, params }: LayoutProps) {
   const { id, tid } = params;
-  
-  if (cookies().get('is_teacher')?.value === 'false') return <NotFound/>
+
+  if (cookies().get('is_teacher')?.value === 'false') return <NotFound />;
 
   return (
     <>

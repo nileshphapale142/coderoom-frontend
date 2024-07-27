@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { FullScreenPopUp } from '@/components/Popups';
 import { EditTest } from '@/components/Popups/editTest';
 import { fetchTestData } from './action';
+import Loading from '../loading';
 
 interface Test {
   name: string;
@@ -21,15 +22,11 @@ interface Test {
   }[];
 }
 
-
-
 const TestHome = async ({
   params,
 }: {
   params: { id: number; tid: number };
 }) => {
-  
-  
   const { id, tid } = params;
   const { data, status } = await fetchTestData(tid);
   //todo: error handling
@@ -37,7 +34,7 @@ const TestHome = async ({
   if (!data?.test) return redirect('/not-found');
 
   const { test }: { test: Test } = data;
-  
+
   return (
     <>
       <div className='visible static flex h-auto min-h-screen bg-[#f0f4f9] opacity-100 contain-style'>

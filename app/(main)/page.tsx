@@ -3,8 +3,6 @@ import { CreateClassPopup, JoinClassPopUp } from '@/components/Popups';
 import { cookies } from 'next/headers';
 import { fetchCourses } from './action';
 
-
-
 const Home = async () => {
   const { props } = await fetchCourses();
   const courses = props.data?.courses;

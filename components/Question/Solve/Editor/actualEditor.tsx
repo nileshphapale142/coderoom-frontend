@@ -4,6 +4,7 @@ import { langValue } from '@/Utils';
 import { Editor } from '@monaco-editor/react';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import EditorLoading from './editor-loading';
 
 type LangKey = 'C' | 'C++' | 'Java' | 'Python';
 
@@ -29,6 +30,7 @@ export const AcutalEditor = ({ qid }: { qid: number }) => {
           setCode(value || '');
           setStoredCode(value || '');
         }}
+        loading={<EditorLoading/>}
         options={{
           scrollbar: {
             vertical: 'auto',

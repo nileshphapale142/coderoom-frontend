@@ -1,32 +1,34 @@
-'use client'
-
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 
 export const CheckBox = ({ action }: { action: () => void }) => {
   const [isChecked, setIsChecked] = useState(false);
 
+  const handleChange = () => {
+    setIsChecked((prev) => !prev);
+    action();
+  };
+
   return (
     <div className='ml-1 mt-2 w-full'>
       <div className='flex items-start justify-start'>
-        <div className='flex cursor-pointer'
-            onClick={() => {
-              action();
-              setIsChecked((prev) => !prev);
-            }}
-        >
+        <label className='flex cursor-pointer' htmlFor='showPassword'>
           <div className='flex items-center justify-center py-[0.15em]'>
             <input
               type='checkbox'
-              placeholder='Show Password'
-              className='cursor-pointer appearance-none rounded'
               id='showPassword'
+              className='cursor-pointer appearance-none rounded'
               checked={isChecked}
+              onChange={handleChange}
             />
           </div>
-          <div className='flex items-center justify-center pl-4'>
+          <div
+            className='flex items-center justify-center pl-4'
+            onClick={handleChange}
+          >
             <span className='text-style cursor-pointer'>Show Password</span>
           </div>
-        </div>
+        </label>
       </div>
     </div>
   );

@@ -87,7 +87,7 @@ export const EditTest = ({ test }: { test: Test }) => {
         evaluationScheme: '',
         visibility: '',
       });
-      router.push(`/c/${test.courseId}/t/${test.id}`);
+      router.refresh();
     } else if (status === 401) router.push('/auth/signin');
     else if (status === 403) {
       alert('Not authorized to edit');

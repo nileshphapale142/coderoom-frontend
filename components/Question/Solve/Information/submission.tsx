@@ -3,7 +3,6 @@
 import { CodeBlock } from '@/components/Utils';
 import { useState } from 'react';
 
-
 export const Submission = ({
   message,
   lang,
@@ -22,10 +21,13 @@ export const Submission = ({
   return (
     //todo: submitted code section on button click
 
-    <div className='mt-2 rounded-3 border border-solid border-gray overflow-hidden w-auto transition-all'>
+    <div className='mt-2 w-auto overflow-hidden rounded-3 border border-solid border-gray transition-all'>
       <button
-        className={`text-style  flex w-full
-           flex-row  p-2 hover:bg-gray-200 ` + (isOpen ? 'border-b-0625 border-b-stone-300' : '') }
+        className={
+          `text-style  flex w-full
+           flex-row  p-2 hover:bg-gray-200 ` +
+          (isOpen ? 'border-b-0625 border-b-stone-300' : '')
+        }
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <div
@@ -51,7 +53,7 @@ export const Submission = ({
       </button>
       {isOpen && (
         <div>
-          <CodeBlock value={code} language={lang}/>
+          <CodeBlock value={code} language={lang} />
         </div>
       )}
     </div>

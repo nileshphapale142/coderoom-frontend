@@ -91,10 +91,10 @@ const SignUp = () => {
   ];
 
   const Inputs: React.ReactNode[] = [
-    <Page1 key={0}/>,
-    <Page2 key={1}/>,
-    <Page3 key={2}/>,
-    <Page4 key={3}/>,
+    <Page1 key={0} />,
+    <Page2 key={1} />,
+    <Page3 key={2} />,
+    <Page4 key={3} />,
   ];
 
   const checkInputs: boolean[] = [

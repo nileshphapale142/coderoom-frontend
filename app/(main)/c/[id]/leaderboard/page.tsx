@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { fetchLeaderboard } from './action';
+import Loading from './loading';
 
 interface User {
   name: string;
@@ -11,7 +12,6 @@ interface Student {
   id: number;
   name: string;
 }
-
 
 const SimpleCell = ({
   name,
@@ -112,8 +112,10 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
 };
 
 const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
-  
-  const { data }: {data: any} = await fetchLeaderboard(id);
+  const { data }: { data: any } = await fetchLeaderboard(id);
+
+  if (!data || !data.students || !data.tests || !data.leaderboard ) return <div></div>;
+
   const { students, tests, leaderboard } = data;
 
   const sortedTests = Object.entries(tests)
@@ -140,6 +142,7 @@ const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
     })
     .sort((a, b) => b.points - a.points);
 
+    
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start
@@ -205,11 +208,9 @@ const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
                                     isNumber={true}
                                   />
                                 ))}
-                                
                               </tr>
                             );
                           })}
-                          
                         </tbody>
                       </table>
                     </div>

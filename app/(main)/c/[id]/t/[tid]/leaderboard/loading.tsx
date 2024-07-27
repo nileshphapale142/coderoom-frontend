@@ -10,16 +10,8 @@ const Loading = () => {
           <div className='h-16 w-full animate-pulse rounded bg-white'></div>
         </div>
         <CourseNavFiller />
-        <div className='mx-auto h-full w-calc-12 max-w-50r px-4 py-6'>
-          <div className='flex w-full animate-pulse flex-col rounded-7 bg-gray-200 px-8'>
-            {[...Array(3)].map((_, idx) => (
-              <div
-                key={idx}
-                className='relative mt-8 h-28 w-full animate-pulse rounded-5 bg-white'
-              ></div>
-            ))}
-            <div className='mt-8'></div>
-          </div>
+        <div className='absolute top-0 left-0 bottom-0 right-0 bg-gray-200 animate-pulse'>
+          
         </div>
       </div>
     </div>

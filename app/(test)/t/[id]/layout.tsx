@@ -1,6 +1,6 @@
-import NotFound from '@/app/(main)/not-found';
 import { cookies } from 'next/headers';
 import React from 'react';
+import NotFound from '../../not-found';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,10 +11,6 @@ interface LayoutProps {
 
 export default function QuestionLayout({ children, params }: LayoutProps) {
   const { id } = params;
-  if (cookies().get('is_teacher')?.value === 'true') return <NotFound/> 
-  return (
-    <>
-      {children}
-    </>
-  );
+  if (cookies().get('is_teacher')?.value === 'true') return <NotFound />;
+  return <>{children}</>;
 }

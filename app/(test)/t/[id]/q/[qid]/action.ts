@@ -1,8 +1,8 @@
-'use server'
+'use server';
 
-import axios from "axios";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import axios from 'axios';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export const fetchQuestion = async (qid: number) => {
   if (!cookies().get('access_token')) {

@@ -52,7 +52,7 @@ export const Attempt = async ({ tid }: { tid: number }) => {
             {test.questions.map((que, idx) => (
               <QuestionBox
                 key={idx}
-                isSolve={false}
+                isSolve={true}
                 name={que.name}
                 maxPts={que.points}
                 availablePts={que.points}

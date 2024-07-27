@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { id: number } }) {
   const currTime = new Date();
 
   return currTime < new Date(test.startTime) ? (
-    <NotStarted name={'My Test'} startTime={test.startTime} />
+    <NotStarted name={test.name} startTime={test.startTime} />
   ) : currTime <= new Date(test.endTime) ? (
     <Attempt tid={params.id} />
   ) : (

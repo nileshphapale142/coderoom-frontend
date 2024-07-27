@@ -2,6 +2,8 @@ import { QuestionSideBar } from '@/components/Popups';
 import { EditorSection } from '@/components/Question/Solve/Editor/editorSection';
 import { InformationSection } from '@/components/Question/Solve/Information/informationSection';
 import { fetchQuestion } from '@/app/action';
+import NotFound from '@/app/(test)/not-found';
+import Loading from '../loading';
 
 interface Question {
   id: number;
@@ -21,13 +23,15 @@ const QuestionPage = async ({
 }: {
   params: { id: number; qid: number };
 }) => {
-
   const { data } = await fetchQuestion(params.qid);
+
+  if (!data.question) return <NotFound/>
+
   const { question }: { question: Question } = data;
 
   return (
     <>
-      <div className='visible relative bottom-0 left-0 right-0 top-0 flex h-auto bg-[#f0f4f9] bg-white opacity-100 contain-style'>
+      <div className='visible relative bottom-0 left-0 right-0 top-0 flex h-auto bg-[#f0f4f9] opacity-100 contain-style'>
         <div className='relative z-auto block h-full  flex-1-auto'>
           <div className='relative z-auto flex h-full flex-col backface-visibility-h '>
             <div className='h-16'></div>

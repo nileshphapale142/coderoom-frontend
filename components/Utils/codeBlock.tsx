@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -27,7 +27,7 @@ export const CodeBlock = ({
     <div className='relative'>
       <button
         onClick={copyToClipboard}
-        className='absolute right-0 top-0 z-50 mr-3 rounded-3 px-2 py-1 hover:bg-stone-200 transition-all'
+        className='absolute right-0 top-0 z-50 mr-3 rounded-3 px-2 py-1 transition-all hover:bg-stone-200'
       >
         {isCopied ? 'Copied!' : 'Copy'}
       </button>
@@ -35,11 +35,12 @@ export const CodeBlock = ({
         <SyntaxHighlighter
           language={language}
           style={oneLight}
+          wrapLongLines={true}
           customStyle={{
             // padding: '1em',
             // paddingTop: '2em', // Make room for the copy button
             borderRadius: '5px',
-            fontSize: '14px',
+            fontSize: '12px',
             backgroundColor: 'white',
             // border: '1px solid #e1e4e8',
           }}

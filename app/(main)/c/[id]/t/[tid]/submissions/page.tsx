@@ -3,6 +3,8 @@ import { getStatusInfo } from '@/Utils';
 import Link from 'next/link';
 import React from 'react';
 import { fetchSubmissions } from './action';
+import NotFound from '@/app/(main)/not-found';
+import Loading from './loading';
 
 interface Submission {
   submission: {
@@ -87,7 +89,6 @@ const BodyRowRenderer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-
 const SubmissionPage = async ({
   params,
 }: {
@@ -95,6 +96,10 @@ const SubmissionPage = async ({
 }) => {
   const { id, tid } = params;
   const { data, status } = await fetchSubmissions(id, tid);
+
+  if (!data || !data.submissions) return <NotFound/>
+
+
   const { submissions }: { submissions: Submission[] } = data;
 
   // todo: pagination
@@ -126,9 +131,7 @@ const SubmissionPage = async ({
                           <BodyRowRenderer key={idx}>
                             <SimpleCell name={submission.id.toString()} />
                             <SimpleCell name={student.name} />
-                            <SimpleCell
-                              name={question.name}
-                            />
+                            <SimpleCell name={question.name} />
                             {/* //todo: handle time situation */}
                             <SimpleCell
                               name={new Date(submission.time).toLocaleString()}

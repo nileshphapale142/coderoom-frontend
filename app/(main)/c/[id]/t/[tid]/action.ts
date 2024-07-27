@@ -1,8 +1,9 @@
-'use server'
+'use server';
 
-import axios from "axios";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import axios from 'axios';
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export const fetchTestData = async (tid: number) => {
   try {

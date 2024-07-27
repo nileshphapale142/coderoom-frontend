@@ -7,8 +7,8 @@ import { useSetRecoilState } from 'recoil';
 export function Edit() {
   const setIsOpen = useSetRecoilState(isFullScreenPopUpOpen);
   const path = usePathname();
-  const pathLength  = path.split('/').length;
-  
+  const pathLength = path.split('/').length;
+
   return (
     <>
       {(pathLength === 3 || pathLength === 5) && (

@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { fetchLeaderboard } from './action';
+import NotFound from '@/app/(main)/not-found';
+import Loading from './loading';
 
 //todo: extract common leaderboard logic
 
@@ -107,8 +109,6 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
   );
 };
 
-
-
 const LeaderboardPage = async ({
   params,
 }: {
@@ -120,7 +120,11 @@ const LeaderboardPage = async ({
   //TODO: horizontal scrolling
 
   const { id, tid } = params;
+  
   const { data } = await fetchLeaderboard(id, tid);
+  if (!data || !data.students || !data.questions || !data.leaderboard) 
+    return <NotFound/>
+
   const { students, questions, leaderboard } = data;
 
   let Students = Object.entries(leaderboard)

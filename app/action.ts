@@ -1,6 +1,7 @@
 'use server';
 
 import axios from 'axios';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -77,6 +78,8 @@ export const createClassAction = async (info: {
       }
     );
 
+    revalidatePath('/');
+
     const resData = response.data;
 
     return { data: resData, status: 201 };
@@ -110,6 +113,8 @@ export const joinClassAction = async (data: { courseCode: string }) => {
     );
 
     const resData = response.data;
+
+    revalidatePath('/');
 
     return { data: resData, status: 201 };
   } catch (err: any) {
@@ -364,6 +369,9 @@ export const editClassAction = async (info: {
       }
     );
 
+    revalidatePath('/');
+    revalidatePath(`/c/${info.id}`);
+
     const resData = response.data;
 
     return { data: resData, status: 200 };
@@ -398,6 +406,9 @@ export const editTestAction = async (test: Test) => {
     );
 
     const data = response.data;
+
+    revalidatePath(`/c/${test.courseId}/t/${test.id}`);
+    revalidatePath(`/c/${test.courseId}`);
 
     return { data, status: 200 };
   } catch (err: any) {

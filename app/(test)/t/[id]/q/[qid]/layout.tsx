@@ -13,7 +13,7 @@ interface LayoutProps {
 
 export default function QuestionLayout({ children, params }: LayoutProps) {
   const { id, qid } = params;
-  if (cookies().get('is_teacher')?.value === 'true') return <NotFound/> 
+  if (cookies().get('is_teacher')?.value === 'true') return <NotFound />;
   return (
     <>
       <TestNavbar qid={qid} />

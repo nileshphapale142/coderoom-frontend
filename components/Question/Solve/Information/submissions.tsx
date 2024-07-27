@@ -8,7 +8,7 @@ import { submissionMade } from '@/Recoil';
 
 interface SubmissionType {
   submission: {
-    code:string;
+    code: string;
     id: number;
     time: string;
     language: string;
@@ -45,7 +45,7 @@ export const Submissions = ({ qid }: { qid: number }) => {
               isDanger={getStatusInfo(submission.statusCode).isDanger}
               message={getStatusInfo(submission.statusCode).name}
               code={atob(submission.code)}
-              />
+            />
           ))}
         </div>
       </div>

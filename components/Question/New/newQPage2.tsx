@@ -38,13 +38,11 @@ int main() {
 
       <Example>
         <div className='mt-4 flex w-full flex-col'>
-          <span className='text-heading text-xl text-gray-600'>
-            Code (Python)
-          </span>
-          <div className='relative overflow-y-scroll'>
+          <span className='text-heading text-xl text-gray-600'>Code (C++)</span>
+          <div className='relative '>
             <span className='text-style flex flex-col font-normal text-gray-600'>
               <span className='mt-2 rounded-7 border-none'>
-                <CodeBlock language='Python' value={exampleCode} />
+                <CodeBlock language='cpp' value={exampleCode} />
               </span>
             </span>
           </div>

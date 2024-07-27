@@ -1,13 +1,18 @@
 import {
-    CourseInfo,
-    CreateTest,
-    ShortLearderboard,
-    TestBox,
+  CourseInfo,
+  CreateTest,
+  ShortLearderboard,
+  TestBox,
 } from '@/components/Course';
-import { CreateTestPopUp, EditCourse, FullScreenPopUp } from '@/components/Popups';
+import {
+  CreateTestPopUp,
+  EditCourse,
+  FullScreenPopUp,
+} from '@/components/Popups';
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
 import { cookies } from 'next/headers';
 import { fetchCourseInfo } from './action';
+import Loading from '../loading';
 
 interface Course {
   id: number;
@@ -22,11 +27,9 @@ interface Course {
   leaderboard: { name: string; points: number }[];
 }
 
-
-
 const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
   const { props } = await fetchCourseInfo(id);
-  
+
   if (!props.data?.course) return <></>;
 
   const { course }: { course: Course } = props.data;
@@ -53,7 +56,7 @@ const CourseDash = async ({ params: { id } }: { params: { id: number } }) => {
               />
 
               <div className='mt-6 flex h-full'>
-                <main className='h-full p-4 m-[-1rem] flex-grow '>
+                <main className='m-[-1rem] h-full flex-grow p-4 '>
                   <div>
                     <div>
                       {isTeacher ? <CreateTest /> : <></>}

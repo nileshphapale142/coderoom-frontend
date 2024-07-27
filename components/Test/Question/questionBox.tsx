@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { isSolutinCodeFilled } from '@/Recoil';
 
 interface QuestionBoxProps {
   route: string;
@@ -18,8 +17,8 @@ export const QuestionBox = (question: QuestionBoxProps) => {
                     className='absolute left-0 right-0 z-20 h-full w-full'
                   /> */}
       <div
-        className='relative flex flex-row  justify-between rounded-5 border 
-                  border-solid border-gray px-8 py-8 '
+        className='relative flex flex-row justify-between rounded-5 border 
+                  border-solid border-gray p-8'
       >
         <div className='flex max-w-full flex-col items-start overflow-hidden'>
           <span className='text-heading mb-2 line-clamp-4 max-w-full text-gray-4'>

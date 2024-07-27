@@ -18,11 +18,11 @@ export const NewQPage1 = () => {
       <Example>
         <div className='flex w-full flex-col border-b pb-3'>
           <span className='text-heading text-xl text-gray-600'>
-            Questin Name
+            Question Name
           </span>
           <div>
             <span className='text-style font-normal text-gray-600'>
-              Smallest Interger
+              Smallest Integer
             </span>
           </div>
         </div>
@@ -33,22 +33,22 @@ export const NewQPage1 = () => {
           <div>
             <span className='text-style flex flex-col font-normal text-gray-600'>
               <span>
-                Given an array of integers find out the smallest element in it.
+                Given an array of integers find out the smallest integer in it.
               </span>
 
               <span>
                 <strong>Inputs:</strong>
               </span>
-              <span>
-                First of line of testcaes is t: number of testCases, next line
-                contains n: size of array, next line contains nums array: n
-                space separated integers.
+              <span>First line contains number of test cases.</span>
+              <span className='block'>
+                In each test case, first line contains n, size of the array, and
+                next line contains n space separated integers.
               </span>
               <span>
                 <strong>Outputs:</strong>
               </span>
               <span>
-                Print minimum element for each test case in a new line.
+                Print minimum integer for each test case in a new line.
               </span>
 
               <span>

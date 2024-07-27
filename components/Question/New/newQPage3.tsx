@@ -18,12 +18,23 @@ export const NewQPage3 = () => {
           <span className='text-heading text-xl text-gray-600'>Test Cases</span>
           <div className='mt-2'>
             <span className='text-style flex flex-col font-normal text-gray-600'>
-              <span>Input: nums = [2, 7, 11, 15], target = 9</span>
-              <span>Output: [0, 1]</span>
-              <span className='mt-2'>
-                Input:nums=[-3, 4, 3, 90], target = 0
+              <span>First line should contain number of test cases.</span>
+              <span className='solid border-b pb-1'>
+                In each test case required inputs should contain.
               </span>
-              <span>Output: [0, 2]</span>
+              <span className='text-heading solid border-b py-2'>Example</span>
+              {`2
+5
+3 1 4 1 5
+6
+-1 -1 -2 -3 -4 -5
+4`
+                .split('\n')
+                .map((line, idx) => (
+                  <span key={idx} className='block'>
+                    {line}
+                  </span>
+                ))}
             </span>
           </div>
         </div>
