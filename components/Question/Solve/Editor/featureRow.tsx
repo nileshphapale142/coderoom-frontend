@@ -6,9 +6,11 @@ import { useRecoilState } from 'recoil';
 import { FullScreenButton } from './fullScreen';
 import { ResetCodeButton } from './resetCode';
 
-export const FeatureRow = ({ qid }: { qid: number }) => {
+export const FeatureRow = ({ qid, languages }: {
+  qid: number, languages: {
+    name: string, id: number
+  }[] }) => {
   const [language, setLanguage] = useRecoilState(selectedLanguage);
-
   useEffect(() => {
     setLanguage(localStorage.getItem(`userLanguageQ${qid}`) || 'C');
   }, []);
@@ -19,7 +21,7 @@ export const FeatureRow = ({ qid }: { qid: number }) => {
         {language && (
           <MyDropDown
             title='Language'
-            options={languageOptions}
+            options={languages}
             selectHandler={(lang) => {
               setLanguage(lang);
               localStorage.setItem(`userLanguageQ${qid}`, lang);

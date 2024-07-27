@@ -3,7 +3,7 @@ import { EditorSection } from '@/components/Question/Solve/Editor/editorSection'
 import { InformationSection } from '@/components/Question/Solve/Information/informationSection';
 import { fetchQuestion } from '@/app/action';
 import NotFound from '@/app/(test)/not-found';
-import Loading from '../loading';
+import { TestNavbar } from '@/components/Navbar';
 
 interface Question {
   id: number;
@@ -16,6 +16,10 @@ interface Question {
     output: string;
     explaination: string;
   }[];
+  Test: {
+    endTime: string;
+    allowedLanguages: string[];
+  }
 }
 
 const QuestionPage = async ({
@@ -31,6 +35,7 @@ const QuestionPage = async ({
 
   return (
     <>
+      <TestNavbar qid={params.qid} endTime={ question.Test.endTime}/>
       <div className='visible relative bottom-0 left-0 right-0 top-0 flex h-auto bg-[#f0f4f9] opacity-100 contain-style'>
         <div className='relative z-auto block h-full  flex-1-auto'>
           <div className='relative z-auto flex h-full flex-col backface-visibility-h '>
@@ -42,7 +47,7 @@ const QuestionPage = async ({
               {/* //todo: add slider if want to */}
               {/* <div className='h-full w-2 bg-black'>{'||'}</div> */}
 
-              <EditorSection qid={params.qid} />
+              <EditorSection qid={params.qid} languages={question.Test.allowedLanguages}/>
             </div>
           </div>
         </div>
