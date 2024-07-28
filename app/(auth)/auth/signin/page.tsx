@@ -37,7 +37,7 @@ const SignIn = () => {
       // localStorage.removeItem('access_token');
       // localStorage.setItem('access_token', resData.access_token);
 
-      router.push('/');
+      // router.push('/');  
     } catch (err: any) {
       if (err.response) {
         if (err.response.status === 400) alert('Data not in correct format');
