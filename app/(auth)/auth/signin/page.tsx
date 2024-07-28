@@ -14,6 +14,7 @@ const SignIn = () => {
   const router = useRouter();
 
   const handleSignIn = async () => {
+    console.log('Hello');
     if (!isInfoFilled) {
       alert('Fill all fields');
       return;
@@ -25,14 +26,19 @@ const SignIn = () => {
     };
 
     try {
-      const response = await axios.post('/signin', data);
+      // console.log(data);
+      const response = await axios.post('https://coderoom-backend.onrender.com/auth/signin', data, {
+      withCredentials: true
+      });
       const resData = response.data;
-
-      localStorage.removeItem('access_token');
-      localStorage.setItem('access_token', resData.access_token);
+      // console.log(resData);
+      
+      // localStorage.removeItem('access_token');
+      // localStorage.setItem('access_token', resData.access_token);
 
       router.push('/');
     } catch (err: any) {
+      console.log(err);
       if (err.response) {
         if (err.response.status === 400) alert('Data not in correct format');
         else if (err.response.status === 403)

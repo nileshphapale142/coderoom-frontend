@@ -14,8 +14,9 @@ export const fetchSubmissions = async (cid: number, tid: number) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5000/test/${tid}/submissions`,
+      `https://coderoom-backend.onrender.com/test/${tid}/submissions`,
       {
+      withCredentials: true,
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },

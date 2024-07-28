@@ -56,18 +56,22 @@ const SignUp = () => {
     if (isStudent) data.enrollementId = rollNo;
 
     try {
-      const response = await axios.post('/signup', data);
+      const response = await axios.post('https://coderoom-backend.onrender.com/auth/signup', data, {
+      withCredentials: true
+      }
+      );
       const resData = response.data;
+      console.log(resData);
 
-      localStorage.removeItem('access_token');
-      localStorage.setItem('access_token', resData.access_token);
+      // localStorage.removeItem('access_token');
+      // localStorage.setItem('access_token', resData.access_token);
       router.push('/');
     } catch (err: any) {
       if (err.response) {
         if (err.response?.status === 400) alert('Data validation unsuccessful');
         else if (err.response?.status === 403) alert('User already exists');
         else if (err.response?.status === 500) alert('Problem at server');
-        else alert(err.response?.message);
+        else alert(err);
       } else alert('Unknown problem');
     }
   };

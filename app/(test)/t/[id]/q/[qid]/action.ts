@@ -13,7 +13,9 @@ export const fetchQuestion = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:5000/question/${qid}`, {
+    const response = await axios.get(`https://coderoom-backend.onrender.com/question/${qid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },

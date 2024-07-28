@@ -14,7 +14,8 @@ export const fetchTestData = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(`http://localhost:5000/test/${tid}`, {
+    const response = await axios.get(`https://coderoom-backend.onrender.com/test/${tid}`, {
+    withCredentials: true,
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         'Cache-Control': 'no-cache',

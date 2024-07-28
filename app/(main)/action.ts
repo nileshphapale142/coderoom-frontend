@@ -15,7 +15,9 @@ export async function fetchCourses() {
     };
   }
   try {
-    const response = await axios.get('http://localhost:5000/user/getCourses', {
+    const response = await axios.get('https://coderoom-backend.onrender.com/user/getCourses', {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,
       },

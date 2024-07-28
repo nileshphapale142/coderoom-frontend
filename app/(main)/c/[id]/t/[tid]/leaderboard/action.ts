@@ -14,8 +14,9 @@ export const fetchLeaderboard = async (cid: number, tid: number) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5000/test/${tid}/leaderboard`,
+      `https://coderoom-backend.onrender.com/test/${tid}/leaderboard`,
       {
+      withCredentials: true,
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },

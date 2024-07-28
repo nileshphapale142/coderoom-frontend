@@ -14,11 +14,12 @@ export const fetchLeaderboard = async (cid: number) => {
     }
 
     const response = await axios.get(
-      `http://localhost:5000/course/${cid}/leaderboard`,
+      `https://coderoom-backend.onrender.com/course/${cid}/leaderboard`, 
       {
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
+        withCredentials: true
       }
     );
 

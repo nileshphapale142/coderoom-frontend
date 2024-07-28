@@ -69,9 +69,11 @@ export const createClassAction = async (info: {
     };
 
     const response = await axios.post(
-      'http://localhost:5000/course/create',
+      'https://coderoom-backend.onrender.com/course/create',
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -103,9 +105,11 @@ export const joinClassAction = async (data: { courseCode: string }) => {
   }
   try {
     const response = await axios.post(
-      'http://localhost:5000/course/addStudent',
+      'https://coderoom-backend.onrender.com/course/addStudent',
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -135,7 +139,9 @@ export const createTestAction = async (test: Test) => {
         status: 401,
       };
 
-    const response = await axios.post('http://localhost:5000/test/new', test, {
+    const response = await axios.post('https://coderoom-backend.onrender.com/test/new', test, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
@@ -162,9 +168,11 @@ export const createQuestionAction = async (question: Question) => {
     }
 
     const response = await axios.post(
-      'http://localhost:5000/question/new',
+      'https://coderoom-backend.onrender.com/question/new',
       question,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -196,9 +204,11 @@ export const createSubmission = async (submission: Submission) => {
 
   try {
     const response = await axios.post(
-      'http://localhost:5000/submission/new',
+      'https://coderoom-backend.onrender.com/submission/new',
       submission,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -228,8 +238,10 @@ export const getSubmissions = async (qid: number) => {
 
   try {
     const response = await axios.get(
-      `http://localhost:5000/submission/user/question/${qid}`,
+      `https://coderoom-backend.onrender.com/submission/user/question/${qid}`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -258,7 +270,9 @@ export const fetchQuestionList = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(`http://localhost:5000/test/${tid}`, {
+    const response = await axios.get(`https://coderoom-backend.onrender.com/test/${tid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         'Cache-Control': 'no-cache',
@@ -292,7 +306,9 @@ export const fetchQuestion = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:5000/question/${qid}`, {
+    const response = await axios.get(`https://coderoom-backend.onrender.com/question/${qid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
@@ -317,9 +333,11 @@ export const editQuestionAction = async (question: Question) => {
     }
 
     const response = await axios.patch(
-      `http://localhost:5000/question/${question.id}/edit`,
+      `https://coderoom-backend.onrender.com/question/${question.id}/edit`,
       question,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -360,9 +378,11 @@ export const editClassAction = async (info: {
     };
 
     const response = await axios.patch(
-      `http://localhost:5000/course/${info.id}/edit`,
+      `https://coderoom-backend.onrender.com/course/${info.id}/edit`,
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -396,9 +416,11 @@ export const editTestAction = async (test: Test) => {
       };
 
     const response = await axios.patch(
-      `http://localhost:5000/test/${test.id}/edit`,
+      `https://coderoom-backend.onrender.com/test/${test.id}/edit`,
       test,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -428,8 +450,10 @@ export const getCourseName = async (id: number) => {
       };
 
     const response = await axios.get(
-      `http://localhost:5000/course/${id}/name`,
+      `https://coderoom-backend.onrender.com/course/${id}/name`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -451,7 +475,9 @@ export const getTestName = async (id: number) => {
         status: 401,
       };
 
-    const response = await axios.get(`http://localhost:5000/test/${id}/name`, {
+    const response = await axios.get(`https://coderoom-backend.onrender.com/test/${id}/name`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
