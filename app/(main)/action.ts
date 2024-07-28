@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -15,7 +16,7 @@ export async function fetchCourses() {
     };
   }
   try {
-    const response = await axios.get('https://coderoom-backend.onrender.com/user/getCourses', {
+    const response = await backendApi.get('/user/getCourses', {
       withCredentials: true,
 
       headers: {

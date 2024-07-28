@@ -17,6 +17,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { backendApi } from '@/api';
 
 interface SignUpDto {
   name: string;
@@ -56,7 +57,7 @@ const SignUp = () => {
     if (isStudent) data.enrollementId = rollNo;
 
     try {
-      const response = await axios.post('https://coderoom-backend.onrender.com/auth/signup', data, {
+      const response = await backendApi.post('/auth/signup', data, {
       withCredentials: true
       }
       );

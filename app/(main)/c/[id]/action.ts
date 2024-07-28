@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -16,7 +17,7 @@ export async function fetchCourseInfo(id: number) {
   }
 
   try {
-    const response = await axios.get(`https://coderoom-backend.onrender.com/course/${id}`, {
+    const response = await backendApi.get(`/course/${id}`, {
     withCredentials: true,
       headers: {
         Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,

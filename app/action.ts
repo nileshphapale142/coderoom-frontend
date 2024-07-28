@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
@@ -68,8 +69,8 @@ export const createClassAction = async (info: {
       description: info.description,
     };
 
-    const response = await axios.post(
-      'https://coderoom-backend.onrender.com/course/create',
+    const response = await backendApi.post(
+      '/course/create',
       data,
       {
         withCredentials: true,
@@ -104,8 +105,8 @@ export const joinClassAction = async (data: { courseCode: string }) => {
     };
   }
   try {
-    const response = await axios.post(
-      'https://coderoom-backend.onrender.com/course/addStudent',
+    const response = await backendApi.post(
+      '/course/addStudent',
       data,
       {
         withCredentials: true,
@@ -139,7 +140,7 @@ export const createTestAction = async (test: Test) => {
         status: 401,
       };
 
-    const response = await axios.post('https://coderoom-backend.onrender.com/test/new', test, {
+    const response = await backendApi.post('/test/new', test, {
       withCredentials: true,
 
       headers: {
@@ -167,8 +168,8 @@ export const createQuestionAction = async (question: Question) => {
       };
     }
 
-    const response = await axios.post(
-      'https://coderoom-backend.onrender.com/question/new',
+    const response = await backendApi.post(
+      '/question/new',
       question,
       {
         withCredentials: true,
@@ -203,8 +204,8 @@ export const createSubmission = async (submission: Submission) => {
   }
 
   try {
-    const response = await axios.post(
-      'https://coderoom-backend.onrender.com/submission/new',
+    const response = await backendApi.post(
+      '/submission/new',
       submission,
       {
         withCredentials: true,
@@ -237,8 +238,8 @@ export const getSubmissions = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(
-      `https://coderoom-backend.onrender.com/submission/user/question/${qid}`,
+    const response = await backendApi.get(
+      `/submission/user/question/${qid}`,
       {
         withCredentials: true,
 
@@ -270,7 +271,7 @@ export const fetchQuestionList = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(`https://coderoom-backend.onrender.com/test/${tid}`, {
+    const response = await backendApi.get(`/test/${tid}`, {
       withCredentials: true,
 
       headers: {
@@ -306,7 +307,7 @@ export const fetchQuestion = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(`https://coderoom-backend.onrender.com/question/${qid}`, {
+    const response = await backendApi.get(`/question/${qid}`, {
       withCredentials: true,
 
       headers: {
@@ -332,8 +333,8 @@ export const editQuestionAction = async (question: Question) => {
       };
     }
 
-    const response = await axios.patch(
-      `https://coderoom-backend.onrender.com/question/${question.id}/edit`,
+    const response = await backendApi.patch(
+      `/question/${question.id}/edit`,
       question,
       {
         withCredentials: true,
@@ -377,8 +378,8 @@ export const editClassAction = async (info: {
       description: info.description,
     };
 
-    const response = await axios.patch(
-      `https://coderoom-backend.onrender.com/course/${info.id}/edit`,
+    const response = await backendApi.patch(
+      `/course/${info.id}/edit`,
       data,
       {
         withCredentials: true,
@@ -415,8 +416,8 @@ export const editTestAction = async (test: Test) => {
         status: 401,
       };
 
-    const response = await axios.patch(
-      `https://coderoom-backend.onrender.com/test/${test.id}/edit`,
+    const response = await backendApi.patch(
+      `/test/${test.id}/edit`,
       test,
       {
         withCredentials: true,
@@ -449,8 +450,8 @@ export const getCourseName = async (id: number) => {
         status: 401,
       };
 
-    const response = await axios.get(
-      `https://coderoom-backend.onrender.com/course/${id}/name`,
+    const response = await backendApi.get(
+      `/course/${id}/name`,
       {
         withCredentials: true,
 
@@ -475,7 +476,7 @@ export const getTestName = async (id: number) => {
         status: 401,
       };
 
-    const response = await axios.get(`https://coderoom-backend.onrender.com/test/${id}/name`, {
+    const response = await backendApi.get(`/test/${id}/name`, {
       withCredentials: true,
 
       headers: {

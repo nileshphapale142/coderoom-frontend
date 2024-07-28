@@ -57,7 +57,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://coderoom-backend.onrender.com/:path*',
+        destination: '/:path*',
       },
     ];
   },

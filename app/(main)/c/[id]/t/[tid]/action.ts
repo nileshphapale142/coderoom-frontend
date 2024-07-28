@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
@@ -14,7 +15,7 @@ export const fetchTestData = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(`https://coderoom-backend.onrender.com/test/${tid}`, {
+    const response = await backendApi.get(`/test/${tid}`, {
     withCredentials: true,
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,

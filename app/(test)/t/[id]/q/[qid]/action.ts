@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -13,7 +14,7 @@ export const fetchQuestion = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(`https://coderoom-backend.onrender.com/question/${qid}`, {
+    const response = await backendApi.get(`/question/${qid}`, {
       withCredentials: true,
 
       headers: {

@@ -1,5 +1,6 @@
 'use client';
 
+import { backendApi } from '@/api';
 import { Page, Page2, SignInSec } from '@/components/Auth';
 import { isSignInInfoFilled, userSignInInfo } from '@/Recoil';
 import axios from 'axios';
@@ -27,10 +28,10 @@ const SignIn = () => {
 
     try {
       // console.log(data);
-      const response = await axios.post('https://coderoom-backend.onrender.com/auth/signin', data, {
-      withCredentials: true
+      const response = await backendApi.post('/auth/signin', data, {
       });
       const resData = response.data;
+      console.log(response);
       // console.log(resData);
       
       // localStorage.removeItem('access_token');
@@ -38,14 +39,14 @@ const SignIn = () => {
 
       router.push('/');
     } catch (err: any) {
-      console.log(err);
       if (err.response) {
         if (err.response.status === 400) alert('Data not in correct format');
         else if (err.response.status === 403)
           alert('Either email or password incorrect');
         else if (err.response.status === 500) alert('Problem at server');
         else alert(err.response.message);
-      } else alert('Unknwon problem');
+      } else alert(err);
+;
     }
   };
   return (
