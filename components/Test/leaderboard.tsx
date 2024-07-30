@@ -1,3 +1,4 @@
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
@@ -119,9 +120,11 @@ export const fetchLeaderboard = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(
-      `http://localhost:5000/test/${tid}/leaderboard`,
+    const response = await backendApi.get(
+      `/test/${tid}/leaderboard`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },

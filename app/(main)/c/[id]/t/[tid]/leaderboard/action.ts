@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -13,9 +14,10 @@ export const fetchLeaderboard = async (cid: number, tid: number) => {
       };
     }
 
-    const response = await axios.get(
-      `http://localhost:5000/test/${tid}/leaderboard`,
+    const response = await backendApi.get(
+      `/test/${tid}/leaderboard`,
       {
+      withCredentials: true,
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },

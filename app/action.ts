@@ -1,5 +1,6 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
@@ -68,10 +69,12 @@ export const createClassAction = async (info: {
       description: info.description,
     };
 
-    const response = await axios.post(
-      'http://localhost:5000/course/create',
+    const response = await backendApi.post(
+      '/course/create',
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -102,10 +105,12 @@ export const joinClassAction = async (data: { courseCode: string }) => {
     };
   }
   try {
-    const response = await axios.post(
-      'http://localhost:5000/course/addStudent',
+    const response = await backendApi.post(
+      '/course/addStudent',
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -135,7 +140,9 @@ export const createTestAction = async (test: Test) => {
         status: 401,
       };
 
-    const response = await axios.post('http://localhost:5000/test/new', test, {
+    const response = await backendApi.post('/test/new', test, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
@@ -161,10 +168,12 @@ export const createQuestionAction = async (question: Question) => {
       };
     }
 
-    const response = await axios.post(
-      'http://localhost:5000/question/new',
+    const response = await backendApi.post(
+      '/question/new',
       question,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -195,10 +204,12 @@ export const createSubmission = async (submission: Submission) => {
   }
 
   try {
-    const response = await axios.post(
-      'http://localhost:5000/submission/new',
+    const response = await backendApi.post(
+      '/submission/new',
       submission,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -227,9 +238,11 @@ export const getSubmissions = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(
-      `http://localhost:5000/submission/user/question/${qid}`,
+    const response = await backendApi.get(
+      `/submission/user/question/${qid}`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -258,7 +271,9 @@ export const fetchQuestionList = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(`http://localhost:5000/test/${tid}`, {
+    const response = await backendApi.get(`/test/${tid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         'Cache-Control': 'no-cache',
@@ -292,7 +307,9 @@ export const fetchQuestion = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:5000/question/${qid}`, {
+    const response = await backendApi.get(`/question/${qid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
@@ -316,10 +333,12 @@ export const editQuestionAction = async (question: Question) => {
       };
     }
 
-    const response = await axios.patch(
-      `http://localhost:5000/question/${question.id}/edit`,
+    const response = await backendApi.patch(
+      `/question/${question.id}/edit`,
       question,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -359,10 +378,12 @@ export const editClassAction = async (info: {
       description: info.description,
     };
 
-    const response = await axios.patch(
-      `http://localhost:5000/course/${info.id}/edit`,
+    const response = await backendApi.patch(
+      `/course/${info.id}/edit`,
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -395,10 +416,12 @@ export const editTestAction = async (test: Test) => {
         status: 401,
       };
 
-    const response = await axios.patch(
-      `http://localhost:5000/test/${test.id}/edit`,
+    const response = await backendApi.patch(
+      `/test/${test.id}/edit`,
       test,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -427,9 +450,11 @@ export const getCourseName = async (id: number) => {
         status: 401,
       };
 
-    const response = await axios.get(
-      `http://localhost:5000/course/${id}/name`,
+    const response = await backendApi.get(
+      `/course/${id}/name`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -451,7 +476,9 @@ export const getTestName = async (id: number) => {
         status: 401,
       };
 
-    const response = await axios.get(`http://localhost:5000/test/${id}/name`, {
+    const response = await backendApi.get(`/test/${id}/name`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
