@@ -62,3 +62,7 @@ export function getStatusInfo(code: number) {
 export const toCamelCase = (str: string): string => {
   return str[0].toUpperCase() + str.slice(1);
 };
+
+export function convertToIndianTime(utcDate:string) {
+  return new Date(utcDate).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+}
