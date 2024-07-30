@@ -64,7 +64,7 @@ export const TestBox = ({
                                     min-w-0 flex-30 pr-1 text-right text-black-3'
           >
             {/* //todo: handle time format situation */}
-            {new Date(test.startTime).toString()}
+            {new Date(test.startTime).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })}
           </div>
         </div>
       </div>
