@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -63,7 +64,7 @@ export const TestBox = ({
                                     min-w-0 flex-30 pr-1 text-right text-black-3'
           >
             {/* //todo: handle time format situation */}
-            {new Date(test.startTime).toLocaleString()}
+            {new Date(test.startTime).toString()}
           </div>
         </div>
       </div>
