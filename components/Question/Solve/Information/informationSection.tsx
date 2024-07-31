@@ -14,6 +14,7 @@ interface Question {
   name: string;
   statement: string;
   points: number;
+  availablePoints: number;
   testId: number;
   exampleTestCases: {
     input: string;
