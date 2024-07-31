@@ -12,7 +12,7 @@ export const FeatureRow = ({ qid, languages }: {
   }[] }) => {
   const [language, setLanguage] = useRecoilState(selectedLanguage);
   useEffect(() => {
-    setLanguage(localStorage.getItem(`userLanguageQ${qid}`) || 'C');
+    setLanguage(localStorage.getItem(`userLanguageQ${qid}`) || languages[0].name);
   }, []);
 
   return (

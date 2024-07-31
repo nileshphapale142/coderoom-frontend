@@ -19,6 +19,7 @@ interface Test {
     id: number;
     name: string;
     points: number;
+    availablePoints: number;
   }[];
 }
 
@@ -53,7 +54,7 @@ const TestHome = async ({
                       key={idx}
                       name={que.name}
                       maxPts={que.points}
-                      availablePts={que.points}
+                      availablePts={que.availablePoints}
                       route={`/c/${id}/t/${tid}/q/${que.id}/edit`}
                       isSolve={false}
                     />

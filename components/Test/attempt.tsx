@@ -12,6 +12,7 @@ interface Test {
     id: number;
     name: string;
     points: number;
+    availablePoints: number;
   }[];
 }
 
@@ -55,7 +56,7 @@ export const Attempt = async ({ tid }: { tid: number }) => {
                 isSolve={true}
                 name={que.name}
                 maxPts={que.points}
-                availablePts={que.points}
+                availablePts={que.availablePoints}
                 route={`/t/${tid}/q/${que.id}`}
               />
             ))}

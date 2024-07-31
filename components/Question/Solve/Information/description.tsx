@@ -3,6 +3,7 @@ interface Question {
   name: string;
   statement: string;
   points: number;
+  availablePoints: number;
   testId: number;
   exampleTestCases: {
     input: string;
@@ -76,7 +77,7 @@ export const Description = ({ question }: { question: Question }) => {
               Maximum Point: {question.points}
             </span>
             <span className='inline-block'>
-              Available Point: {question.points}
+              Available Point: {question.availablePoints}
             </span>
           </div>
         </div>
