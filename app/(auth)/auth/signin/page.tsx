@@ -16,7 +16,6 @@ const SignIn = () => {
   const router = useRouter();
 
   const handleSignIn = async () => {
-    console.log('Hello');
     if (!isInfoFilled) {
       alert('Fill all fields');
       return;
@@ -34,6 +33,7 @@ const SignIn = () => {
     else if (status === 400) alert('Email not in correct format');
     else if (status === 500) alert('server error');
     else if (status === 403) alert('email or password not correct');
+    else alert('wtf');
     
 
     // try {
