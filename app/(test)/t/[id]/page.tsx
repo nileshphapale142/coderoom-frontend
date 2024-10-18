@@ -12,6 +12,7 @@ interface Test {
     name: string;
     points: number;
   }[];
+
 }
 
 export default async function Page({ params }: { params: { id: number } }) {

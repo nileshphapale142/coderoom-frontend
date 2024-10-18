@@ -8,8 +8,7 @@ export async function SignInAction(data: {
   password: string;
 }) {
   try {
-    const response = await backendApi.post('/auth/signin', data, {
-    });
+    const response = await backendApi.post('/auth/signin', data);
     const resData = response.data;
     
     const expiryDate = new Date();
