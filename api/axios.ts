@@ -1,6 +1,17 @@
 import axios from "axios";
+import { env } from "process";
 
 export const backendApi = axios.create({
-  baseURL: process.env?.NODE_ENVIRONMENT === 'development' ? 'http://localhost:8080' : 'https://coderoom-backend-45797345156.asia-south1.run.app', 
+  baseURL: env?.BACKEND_API_URL, 
   withCredentials: true
 });
+
+
+export const judgeApi = axios.create({
+  baseURL: '/api/judge'
+  // headers: {
+  //   Authorization: `Bearer ${env?.NEXT_PUBLIC_SULU_API_KEY}`,
+  //   'Access-Control-Allow-Origin': '*',
+    
+  // }
+})

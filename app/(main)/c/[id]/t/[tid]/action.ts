@@ -7,8 +7,10 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export const fetchTestData = async (tid: number) => {
+  const cookies_ = await cookies()
+
   try {
-    if (!cookies().get('access_token')) {
+    if (!cookies_.get('access_token')) {
       redirect('/auth/sign');
       return {
         data: null,
@@ -18,7 +20,7 @@ export const fetchTestData = async (tid: number) => {
     const response = await backendApi.get(`/test/${tid}`, {
     withCredentials: true,
       headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        Authorization: `Bearer ${cookies_.get('access_token')?.value}`,
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0',

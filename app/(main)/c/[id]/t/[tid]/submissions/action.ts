@@ -6,8 +6,10 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export const fetchSubmissions = async (cid: number, tid: number) => {
+  const cookies_ = await cookies()
+
   try {
-    if (!cookies().get('access_token')) {
+    if (!cookies_.get('access_token')) {
       redirect('/auth/signin');
       return {
         data: null,
@@ -19,7 +21,7 @@ export const fetchSubmissions = async (cid: number, tid: number) => {
       {
       withCredentials: true,
         headers: {
-          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+          Authorization: `Bearer ${cookies_.get('access_token')?.value}`,
         },
       }
     );

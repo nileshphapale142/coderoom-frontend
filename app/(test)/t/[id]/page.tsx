@@ -21,7 +21,8 @@ export default async function Page({ params }: { params: { id: number } }) {
   const { data, status } = await fetchTestData(params.id);
   const { test }: { test: Test } = data;
   const currTime = new Date();
-
+  console.log(currTime)
+  console.log(test.startTime)
   return currTime < new Date(test.startTime) ? (
     <NotStarted name={test.name} startTime={test.startTime} />
   ) : currTime <= new Date(test.endTime) ? (

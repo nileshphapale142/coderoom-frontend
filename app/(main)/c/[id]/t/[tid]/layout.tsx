@@ -11,10 +11,11 @@ interface LayoutProps {
   };
 }
 
-export default function TestLayout({ children, params }: LayoutProps) {
+export default async function TestLayout({ children, params }: LayoutProps) {
   const { id, tid } = params;
+  const cookies_ = await cookies()
 
-  if (cookies().get('is_teacher')?.value === 'false') return <NotFound />;
+  if (cookies_.get('is_teacher')?.value === 'false') return <NotFound />;
 
   return (
     <>
