@@ -18,8 +18,8 @@ export const TestBox = ({
   courseId: number;
   isTeacher: boolean;
 }) => {
-  console.log(test)
-  console.log(new Date(test.startTime).toLocaleString())
+  // console.log(test)
+  // console.log(new Date(test.startTime).toLocaleString())
   return (
     <li
       className='relative box-border bg-transparent transition-all duration-300 
@@ -66,7 +66,7 @@ export const TestBox = ({
                                     min-w-0 flex-30 pr-1 text-right text-black-3'
           >
             {/* //todo: handle time format situation */}
-            {new Date(test.startTime).toString()}
+            {new Date(test.startTime).toLocaleString()}
           </div>
         </div>
       </div>

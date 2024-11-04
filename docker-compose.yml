@@ -1,6 +1,6 @@
 services:
   prod-server:
-    image: coderoom-frontend:1.0.0
+    image: coderoom-frontend:1
     container_name: production-server
     build:
       context: .
