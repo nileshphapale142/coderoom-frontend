@@ -21,20 +21,18 @@ export async function SignUpAction(data: SignUpDto) {
     expiryDate.setDate(expiryDate.getDate() + 30);
     
     cookies().set('access_token', resData.access_token, {
-      sameSite: 'none',
-      secure: true,
+      sameSite: 'lax',             // Or omit `sameSite`
       httpOnly: true,
-      partitioned: true,
       expires: expiryDate
     });
     
+    // Teacher role cookie
     cookies().set('is_teacher', resData.isTeacher, {
-      sameSite: 'none',
-      secure: true,
+      sameSite: 'lax',             // Or omit `sameSite`
       httpOnly: false,
-      partitioned: true,
       expires: expiryDate
     });
+
     
     return { status: 201 };
   } catch (err: any) {

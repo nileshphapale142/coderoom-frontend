@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 
 export async function fetchCourses() {
   const cookieStore = cookies();
+
   if (!cookieStore.get('access_token')) {
     redirect('/auth/signin');
     return {

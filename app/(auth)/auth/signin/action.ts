@@ -11,24 +11,23 @@ export async function SignInAction(data: {
     const response = await backendApi.post('/auth/signin', data);
     const resData = response.data;
     
+    //todo: add conrfig files to store configuration information including domain
     const expiryDate = new Date();
     expiryDate.setDate(expiryDate.getDate() + 30);
     
     cookies().set('access_token', resData.access_token, {
-      sameSite: 'none',
-      secure: true,
+      sameSite: 'lax',            
       httpOnly: true,
-      partitioned: true,
       expires: expiryDate
     });
     
+    // Teacher role cookie
     cookies().set('is_teacher', resData.isTeacher, {
-      sameSite: 'none',
-      secure: true,
+      sameSite: 'lax',           
       httpOnly: false,
-      partitioned: true,
       expires: expiryDate
     });
+
     
     return { status: 201 };
   } catch (err: any) {
