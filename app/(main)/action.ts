@@ -13,7 +13,8 @@ export async function fetchCourses() {
     return {
       props: {
         data: null,
-      },
+        status: -1
+      }
     };
   }
   try {
@@ -30,6 +31,7 @@ export async function fetchCourses() {
     return {
       props: {
         data,
+        status: 200
       },
     };
   } catch (err: any) {
@@ -38,6 +40,7 @@ export async function fetchCourses() {
     return {
       props: {
         data: null,
+        status: err?.response?.status
       },
     };
   }

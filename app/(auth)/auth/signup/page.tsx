@@ -15,9 +15,7 @@ import {
 import { Page, Page1, Page2, Page3, Page4 } from '@/components/Auth';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { backendApi } from '@/api';
 import { SignUpAction } from './action';
 
 interface SignUpDto {
@@ -60,30 +58,12 @@ const SignUp = () => {
     const { status } = await SignUpAction(data);
         
     if (status === 201) router.push('/');
-    else if (status === -1) alert('unknown problem');
+    else if (status === -1) alert('Unknown problem');
     else if (status === 400) alert('Data not in correct format');
-    else if (status === 500) alert('server error');
-    else if (status === 403) alert('user already exists');
-
-    // try {
-    //   const response = await backendApi.post('/auth/signup', data, {
-    //   withCredentials: true
-    //   }
-    //   );
-    //   const resData = response.data;
-    //   console.log(resData);
-
-    //   // localStorage.removeItem('access_token');
-    //   // localStorage.setItem('access_token', resData.access_token);
-    //   router.push('/');
-    // } catch (err: any) {
-    //   if (err.response) {
-    //     if (err.response?.status === 400) alert('Data validation unsuccessful');
-    //     else if (err.response?.status === 403) alert('User already exists');
-    //     else if (err.response?.status === 500) alert('Problem at server');
-    //     else alert(err);
-    //   } else alert('Unknown problem');
-    // }
+    else if (status === 500) alert('Server error');
+    else if (status === 403) alert('User already exists');
+    else if (status === 406) alert('Your request for teacher role has been sent to the admin.\nOnce approved you can sign-in to your account.')
+    else alert('Unknown problem');
   };
 
   const Descriptions = [

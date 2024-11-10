@@ -20,15 +20,18 @@ export async function SignUpAction(data: SignUpDto) {
     const expiryDate = new Date();
     expiryDate.setDate(expiryDate.getDate() + 30);
     
+    
+    if (!resData.access_token && resData?.in_verification_queue) return { status: 406 };
+    if (!resData.access_token) return { status: 500 };
+    
     cookies().set('access_token', resData.access_token, {
-      sameSite: 'lax',             // Or omit `sameSite`
+      sameSite: 'lax',             
       httpOnly: true,
       expires: expiryDate
     });
     
-    // Teacher role cookie
     cookies().set('is_teacher', resData.isTeacher, {
-      sameSite: 'lax',             // Or omit `sameSite`
+      sameSite: 'lax',             
       httpOnly: false,
       expires: expiryDate
     });
@@ -37,6 +40,7 @@ export async function SignUpAction(data: SignUpDto) {
     return { status: 201 };
   } catch (err: any) {
     console.log(err);
+    console.log(err?.message) 
     return {
       status: err?.response?.status || -1 
     };

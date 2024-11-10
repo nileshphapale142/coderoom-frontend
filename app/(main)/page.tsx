@@ -6,6 +6,9 @@ import { fetchCourses } from './action';
 const Home = async () => {
   const { props } = await fetchCourses();
   const courses = props.data?.courses;
+  const status = props.status
+  
+  //todo: handle errors here (status coodes)
 
   return (
     <>
