@@ -1,5 +1,4 @@
-import React from 'react';
-import { Page3Inputs, Example } from './';
+import { Example, Page3Inputs } from './';
 
 export const NewQPage3 = () => {
   return (
@@ -19,16 +18,16 @@ export const NewQPage3 = () => {
           <div className='mt-2'>
             <span className='text-style flex flex-col font-normal text-gray-600'>
               <span>First line should contain number of test cases.</span>
-              <span className='solid border-b pb-1'>
-                In each test case required inputs should contain.
+              <span>
+                Each test case should contain its necessary inputs
               </span>
-              <span className='text-heading solid border-b py-2'>Example</span>
+              <span className='solid border-b pb-1'>In following example, 2 is the number of test cases and for each test case first line contains the size of the arary and second line contains the array.</span>
+              <span className='text-heading  py-2'>Example</span>
               {`2
 5
-3 1 4 1 5
+3 1 4 1 
 6
--1 -1 -2 -3 -4 -5
-4`
+-1 -1 -2 -3 -4 -5`
                 .split('\n')
                 .map((line, idx) => (
                   <span key={idx} className='block'>
