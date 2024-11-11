@@ -62,7 +62,10 @@ const SignUp = () => {
     else if (status === 400) alert('Data not in correct format');
     else if (status === 500) alert('Server error');
     else if (status === 403) alert('User already exists');
-    else if (status === 406) alert('Your request for teacher role has been sent to the admin.\nOnce approved you can sign-in to your account.')
+    else if (status === 406) {
+      alert('Your request for teacher role has been sent to the admin.\nOnce approved you can sign-in to your account.');
+      //send user to the signin page after clicking OK on the alert message
+    }
     else alert('Unknown problem');
   };
 
