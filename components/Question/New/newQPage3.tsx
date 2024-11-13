@@ -25,7 +25,7 @@ export const NewQPage3 = () => {
               <span className='text-heading  py-2'>Example</span>
               {`2
 5
-3 1 4 1 
+3 1 4 1 5
 6
 -1 -1 -2 -3 -4 -5`
                 .split('\n')

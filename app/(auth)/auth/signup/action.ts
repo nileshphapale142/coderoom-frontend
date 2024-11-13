@@ -9,7 +9,7 @@ interface SignUpDto {
   email: string;
   password: string;
   isTeacher: boolean;
-  enrollementId?: string;
+  enrollmentId?: string;
 }
 
 export async function SignUpAction(data: SignUpDto) {

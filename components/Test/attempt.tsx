@@ -31,7 +31,7 @@ export const Attempt = async ({ tid }: { tid: number }) => {
                 href={`/t/${tid}`}
                 className='underline-offset-auto transition-all hover:text-gray-700 hover:underline '
               >
-                Sorting Algorithms
+                {test.name}
               </Link>
             </div>
           </div>
