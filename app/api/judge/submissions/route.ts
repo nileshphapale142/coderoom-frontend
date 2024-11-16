@@ -3,10 +3,7 @@ import { NextResponse } from 'next/server';
 import { env } from "process";
 
 const judgeApi = axios.create({
-  baseURL: "http://judge0-v1131-server-1:2358",
-  headers: {
-    Authorization: `Bearer ${env?.NEXT_PUBLIC_SULU_API_KEY || ''}`
-  }
+  baseURL: `${env?.NEXT_PUBLIC_JUDGE0_HOST}`,
 });
 
 export async function POST(request: Request) {
