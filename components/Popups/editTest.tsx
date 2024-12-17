@@ -1,6 +1,11 @@
+
 'use client';
 
-import { createTestInfo, isCreateTestInfoFilled, isFullScreenPopUpOpen } from '@/Recoil';
+import {
+  createTestInfo,
+  isCreateTestInfoFilled,
+  isFullScreenPopUpOpen,
+} from '@/Recoil';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { BasicInput } from '../Inputs';
 import {
@@ -59,19 +64,21 @@ export const EditTest = ({ test }: { test: Test }) => {
       visibility: test.visibility,
     });
   }, []);
-  
-  
+
   const handleEdit = async () => {
     if (!isInfoFilled) {
       alert('Fill all the fields');
       return;
     }
-    
-        
-    const { data, status } = await editTestAction({ ...testInfo, courseId: test.courseId, id: test.id});
-    
+
+    const { data, status } = await editTestAction({
+      ...testInfo,
+      courseId: test.courseId,
+      id: test.id,
+    });
+
     if (status === 200) {
-      setIsPopUpOpen(false); 
+      setIsPopUpOpen(false);
       setTestInfo({
         name: '',
         date: '',
@@ -81,7 +88,7 @@ export const EditTest = ({ test }: { test: Test }) => {
         evaluationScheme: '',
         visibility: '',
       });
-      router.push(`/c/${test.courseId}/t/${test.id}`);
+      router.refresh();
     } else if (status === 401) router.push('/auth/signin');
     else if (status === 403) {
       alert('Not authorized to edit');
@@ -90,8 +97,7 @@ export const EditTest = ({ test }: { test: Test }) => {
       alert('problem at server');
     } else if (status === 400) alert('Data format error');
     else alert('Unkwon problem');
-  }
-  
+  };
 
   return (
     <div className=''>
@@ -171,7 +177,7 @@ export const EditTest = ({ test }: { test: Test }) => {
                   />
                 </div>
               </div>
-      
+
               <div className='my-4 flex flex-row justify-start'>
                 <div>
                   <div className='mb-4 text-left text-875 font-medium leading-5 tracking-sm text-[#3c4043]'>
@@ -179,15 +185,15 @@ export const EditTest = ({ test }: { test: Test }) => {
                   </div>
 
                   <div className='max-w-64'>
-                  <MultiSelectDropDown
-                    title='Select Languages'
-                    options={languages}
-                    selectHandler={(languages: string[]) => {
-                      setTestInfo((prev) => {
-                        return { ...prev, languages };
-                      });
-                    }}
-                    defaultValues={test.allowedLanguages}
+                    <MultiSelectDropDown
+                      title='Select Languages'
+                      options={languages}
+                      selectHandler={(languages: string[]) => {
+                        setTestInfo((prev) => {
+                          return { ...prev, languages };
+                        });
+                      }}
+                      defaultValues={test.allowedLanguages}
                     />
                   </div>
                 </div>
@@ -232,13 +238,10 @@ export const EditTest = ({ test }: { test: Test }) => {
                   />
                 </div>
               </div>
-
-
             </div>
-          <div className='w-full py-4 flex justify-center items-center'>
-            <SimpleButton name='Edit'
-            action={handleEdit}/>
-          </div>
+            <div className='flex w-full items-center justify-center py-4'>
+              <SimpleButton name='Edit' action={handleEdit} />
+            </div>
           </div>
         </div>
       </span>

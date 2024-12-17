@@ -1,93 +1,26 @@
-import React from 'react';
+import { CourseNavFiller } from '@/components/Utils';
 
 const Loading = () => {
   return (
-    <div className='flex h-screen w-screen items-center justify-center align-middle'>
-      <div
-        aria-label='Loading...'
-        role='status'
-        className='flex items-center space-x-2'
-      >
-        <svg
-          className='h-20 w-20 animate-spin stroke-gray-500'
-          height='100'
-          width='100'
-          viewBox='0 0 256 256'
-        >
-          <line
-            x1='128'
-            y1='32'
-            x2='128'
-            y2='64'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='195.9'
-            y1='60.1'
-            x2='173.3'
-            y2='82.7'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='224'
-            y1='128'
-            x2='192'
-            y2='128'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='195.9'
-            y1='195.9'
-            x2='173.3'
-            y2='173.3'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='128'
-            y1='224'
-            x2='128'
-            y2='192'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='60.1'
-            y1='195.9'
-            x2='82.7'
-            y2='173.3'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='32'
-            y1='128'
-            x2='64'
-            y2='128'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-          <line
-            x1='60.1'
-            y1='60.1'
-            x2='82.7'
-            y2='82.7'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='24'
-          ></line>
-        </svg>
-        <span className='text-2xl font-medium text-gray-500'>Loading...</span>
+    <div className='google-bw-bg fixed h-screen w-full'>
+      {/* Header skeleton */}
+
+      <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
+        <div className='flex items-center justify-between border-b-[0.0625rem]'>
+          <div className='h-16 w-full animate-pulse rounded bg-white'></div>
+        </div>
+        <CourseNavFiller />
+        <div className='mx-auto h-full w-calc-12 max-w-50r px-4 py-6'>
+          <div className='flex w-full animate-pulse flex-col rounded-7 bg-gray-200 px-8'>
+            {[...Array(3)].map((_, idx) => (
+              <div
+                key={idx}
+                className='relative mt-8 h-28 w-full animate-pulse rounded-5 bg-white'
+              ></div>
+            ))}
+            <div className='mt-8'></div>
+          </div>
+        </div>
       </div>
     </div>
   );

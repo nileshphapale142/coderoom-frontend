@@ -1,8 +1,6 @@
-import axios from 'axios';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import { fetchLeaderboard } from './action';
+import Loading from './loading';
 
 interface User {
   name: string;
@@ -14,37 +12,6 @@ interface Student {
   id: number;
   name: string;
 }
-
-export const fetchLeaderboard = async (cid: number) => {
-  try {
-    if (!cookies().get('access_token')) {
-      redirect('/auth/signin');
-      return {
-        data: null,
-      };
-    }
-
-    const response = await axios.get(
-      `http://localhost:5000/course/${cid}/leaderboard`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
-        },
-      }
-    );
-
-    const data = response.data;
-
-    return {
-      data,
-    };
-  } catch (err: any) {
-    console.log('err : ', err);
-    return {
-      data: null,
-    };
-  }
-};
 
 const SimpleCell = ({
   name,
@@ -107,8 +74,8 @@ const TestCell = ({
             </div>
             <Link
               href={link}
-              className='text-style line-clamp-2 h-10 overflow-hidden
-                         text-ellipsis text-violet-500 underline'
+              className='text-style hover:undelin line-clamp-2 h-10
+                         overflow-hidden text-ellipsis text-gray-600'
             >
               {name}
             </Link>
@@ -134,7 +101,7 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
           <Link
             href={link}
             className='text-style text-wrapping 
-        max-w-47.5 text-gray-500 hover:text-violet-500 hover:underline'
+        max-w-47.5 text-gray-500 hover:text-gray-600 hover:underline'
           >
             {name}
           </Link>
@@ -145,7 +112,10 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
 };
 
 const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
-  const { data } = await fetchLeaderboard(id);
+  const { data }: { data: any } = await fetchLeaderboard(id);
+
+  if (!data || !data.students || !data.tests || !data.leaderboard ) return <div></div>;
+
   const { students, tests, leaderboard } = data;
 
   const sortedTests = Object.entries(tests)
@@ -172,6 +142,7 @@ const Leaderboard = async ({ params: { id } }: { params: { id: number } }) => {
     })
     .sort((a, b) => b.points - a.points);
 
+    
   //TODO : make separate component files
   //TODO: pagination
   //TODO: your rank at the end or start

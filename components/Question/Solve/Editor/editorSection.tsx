@@ -3,8 +3,9 @@
 import { SubNavBarItem } from '../subNavBar';
 import { FeatureRow } from './featureRow';
 import { AcutalEditor } from './actualEditor';
+import { toCamelCase } from '@/Utils';
 
-export const EditorSection = ({ qid }: { qid: number }) => {
+export const EditorSection = ({ qid, languages }: { qid: number, languages:string[] }) => {
   return (
     <div
       className='google-bw-bg relative m-[0.1rem]  flex flex-1-auto flex-col
@@ -21,7 +22,12 @@ export const EditorSection = ({ qid }: { qid: number }) => {
         </div>
       </div>
 
-      <FeatureRow qid={qid} />
+      <FeatureRow qid={qid} languages={languages.map((lang, idx) => {
+        return {
+          name: toCamelCase(lang),
+          id: idx
+        }
+      })}/>
 
       <AcutalEditor qid={qid} />
     </div>

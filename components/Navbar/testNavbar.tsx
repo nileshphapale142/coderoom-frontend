@@ -3,8 +3,10 @@ import { OpenProblemListBtn } from '../Buttons';
 import { SubmitBtn } from '../Question/Solve/Execution/submit';
 import { RunBtn } from '../Question/Solve/Execution/run';
 import { Clock } from '../Question/Solve/clock';
+import { CountDown } from '../Utils';
+import { FinishCountDown } from '../Test';
 
-export const TestNavbar = ({ qid }: { qid: number }) => {
+export const TestNavbar = ({ qid, endTime }: { qid: number, endTime: string; }) => {
   return (
     <nav className='fixed z-[978] block w-full'>
       <div
@@ -42,9 +44,9 @@ export const TestNavbar = ({ qid }: { qid: number }) => {
             </div>
           </div>
 
-          <div className='mr-9 flex flex-row items-center '>
+          <div className='mr-1 flex flex-row items-center '>
             <div className='flex h-full items-center justify-center p-1'>
-              <Clock />
+              <FinishCountDown endTime={new Date(endTime)}/>
             </div>
           </div>
         </div>

@@ -1,10 +1,10 @@
 import { CourseNavFiller, MainNavFiller } from '@/components/Utils';
 import { getStatusInfo } from '@/Utils';
-import axios from 'axios';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import React from 'react';
+import { fetchSubmissions } from './action';
+import NotFound from '@/app/(main)/not-found';
+import Loading from './loading';
 
 interface Submission {
   submission: {
@@ -66,11 +66,11 @@ const LinkCell = ({ name, link }: { name: string; link: string }) => {
   return (
     <td>
       <div className='p-2 '>
-        <div className='text-style flex w-full items-center justify-start text-violet-1'>
+        <div className='text-style flex w-full items-center justify-start text-gray-600'>
           <div className='text-base font-normal'>
             <Link
               href={link}
-              className='underline-custom flex w-full items-center justify-start '
+              className='underline-custom flex w-full items-center justify-start hover:text-gray-800'
             >
               <span>{name}</span>
             </Link>
@@ -89,42 +89,6 @@ const BodyRowRenderer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const fetchSubmissions = async (cid: number, tid: number) => {
-  try {
-    if (!cookies().get('access_token')) {
-      redirect('/auth/signin');
-      return {
-        data: null,
-      };
-    }
-
-    const response = await axios.get(
-      `http://localhost:5000/test/${tid}/submissions`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
-        },
-      }
-    );
-
-    const data = response.data;
-
-    return {
-      data,
-    };
-  } catch (err: any) {
-    console.log('error: ', err);
-    if (err.response.status === 404) redirect('/not-found');
-    else if (err.response.status === 401) redirect(`/c/${cid}`);
-    else if (err.response.status === 500) redirect(`/c/${cid}`);
-
-    return {
-      data: null,
-      status: err.response.status,
-    };
-  }
-};
-
 const SubmissionPage = async ({
   params,
 }: {
@@ -132,6 +96,10 @@ const SubmissionPage = async ({
 }) => {
   const { id, tid } = params;
   const { data, status } = await fetchSubmissions(id, tid);
+
+  if (!data || !data.submissions) return <NotFound/>
+
+
   const { submissions }: { submissions: Submission[] } = data;
 
   // todo: pagination
@@ -160,16 +128,10 @@ const SubmissionPage = async ({
                     <tbody>
                       {submissions?.map(
                         ({ submission, question, student }, idx) => (
-                          <BodyRowRenderer>
-                            <LinkCell
-                              name={submission.id.toString()}
-                              link='submissionLink'
-                            />
-                            <LinkCell name={student.name} link='userLink' />
-                            <LinkCell
-                              name={question.name}
-                              link={`/c/${id}/t/${tid}/q/${question.id}`}
-                            />
+                          <BodyRowRenderer key={idx}>
+                            <SimpleCell name={submission.id.toString()} />
+                            <SimpleCell name={student.name} />
+                            <SimpleCell name={question.name} />
                             {/* //todo: handle time situation */}
                             <SimpleCell
                               name={new Date(submission.time).toLocaleString()}

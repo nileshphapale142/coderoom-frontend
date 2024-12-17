@@ -54,7 +54,7 @@ export const ProfileOptions = () => {
                               >
                                 {/* //TODO: Extract common out of following two make a component (if need to) */}
 
-                                <span className='mb-[2px] block rounded-1'>
+                                {/* <span className='mb-[2px] block rounded-1'>
                                   <Link
                                     href='profile'
                                     className='box-border block h-calc-1 w-full cursor-pointer overflow-hidden
@@ -90,11 +90,11 @@ export const ProfileOptions = () => {
                                       </div>
                                     </span>
                                   </Link>
-                                </span>
+                                </span> */}
 
                                 <span className='mb-[2px] block rounded-1'>
                                   <Link
-                                    href='/singout'
+                                    href='/auth/signout'
                                     className='box-border block h-calc-1 w-full cursor-pointer overflow-hidden
                                   whitespace-nowrap rounded-tl-inherit rounded-tr-inherit border border-solid 
                                   border-transparent bg-white-2 pb-0 pl-[23px] pr-[15px] pt-2.5

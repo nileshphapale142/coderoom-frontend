@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,6 +18,8 @@ export const TestBox = ({
   courseId: number;
   isTeacher: boolean;
 }) => {
+  // console.log(test)
+  // console.log(new Date(test.startTime).toLocaleString())
   return (
     <li
       className='relative box-border bg-transparent transition-all duration-300 

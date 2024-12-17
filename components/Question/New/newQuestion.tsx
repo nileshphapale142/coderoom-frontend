@@ -49,10 +49,10 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
   const router = useRouter();
 
   const pages: React.ReactNode[] = [
-    <NewQPage1 />,
-    <NewQPage2 />,
-    <NewQPage3 />,
-    <NewQPage4 />,
+    <NewQPage1 key={0} />,
+    <NewQPage2 key={1} />,
+    <NewQPage3 key={2} />,
+    <NewQPage4 key={3} />,
   ];
 
   const validInputs = [
@@ -100,8 +100,7 @@ export const NewQuestion = ({ cid, tid }: { cid: number; tid: number }) => {
 
     if (status === 201) {
       router.push(`/c/${cid}/t/${tid}`);
-    } 
-    else if (status === 400) alert('data format not correct');
+    } else if (status === 400) alert('data format not correct');
     else if (status === 401) router.push(`/auth/signin`);
     else if (status === 500) router.push('/');
     else {

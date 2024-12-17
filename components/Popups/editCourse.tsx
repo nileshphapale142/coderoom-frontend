@@ -16,7 +16,7 @@ interface EditCourseProps {
 
 export const EditCourse = ({ id, name, description }: EditCourseProps) => {
   const [info, setInfo] = useRecoilState(createClassInfo);
-  const setPopUpOpen = useSetRecoilState(isFullScreenPopUpOpen)
+  const setPopUpOpen = useSetRecoilState(isFullScreenPopUpOpen);
   const router = useRouter();
 
   useEffect(() => {
@@ -25,20 +25,19 @@ export const EditCourse = ({ id, name, description }: EditCourseProps) => {
       description,
     });
   }, []);
-  
+
   const handleEdit = async () => {
     if (info.name.length === 0 || info.description.length == 0) {
-      alert('Name and description can\'t be empty');
+      alert("Name and description can't be empty");
       return;
     }
-    
+
     const { data, status } = await editClassAction({ ...info, id });
-    
+
     if (status === 200) {
       setPopUpOpen(false);
       router.push(`/c/${id}`);
-    }
-    else if (status === 403) {
+    } else if (status === 403) {
       alert('Not authorized to edit');
       router.push('/');
     } else if (status === 401) {
@@ -48,7 +47,7 @@ export const EditCourse = ({ id, name, description }: EditCourseProps) => {
     } else if (status === 500) {
       alert('Server error');
     } else alert('Unkown error');
-  }
+  };
 
   return (
     <div className='flex h-full flex-col'>

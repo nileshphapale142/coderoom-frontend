@@ -20,6 +20,7 @@ const config: Config = {
     'opacity-100',
     'opacity-0',
     'text-green-600',
+    'text-green-500',
     'text-green-700',
     'font-bold',
     'text-gray-900',
@@ -32,6 +33,7 @@ const config: Config = {
     'border-stone-700',
     'border-stone-800',
     'border-stone-900',
+    '',
   ],
   theme: {
     extend: {

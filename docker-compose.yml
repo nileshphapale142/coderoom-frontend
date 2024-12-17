@@ -1,0 +1,17 @@
+services:
+  frontend-server:
+    image: coderoom-frontend:1
+    container_name: frontend-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    env_file:
+      - .env.production
+    networks:
+      - coderoom
+
+networks:
+  coderoom:
+    external: true

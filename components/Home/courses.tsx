@@ -14,7 +14,7 @@ interface Course {
 
 export const Courses = ({ courses }: { courses: Course[] }) => {
   return (
-    <div className='visible static flex h-auto min-h-0 opacity-100 contain-style'>
+    <div className='google-bw-bg visible absolute flex h-auto min-h-full w-full opacity-100 contain-style'>
       <div
         className='relative bottom-0 left-0 right-0 top-0 z-auto block min-h-full 
         min-w-0 flex-1-auto '

@@ -1,10 +1,11 @@
 import { MainNavFiller, CourseNavFiller } from '@/components/Utils';
 import { QuestionBox } from '@/components/Test';
 import Link from 'next/link';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import axios from 'axios';
 import { FullScreenPopUp } from '@/components/Popups';
+import { EditTest } from '@/components/Popups/editTest';
+import { fetchTestData } from './action';
+import Loading from '../loading';
 
 interface Test {
   name: string;
@@ -18,59 +19,22 @@ interface Test {
     id: number;
     name: string;
     points: number;
+    availablePoints: number;
   }[];
 }
-
-export const fetchTestData = async (tid: number) => {
-  try {
-    if (!cookies().get('access_token')) {
-      redirect('/auth/sign');
-      return {
-        data: null,
-      };
-    }
-
-    const response = await axios.get(`http://localhost:5000/test/${tid}`, {
-      headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        Expires: '0',
-      },
-    });
-
-    const data = response.data;
-
-    return {
-      data,
-    };
-  } catch (err: any) {
-    //todo: error handling;
-    console.log('error : ', err);
-
-    if (err?.response?.status === 404) redirect('/not-found');
-    else if (err?.response?.status === 401) redirect(`/auth/signin`);
-      else if (err?.response?.status === 500) redirect(`/`);
-
-    return {
-      data: null,
-      status: err?.response?.status,
-    };
-  }
-};
 
 const TestHome = async ({
   params,
 }: {
   params: { id: number; tid: number };
-  }) => {
+}) => {
   const { id, tid } = params;
   const { data, status } = await fetchTestData(tid);
   //todo: error handling
-  
-  if (!data.test) return redirect('/not-found');
-  
-  const test: Test = data.test;
+
+  if (!data?.test) return redirect('/not-found');
+
+  const { test }: { test: Test } = data;
 
   return (
     <>
@@ -90,7 +54,7 @@ const TestHome = async ({
                       key={idx}
                       name={que.name}
                       maxPts={que.points}
-                      availablePts={que.points}
+                      availablePts={que.availablePoints}
                       route={`/c/${id}/t/${tid}/q/${que.id}/edit`}
                       isSolve={false}
                     />
@@ -117,7 +81,14 @@ const TestHome = async ({
           </div>
         </div>
       </div>
-      <FullScreenPopUp test={{ ...test, courseId: id }} />
+      <FullScreenPopUp>
+        <EditTest
+          test={{
+            ...test,
+            courseId: id,
+          }}
+        />
+      </FullScreenPopUp>
     </>
   );
 };

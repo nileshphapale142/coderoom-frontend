@@ -14,10 +14,10 @@ export const BasicTextArea = ({
   defaultValue?: string;
 }): React.ReactNode => {
   const [input, setInput] = useState(defaultValue);
-  
+
   useEffect(() => {
     setInput(defaultValue);
-  }, [defaultValue])
+  }, [defaultValue]);
 
   return (
     <div

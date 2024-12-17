@@ -1,4 +1,4 @@
-import { Page1Inputs } from "../New";
+import { Page1Inputs } from '../New';
 
 export const EditQPage1 = () => {
   return (

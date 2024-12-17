@@ -10,6 +10,7 @@ import {
 import { langValue } from '@/Utils';
 import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { judgeApi } from '@/api';
 
 type LangKey = 'C' | 'C++' | 'Java' | 'Python';
 
@@ -39,18 +40,12 @@ export const RunBtn = () => {
       source_code: btoa(code),
       stdin: btoa(testIn),
     };
-
+    
     try {
-      const response = await axios.post(
-        `https://${process.env.X_RAPIDAPI_HOST}/submissions/?base64_encoded=true&wait=true`,
+      const response = await judgeApi.post(
+        `submissions?base64_encoded=true&wait=true`,
+        
         submission,
-        {
-          headers: {
-            'x-rapidapi-key': process.env.X_RAPIDAPI_KEY,
-            'x-rapidapi-host': process.env.X_RAPIDAPI_HOST,
-            'Content-Type': 'application/json',
-          },
-        }
       );
 
       const data: JudgeResponse = response.data;
@@ -59,6 +54,7 @@ export const RunBtn = () => {
         output: atob(data.stdout || ''),
         error: atob(data.compile_output || data.stderr || ''),
       });
+      
       return;
     } catch (err: any) {
       console.log(err);

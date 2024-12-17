@@ -2,10 +2,8 @@
 
 const nextConfig = {
   env: {
-    X_RAPIDAPI_KEY: 'ea6410e850msh603cdbcd3cbc29cp120feejsn29f801f6a63f',
-    X_RAPIDAPI_HOST: 'judge0-ce.p.rapidapi.com',
+    BACKEND_API_URL:process.env?.BACKEND_API_URL
   },
-
   images: {
     remotePatterns: [
       {
@@ -56,28 +54,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/signup',
-        destination: 'http://localhost:5000/auth/signup',
-      },
-      {
-        source: '/signin',
-        destination: 'http://localhost:5000/auth/signin',
-      },
-      {
-        source: '/u/c/all',
-        destination: 'http://localhost:5000/user/getCourses',
-      },
-      {
-        source: '/u/c/:id',
-        destination: 'http://localhost:5000/course/:id',
-      },
-      {
-        source: '/new/class',
-        destination: 'http://localhost:5000/course/create',
-      },
-      {
-        source: '/join/class',
-        destination: 'http://localhost:5000/course/addStudent',
+        source: '/api/:path*',
+        destination: '/:path*',
       },
     ];
   },

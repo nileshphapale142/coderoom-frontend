@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FinishCountDown } from './finishCountDown';
-import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/page';
 import { QuestionBox } from './Question';
+import { fetchTestData } from '@/app/(main)/c/[id]/t/[tid]/action';
 
 interface Test {
   name: string;
@@ -12,6 +12,7 @@ interface Test {
     id: number;
     name: string;
     points: number;
+    availablePoints: number;
   }[];
 }
 
@@ -30,7 +31,7 @@ export const Attempt = async ({ tid }: { tid: number }) => {
                 href={`/t/${tid}`}
                 className='underline-offset-auto transition-all hover:text-gray-700 hover:underline '
               >
-                Sorting Algorithms
+                {test.name}
               </Link>
             </div>
           </div>
@@ -52,9 +53,10 @@ export const Attempt = async ({ tid }: { tid: number }) => {
             {test.questions.map((que, idx) => (
               <QuestionBox
                 key={idx}
+                isSolve={true}
                 name={que.name}
                 maxPts={que.points}
-                availablePts={que.points}
+                availablePts={que.availablePoints}
                 route={`/t/${tid}/q/${que.id}`}
               />
             ))}

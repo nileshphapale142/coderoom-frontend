@@ -1,6 +1,8 @@
 'use server';
 
+import { backendApi } from '@/api';
 import axios from 'axios';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -46,6 +48,11 @@ interface Submission {
   questionId: number;
 }
 
+export async function SignOut() {
+  cookies().delete('access_token');
+  cookies().delete('is_teacher');
+}
+
 export const createClassAction = async (info: {
   name: string;
   description: string;
@@ -62,15 +69,19 @@ export const createClassAction = async (info: {
       description: info.description,
     };
 
-    const response = await axios.post(
-      'http://localhost:5000/course/create',
+    const response = await backendApi.post(
+      '/course/create',
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
       }
     );
+
+    revalidatePath('/');
 
     const resData = response.data;
 
@@ -94,10 +105,12 @@ export const joinClassAction = async (data: { courseCode: string }) => {
     };
   }
   try {
-    const response = await axios.post(
-      'http://localhost:5000/course/addStudent',
+    const response = await backendApi.post(
+      '/course/addStudent',
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -105,6 +118,8 @@ export const joinClassAction = async (data: { courseCode: string }) => {
     );
 
     const resData = response.data;
+
+    revalidatePath('/');
 
     return { data: resData, status: 201 };
   } catch (err: any) {
@@ -125,7 +140,9 @@ export const createTestAction = async (test: Test) => {
         status: 401,
       };
 
-    const response = await axios.post('http://localhost:5000/test/new', test, {
+    const response = await backendApi.post('/test/new', test, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
@@ -151,10 +168,12 @@ export const createQuestionAction = async (question: Question) => {
       };
     }
 
-    const response = await axios.post(
-      'http://localhost:5000/question/new',
+    const response = await backendApi.post(
+      '/question/new',
       question,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -185,10 +204,12 @@ export const createSubmission = async (submission: Submission) => {
   }
 
   try {
-    const response = await axios.post(
-      'http://localhost:5000/submission/new',
+    const response = await backendApi.post(
+      '/submission/new',
       submission,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -217,9 +238,11 @@ export const getSubmissions = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(
-      `http://localhost:5000/submission/user/question/${qid}`,
+    const response = await backendApi.get(
+      `/submission/user/question/${qid}`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -248,7 +271,9 @@ export const fetchQuestionList = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(`http://localhost:5000/test/${tid}`, {
+    const response = await backendApi.get(`/test/${tid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         'Cache-Control': 'no-cache',
@@ -273,7 +298,6 @@ export const fetchQuestionList = async (tid: number) => {
   }
 };
 
-
 export const fetchQuestion = async (qid: number) => {
   if (!cookies().get('access_token')) {
     redirect('/auth/signin');
@@ -283,7 +307,9 @@ export const fetchQuestion = async (qid: number) => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:5000/question/${qid}`, {
+    const response = await backendApi.get(`/question/${qid}`, {
+      withCredentials: true,
+
       headers: {
         Authorization: `Bearer ${cookies().get('access_token')?.value}`,
       },
@@ -307,10 +333,12 @@ export const editQuestionAction = async (question: Question) => {
       };
     }
 
-    const response = await axios.patch(
-      `http://localhost:5000/question/${question.id}/edit`,
+    const response = await backendApi.patch(
+      `/question/${question.id}/edit`,
       question,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -325,14 +353,13 @@ export const editQuestionAction = async (question: Question) => {
     };
   } catch (err: any) {
     console.log(err);
-    console.log(err?.response?.data)
+    console.log(err?.response?.data);
     return {
       data: null,
       status: err?.response?.status,
     };
   }
 };
-
 
 export const editClassAction = async (info: {
   id: number;
@@ -351,15 +378,20 @@ export const editClassAction = async (info: {
       description: info.description,
     };
 
-    const response = await axios.patch(
-      `http://localhost:5000/course/${info.id}/edit`,
+    const response = await backendApi.patch(
+      `/course/${info.id}/edit`,
       data,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
       }
     );
+
+    revalidatePath('/');
+    revalidatePath(`/c/${info.id}`);
 
     const resData = response.data;
 
@@ -383,14 +415,23 @@ export const editTestAction = async (test: Test) => {
         data: null,
         status: 401,
       };
-    
-    const response = await axios.patch(`http://localhost:5000/test/${test.id}/edit`, test, {
-      headers: {
-        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
-      },
-    });
+
+    const response = await backendApi.patch(
+      `/test/${test.id}/edit`,
+      test,
+      {
+        withCredentials: true,
+
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
+      }
+    );
 
     const data = response.data;
+
+    revalidatePath(`/c/${test.courseId}/t/${test.id}`);
+    revalidatePath(`/c/${test.courseId}`);
 
     return { data, status: 200 };
   } catch (err: any) {
@@ -398,5 +439,53 @@ export const editTestAction = async (test: Test) => {
       data: null,
       status: err.response.status,
     };
+  }
+};
+
+export const getCourseName = async (id: number) => {
+  try {
+    if (!cookies().get('access_token'))
+      return {
+        name: null,
+        status: 401,
+      };
+
+    const response = await backendApi.get(
+      `/course/${id}/name`,
+      {
+        withCredentials: true,
+
+        headers: {
+          Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+        },
+      }
+    );
+
+    return { name: response.data?.name, status: 200 };
+  } catch (err: any) {
+    console.log(err);
+    return { name: null, status: err?.resposne?.status };
+  }
+};
+
+export const getTestName = async (id: number) => {
+  try {
+    if (!cookies().get('access_token'))
+      return {
+        name: null,
+        status: 401,
+      };
+
+    const response = await backendApi.get(`/test/${id}/name`, {
+      withCredentials: true,
+
+      headers: {
+        Authorization: `Bearer ${cookies().get('access_token')?.value}`,
+      },
+    });
+
+    return { name: response.data?.name, status: 200 };
+  } catch (err: any) {
+    return { name: null, status: err?.resposne?.status };
   }
 };

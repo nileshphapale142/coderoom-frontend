@@ -1,3 +1,4 @@
+import { backendApi } from '@/api';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
@@ -74,7 +75,7 @@ const TestCell = ({
             <Link
               href={link}
               className='text-style line-clamp-2 h-10 overflow-hidden
-                                     text-ellipsis text-violet-500 underline'
+                                     text-ellipsis text-gray-600 '
             >
               {name}
             </Link>
@@ -100,7 +101,7 @@ const StudentCell = ({ name, link }: { name: string; link: string }) => {
           <Link
             href={link}
             className='text-style text-wrapping 
-        max-w-47.5 text-gray-500 hover:text-violet-500 hover:underline'
+        max-w-47.5 text-gray-500 hover:text-gray-600 hover:underline'
           >
             {name}
           </Link>
@@ -119,9 +120,11 @@ export const fetchLeaderboard = async (tid: number) => {
       };
     }
 
-    const response = await axios.get(
-      `http://localhost:5000/test/${tid}/leaderboard`,
+    const response = await backendApi.get(
+      `/test/${tid}/leaderboard`,
       {
+        withCredentials: true,
+
         headers: {
           Authorization: `Bearer ${cookies().get('access_token')?.value}`,
         },
@@ -201,7 +204,7 @@ export const Leaderboard = async ({ tid }: { tid: number }) => {
                               <TestCell
                                 key={idx}
                                 name={que[1].name}
-                                link={`/t/${tid}/q/${que[0]}`}
+                                link={''}
                                 // date='some date'
                                 outof={que[1].maxPoints.toString()}
                               />

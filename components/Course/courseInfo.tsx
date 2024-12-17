@@ -9,7 +9,7 @@ interface CourseInfoProps {
 
 export const CourseInfo = (props: CourseInfoProps) => {
   return (
-    <div className='mt-6 w-full overflow-hidden rounded-2 bg-violet-500 '>
+    <div className='mt-6 w-full overflow-hidden rounded-3 bg-gray-600 '>
       <div className='relative h-60 w-full '>
         <div className='absolute left-0 top-0 h-full w-full bg-cover bg-no-repeat'>
           <div className='absolute left-0 top-0 block h-full w-full opacity-80'></div>
@@ -34,8 +34,8 @@ export const CourseInfo = (props: CourseInfoProps) => {
           >
             {props.teacher}
           </h3>
-          <div className='my-1 pr-8 text-1375 font-normal leading-7 text-black'>
-            {props.code}
+          <div className='my-1 pr-8 text-1375 font-normal leading-7 text-gray-200'>
+            <strong>Course Code:</strong> {props.code}
           </div>
         </div>
       </div>
