@@ -23,7 +23,7 @@ interface SignUpDto {
   email: string;
   password: string;
   isTeacher: boolean;
-  enrollementId?: string;
+  enrollmentId?: string;
 }
 
 //todo: optimize load time for the page
@@ -53,7 +53,7 @@ const SignUp = () => {
       isTeacher: !isStudent,
     };
 
-    if (isStudent) data.enrollementId = rollNo;
+    if (isStudent) data.enrollmentId = rollNo;
     
     const { status } = await SignUpAction(data);
         

@@ -1,7 +1,7 @@
 services:
-  prod-server:
+  frontend-server:
     image: coderoom-frontend:1
-    container_name: production-server
+    container_name: frontend-server
     build:
       context: .
       dockerfile: Dockerfile
