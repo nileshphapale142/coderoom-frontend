@@ -1,7 +1,7 @@
 'use client';
 
-import { signUpPageNo } from '@/Recoil';
-import { useRecoilState } from 'recoil';
+import { signUpPageNo, roleSelectWarning } from '@/Recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { RoundedSmBtn } from '../Buttons';
 import { RoundSmLink } from '../Links';
 
@@ -21,13 +21,11 @@ export const Page = ({
   isSignIn?: boolean;
 }) => {
   const [pageNo, setPageNo] = useRecoilState(signUpPageNo);
-
-  const displayMsg = () => {
-    if (!inputsFilled) alert('Fill all the fields');
-  };
+  const setRoleSelectWarning = useSetRecoilState(roleSelectWarning);
 
   const nextPageHandler = () => {
     if (inputsFilled) setPageNo((prev) => prev + 1);
+    else if (pageNo == 0) setRoleSelectWarning(true);
     else alert('Fill all the fields');
   };
 
@@ -66,7 +64,7 @@ export const Page = ({
             <RoundedSmBtn name={'Enter'} action={handleSubmit} id='signInBtn' />
           </div>
         ) : (
-          <div className='flex flex-row justify-between'>
+          <div className={'flex flex-row justify-end '}>
             {pageNo !== 0 ? (
               <RoundedSmBtn
                 name={'Back'}
@@ -74,7 +72,11 @@ export const Page = ({
                 id='backBtn'
               />
             ) : (
-              <div className='w-1'></div>
+              <RoundSmLink
+                name={'Already have an account?'}
+                link='/auth/signin'
+                id='signInLink'
+              />
             )}
 
             {pageNo !== 3 ? (

@@ -4,6 +4,9 @@ import { env } from "process";
 
 const judgeApi = axios.create({
   baseURL: `${env?.NEXT_PUBLIC_JUDGE0_HOST}`,
+  headers: {
+    Authorization: `Bearer ${env?.NEXT_PUBLIC_JUDGE0_KEY}`
+  }
 });
 
 export async function POST(request: Request) {

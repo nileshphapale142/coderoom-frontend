@@ -1,8 +1,8 @@
 'use client';
 
-import { userRoleSelected } from '@/Recoil';
+import { userRoleSelected, roleSelectWarning } from '@/Recoil';
 import Image from 'next/image';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export const RoleSelect = ({
   imgLink,
@@ -12,13 +12,25 @@ export const RoleSelect = ({
   role: string;
 }) => {
   const [userRole, setUserRole] = useRecoilState(userRoleSelected);
+  const warning = useRecoilValue(roleSelectWarning);
+
+  const borderColor = (
+    userRole ? 
+    ( userRole === role ? 
+      ' border-2 border-blue-1' : 
+      ' border-gray') 
+      : 
+    ( warning ? 
+      ' border-2 border-red-600' : 
+      ' border-gray' )
+  );
 
   return (
     <div
       className={
         `google-bw-bg box-border flex cursor-pointer flex-col items-center
         justify-around rounded-7 border border-solid  p-8 px-12 ` +
-        (userRole === role ? ' border-2 border-blue-1' : ' border-gray ')
+        (borderColor)
       }
       onClick={() => setUserRole(role)}
       id={role.toLowerCase()}

@@ -48,6 +48,11 @@ export const userRoleSelected = atom<string | null>({
   default: null,
 });
 
+export const roleSelectWarning = atom<boolean>({
+  key: 'roleSelectWarning',
+  default: false,
+});
+
 export const userName = atom<{
   first: string;
   last: string;
